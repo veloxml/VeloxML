@@ -1,0 +1,42 @@
+[build-system]
+requires = ["setuptools", "wheel", "scikit-build", "cmake", "ninja", "pybind11"]
+build-backend = "setuptools.build_meta"
+
+[tool.cmake]
+args = ["-DBUILD_TESTS=OFF", "-DBUILD_GMOCK=OFF", "-DINSTALL_GTEST=OFF"]
+
+[project]
+name = "veloxml"  # あなたのプロジェクト名
+version = "0.0.1"
+description = "High-Performance Machine Learning Library for Python (Powered by C++)"
+authors = [
+    { name = "Yuji Chinen", email = "veloxml1113@gmail.com" }
+]
+license = { file = "LICENSE" }
+readme = "README.md"
+dependencies = [
+    "numpy",
+    "pybind11",
+] # 必要な依存関係を追加
+
+[project.optional-dependencies]
+dev = [
+    "pytest",
+    "sphinx"
+]
+
+[project.urls]
+Homepage = "https://github.com/veloxml/VeloxML"
+Documentation = "https://github.com/veloxml/VeloxML"
+Repository = "https://github.com/veloxml/VeloxML"
+Issues = "https://github.com/veloxml/VeloxML/issues"
+
+[tool.setuptools.packages.find]
+where = ["."]  # ここを変更（ディレクトリを明示的に設定）
+include = ["veloxml*"]  # サブパッケージも含める
+
+[tool.setuptools.package-data]
+veloxml = ["core/*.so", "**/*.py"]  # .soファイルを含める
+
+[tool.setuptools.exclude-package-data]
+veloxml = ["core/include/gtest/*", "core/lib/gtest*"]

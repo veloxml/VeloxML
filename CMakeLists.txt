@@ -154,20 +154,27 @@ set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -undefined dynamic_l
 # Python バインドのビルド設定
 # ------------------------------------------------------------------------------
 set(PYBIND11_FINDPYTHON ON)
-# set(VELOXML_MODULE_NAME "core_c")  # Python モジュール名
-set(PYTHON_MODULE_DIR "${CMAKE_SOURCE_DIR}/veloxml/core")  # 配置先を veloxml/ にする
+# pybind11 を使って C++ モジュールをビルド
+pybind11_add_module(c_veloxml_core ${BUILD_SOURCES} "${CMAKE_SOURCE_DIR}/src/bindings.cpp")
 
-pybind11_add_module("c_veloxml_core" ${BUILD_SOURCES} "${CMAKE_SOURCE_DIR}/src/bindings.cpp")
-# 出力ディレクトリを `{PYTHON_MODULE_DIR}/{category}` に設定
-set_target_properties("c_veloxml_core" PROPERTIES LIBRARY_OUTPUT_DIRECTORY "${PYTHON_MODULE_DIR}/${category}")
+# .so ファイルの出力ディレクトリを `_skbuild` 内の適切なディレクトリにする
+set_target_properties(c_veloxml_core PROPERTIES
+    LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}"  # ここを修正
+)
 
 # Include パス & ライブラリを設定
-target_include_directories("c_veloxml_core" PRIVATE include ${OPENBLAS_INCLUDE_DIR})
-target_link_libraries("c_veloxml_core" PRIVATE ${OPENBLAS_LIB} TBB::tbb)
-target_link_libraries("c_veloxml_core" PRIVATE ${LAPACK_LIBRARIES})
+target_include_directories(c_veloxml_core PRIVATE include ${OPENBLAS_INCLUDE_DIR})
+target_link_libraries(c_veloxml_core PRIVATE ${OPENBLAS_LIB} TBB::tbb)
+target_link_libraries(c_veloxml_core PRIVATE ${LAPACK_LIBRARIES})
 
-# `install` で `{PYTHON_MODULE_DIR}/{category}/` に配置
-install(TARGETS "c_veloxml_core" DESTINATION "${PYTHON_MODULE_DIR}/")
+# Google Test を明示的にインストールしないようにする
+if(TARGET gtest OR TARGET gtest_main)
+    message(STATUS "Excluding Google Test from installation")
+    set_target_properties(gtest PROPERTIES EXCLUDE_FROM_ALL TRUE EXCLUDE_FROM_DEFAULT_BUILD TRUE)
+    set_target_properties(gtest_main PROPERTIES EXCLUDE_FROM_ALL TRUE EXCLUDE_FROM_DEFAULT_BUILD TRUE)
+endif()
+
+install(TARGETS c_veloxml_core LIBRARY DESTINATION "${CMAKE_INSTALL_PREFIX}/veloxml/core")
 
 # ビルド
 add_executable(MyExecutable src/main.cpp)
