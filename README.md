@@ -13,11 +13,11 @@ It combines the ease of use of Python with the **speed and efficiency of C++**, 
 - 📈 **Essential ML Algorithms**:
   - ✅ Linear & Logistic Regression
   - ✅ Decision Trees & Random Forests
-  - ✅ Gradient Boosting (XGBoost-style)
+  - ~~✅ Gradient Boosting (XGBoost-style)~~ Coming Soon! 
   - ✅ Support Vector Machines (SVM)
   - ✅ Clustering (k-means)
-  - ✅ Dimensionality Reduction (PCA, t-SNE, UMAP)
-  - ✅ Optimization Algorithms (SGD, Adam, RMSprop)
+  - ✅ Dimensionality Reduction (PCA, ~~t-SNE~~, ~~UMAP~~) Coming Soon! 
+  - ~~✅ Optimization Algorithms (SGD, Adam, RMSprop)~~ Coming Soon! 
 
 ## Installation & Usage
 
@@ -29,7 +29,7 @@ Currently, VeloxML is available for macOS with Apple Silicon (arm64).
 
 * macOS (Apple Silicon)
 * Python 3.12+
-* `numpy`, `pybind11` (installed automatically)
+* `numpy`, `pybind11`
 
 ```sh
 pip install veloxml
@@ -83,15 +83,44 @@ Feel free to open issues, suggest features, or submit pull requests.
 - 📈 **主要な機械学習アルゴリズムを搭載**:
   - ✅ 線形回帰 & ロジスティック回帰
   - ✅ 決定木 & ランダムフォレスト
-  - ✅ 勾配ブースティング（XGBoost風）
+  - ~~ ✅ 勾配ブースティング（XGBoost風）~~ Coming Soon! 
   - ✅ サポートベクターマシン（SVM）
   - ✅ クラスタリング（k-means）
-  - ✅ 次元削減（PCA, t-SNE, UMAP）
-  - ✅ 最適化アルゴリズム（SGD, Adam, RMSprop）
+  - ✅ 次元削減（PCA, ~~t-SNE~~, ~~UMAP~~）Coming Soon !
+  - ~~✅ 最適化アルゴリズム（SGD, Adam, RMSprop）~~ Coming Soon!
 
 ## インストール & 使い方
-🚧 **[近日公開予定]** 🚧  
-VeloxMLは現在開発中です。最初のリリースをお楽しみに！
+
+### インストール (MacOS のみ)
+
+現在、VeloxML は Apple Silicon (arm64) を搭載した macOS で利用できます。
+
+#### 環境要件
+
+* macOS (Apple Silicon)
+* Python 3.12+
+* `numpy`, `pybind11`
+
+```sh
+pip install veloxml
+```
+
+## 使用例
+
+```python
+import veloxml
+from veloxml.linear import LinearRegression
+
+# Create and fit a model
+model = LinearRegression()
+X = [[1], [2], [3], [4], [5]]
+y = [2, 4, 6, 8, 10]
+model.fit(X, y)
+
+# Make predictions
+predictions = model.predict([[6]])
+print(predictions)  # Expected output: [12]
+```
 
 ## 今後の拡張予定
 - 🔄 **分散学習対応**: マルチノードでのスケーラブルな学習。
