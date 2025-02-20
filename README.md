@@ -20,8 +20,37 @@ It combines the ease of use of Python with the **speed and efficiency of C++**, 
   - ✅ Optimization Algorithms (SGD, Adam, RMSprop)
 
 ## Installation & Usage
-🚧 **[Coming Soon]** 🚧  
-VeloxML is currently under development. Stay tuned for the first release!
+
+### Installation (MacOS only)
+
+Currently, VeloxML is available for macOS with Apple Silicon (arm64).
+
+#### Requirements
+
+* macOS (Apple Silicon)
+* Python 3.12+
+* `numpy`, `pybind11` (installed automatically)
+
+```sh
+pip install veloxml
+```
+
+## Example Usage
+
+```python
+import veloxml
+from veloxml.linear import LinearRegression
+
+# Create and fit a model
+model = LinearRegression()
+X = [[1], [2], [3], [4], [5]]
+y = [2, 4, 6, 8, 10]
+model.fit(X, y)
+
+# Make predictions
+predictions = model.predict([[6]])
+print(predictions)  # Expected output: [12]
+```
 
 ## Planned Enhancements
 - 🔄 **Distributed Learning**: Scalability for multi-node training.
