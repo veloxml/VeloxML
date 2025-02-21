@@ -1,6 +1,9 @@
+![Docs workflow](https://github.com/veloxml/VeloxML/actions/workflows/docs.yml/badge.svg)
+![Release workflow](https://github.com/veloxml/VeloxML/actions/workflows/release.yml/badge.svg)
+
 # VeloxML - High-Performance Machine Learning Library for Python (Powered by C++)
 
-🚀 **Ultra-Fast ML, Engineered in C++, Designed for Python Users!** 🚀
+🚀 **Ultra-Fast ML, Engineered in C++, Designed for Python Users!** 🚀◊
 
 **VeloxML** is a **Python-friendly machine learning Library** with a **high-performance C++ backend**.  
 It combines the ease of use of Python with the **speed and efficiency of C++**, offering optimized implementations of classical ML algorithms for modern CPUs.
