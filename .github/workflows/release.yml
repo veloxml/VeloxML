@@ -12,7 +12,7 @@ jobs:
 
     strategy:
       matrix:
-        os: [ubuntu-latest, ubuntu-24.04-arm, macos-latest, windows-latest]
+        os: [ubuntu-latest, macos-latest, windows-latest]
         build_type: ["Release"]
         c_compiler: ["gcc"]
         cxx_compiler: ["g++"]
@@ -31,7 +31,9 @@ jobs:
         run: |
           sudo apt update
           sudo apt install -y ninja-build cmake g++ gcc libtbb-dev libomp-dev
+          echo "TBB_DIR=/usr/lib/x86_64-linux-gnu/cmake/TBB" >> $GITHUB_ENV
           pip install -U build scikit-build ninja pytest cibuildwheel
+          
       - name: Install dependencies (macOS)
         if: runner.os == 'macOS'
         run: |
