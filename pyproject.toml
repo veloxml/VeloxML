@@ -12,7 +12,7 @@ description = "High-Performance Machine Learning Library for Python (Powered by 
 authors = [
     { name = "Yuji Chinen", email = "veloxml1113@gmail.com" }
 ]
-license = "MIT"
+license = { file = "LICENSE" }
 readme = "README.md"
 dependencies = [
     "numpy",
