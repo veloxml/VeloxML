@@ -86,6 +86,8 @@ if(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")  # macOS
 
 elseif(${CMAKE_SYSTEM_NAME} MATCHES "Linux")  # Ubuntu
     # Ubuntu: APT でインストールされる TBB を検索
+    set(TBB_DIR ${TBB_DIR})
+    message(STATUS "TBB_DIR: ${TBB_DIR}")
     find_package(TBB REQUIRED)
 
 elseif(${CMAKE_SYSTEM_NAME} MATCHES "Windows")  # Windows
