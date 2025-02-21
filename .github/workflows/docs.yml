@@ -37,3 +37,6 @@ jobs:
         with:
           branch: gh-pages
           folder: docs/build
+          token: ${{ secrets.GITHUB_TOKEN }}
+          force: true
+
