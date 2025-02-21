@@ -94,7 +94,7 @@ jobs:
         env:
           TBB_DIR: ${{ env.TBB_DIR }}
           CMAKE_ARGS: "-DTBB_DIR=${{ env.TBB_DIR }} -DCMAKE_PREFIX_PATH=${{ env.TBB_DIR }}"
-          CIBW_REPAIR_WHEEL_COMMAND_MACOS: "delocate-wheel --require-archs universal2 -L /usr/local/lib -w {dest_dir} {wheel}"
+          CIBW_REPAIR_WHEEL_COMMAND_MACOS: "delocate-wheel --require-archs universal2 -w {dest_dir} {wheel}"
 
       - name: Build Source Distribution (sdist)
         run: python -m build --sdist --outdir wheelhouse
