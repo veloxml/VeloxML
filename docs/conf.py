@@ -24,6 +24,7 @@ extensions = [
   'sphinx.ext.viewcode',      # ソースコードのリンク
   "sphinx.ext.napoleon",
   "sphinx.ext.autosummary",
+  'sphinx.ext.githubpages'
   "myst_parser"]
 
 templates_path = ['_templates']
