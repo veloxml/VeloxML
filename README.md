@@ -40,6 +40,10 @@ pip install veloxml
 
 ## Example Usage
 
+Please refer to the documentation for detailed usage.
+
+https://veloxml.github.io/VeloxML/
+
 ```python
 import veloxml
 from veloxml.linear import LinearRegression

@@ -27,7 +27,7 @@ dev = [
 
 [project.urls]
 Homepage = "https://github.com/veloxml/VeloxML"
-Documentation = "https://github.com/veloxml/VeloxML"
+Documentation = "https://veloxml.github.io/VeloxML/"
 Repository = "https://github.com/veloxml/VeloxML"
 Issues = "https://github.com/veloxml/VeloxML/issues"
 
