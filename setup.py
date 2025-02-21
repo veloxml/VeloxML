@@ -1,6 +1,20 @@
 from skbuild import setup
 from setuptools import find_packages
 
+import os, sys
+
+# OSごとにTBBのパスを設定
+if sys.platform == "darwin":  # macOS
+    TBB_PREFIX = os.popen("brew --prefix tbb").read().strip()
+    TBB_DIR = os.path.join(TBB_PREFIX, "lib/cmake/tbb")
+elif sys.platform.startswith("linux"):
+    TBB_DIR = os.environ.get("TBB_DIR", "/usr/lib/x86_64-linux-gnu/cmake/TBB")
+elif sys.platform == "win32":
+    VCPKG_ROOT = os.environ.get("VCPKG_ROOT", "C:/vcpkg")
+    TBB_DIR = os.path.join(VCPKG_ROOT, "installed", "x64-windows", "share", "tbb")
+else:
+    raise RuntimeError("Unsupported OS")
+
 setup(
     name="veloxml",
     version="0.0.1",
@@ -21,6 +35,8 @@ setup(
         "-DBUILD_TESTS=OFF",
         "-DBUILD_GMOCK=OFF",
         "-DINSTALL_GTEST=OFF",
+        f"-DTBB_DIR={TBB_DIR}",
+        f"-DCMAKE_PREFIX_PATH={TBB_DIR}",
     ],
     include_package_data=True,  # .so を含める
 )
