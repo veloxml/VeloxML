@@ -42,12 +42,23 @@ jobs:
           echo "CXX=${GXX_PATH}" >> $GITHUB_ENV
           echo "Using GCC: $GCC_PATH"
           echo "Using G++: $GXX_PATH"
+          TBB_PREFIX=$(brew --prefix tbb)
+          echo "TBB_DIR=${TBB_PREFIX}/lib/cmake/tbb" >> $GITHUB_ENV
           pip install -U build scikit-build ninja pytest cibuildwheel
 
       - name: Install dependencies (Windows)
         if: runner.os == 'Windows'
         run: |
           choco install mingw ninja cmake tbb 
+          git clone https://github.com/microsoft/vcpkg.git
+          cd vcpkg
+          ./bootstrap-vcpkg.bat
+          ./vcpkg install tbb:x64-windows
+          ./vcpkg integrate install
+          echo "CC=$(where gcc)" >> $GITHUB_ENV
+          echo "CXX=$(where g++)" >> $GITHUB_ENV
+          echo "VCPKG_ROOT=${{ github.workspace }}/vcpkg" >> $GITHUB_ENV
+          echo "TBB_DIR=${{ github.workspace }}/vcpkg/installed/x64-windows/share/tbb" >> $GITHUB_ENV
           pip install -U build scikit-build ninja pytest cibuildwheel
 
       - name: Build Python Wheels

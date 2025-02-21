@@ -79,10 +79,20 @@ endif()
 
 # OS によって TBB の検索方法を変更
 if(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")  # macOS
+    # macOS: Homebrew の TBB を使用
+    execute_process(COMMAND brew --prefix tbb OUTPUT_VARIABLE TBB_PREFIX OUTPUT_STRIP_TRAILING_WHITESPACE)
+    set(TBB_DIR "${TBB_PREFIX}/lib/cmake/tbb")
     find_package(TBB CONFIG REQUIRED)
+
 elseif(${CMAKE_SYSTEM_NAME} MATCHES "Linux")  # Ubuntu
-    find_package(PkgConfig REQUIRED)
-    pkg_check_modules(TBB REQUIRED tbb)
+    # Ubuntu: APT でインストールされる TBB を検索
+    find_package(TBB REQUIRED)
+
+elseif(${CMAKE_SYSTEM_NAME} MATCHES "Windows")  # Windows
+    # Windows: vcpkg でインストールされた TBB を使用
+    set(TBB_DIR "$ENV{VCPKG_ROOT}/installed/x64-windows/share/tbb")
+    find_package(TBB CONFIG REQUIRED)
+
 else()
     message(FATAL_ERROR "Unsupported OS for TBB!")
 endif()
@@ -95,7 +105,13 @@ else()
 endif()
 
 # TBB のヘッダーパスを追加
-include_directories(SYSTEM "/opt/homebrew/include")
+if(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
+    include_directories(SYSTEM "${TBB_PREFIX}/include")
+elseif(${CMAKE_SYSTEM_NAME} MATCHES "Linux")
+    include_directories(SYSTEM "/usr/include")
+elseif(${CMAKE_SYSTEM_NAME} MATCHES "Windows")
+    include_directories(SYSTEM "$ENV{VCPKG_ROOT}/installed/x64-windows/include")
+endif()
 
 
 # ------------------------------------------------------------------------------
