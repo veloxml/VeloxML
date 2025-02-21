@@ -90,11 +90,17 @@ jobs:
           pip install -U build scikit-build ninja pytest cibuildwheel
 
       - name: Build Python Wheels
-        run: cibuildwheel --output-dir wheelhouse
+        uses: pypa/cibuildwheel@v2.22.0
+        with:
+          package-dir: .
+          output-dir: wheelhouse
         env:
           TBB_DIR: ${{ env.TBB_DIR }}
           CMAKE_ARGS: "-DTBB_DIR=${{ env.TBB_DIR }} -DCMAKE_PREFIX_PATH=${{ env.TBB_DIR }}"
-          CIBW_REPAIR_WHEEL_COMMAND_MACOS: "delocate-wheel --exclude libgomp.1.dylib --require-archs universal2 -w {dest_dir} {wheel}"
+          CIBW_ARCHS_MACOS: "x86_64 universal2 arm64"
+          CIBW_BEFORE_ALL: "pip install -U scikit-build ninja"
+          CIBW_BEFORE_BUILD: "pip install -U pytest"
+          CIBW_TEST_COMMAND: "pytest {project}/tests"
 
       - name: Build Source Distribution (sdist)
         run: python -m build --sdist --outdir wheelhouse
