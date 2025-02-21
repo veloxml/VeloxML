@@ -1,0 +1,692 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>veloxml.tree package &mdash; VeloxML 0.0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=d45e8c67"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="veloxml.svm package" href="veloxml.svm.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            VeloxML
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">veloxml</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="veloxml.html">veloxml package</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="veloxml.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="veloxml.base.html">veloxml.base package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="veloxml.core.html">veloxml.core package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="veloxml.kmeans.html">veloxml.kmeans package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="veloxml.linear.html">veloxml.linear package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="veloxml.pca.html">veloxml.pca package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="veloxml.svm.html">veloxml.svm package</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">veloxml.tree package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="veloxml.html#module-veloxml">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">VeloxML</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="modules.html">veloxml</a></li>
+          <li class="breadcrumb-item"><a href="veloxml.html">veloxml package</a></li>
+      <li class="breadcrumb-item active">veloxml.tree package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/source/veloxml.tree.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="veloxml-tree-package">
+<h1>veloxml.tree package<a class="headerlink" href="#veloxml-tree-package" title="Link to this heading"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading"></a></h2>
+</section>
+<section id="module-veloxml.tree.decision_tree_classification">
+<span id="veloxml-tree-decision-tree-classification-module"></span><h2>veloxml.tree.decision_tree_classification module<a class="headerlink" href="#module-veloxml.tree.decision_tree_classification" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="veloxml.tree.decision_tree_classification.DecisionTreeClassification">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">veloxml.tree.decision_tree_classification.</span></span><span class="sig-name descname"><span class="pre">DecisionTreeClassification</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">criterion</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Gini'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">split_algorithm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Standard'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_depth</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_samples_split</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">20</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_samples_leaf</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_leaf_nodes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_impurity_decrease</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_features</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_bins</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">256</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/veloxml/tree/decision_tree_classification.html#DecisionTreeClassification"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#veloxml.tree.decision_tree_classification.DecisionTreeClassification" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="veloxml.base.html#veloxml.base.classification_base.ClassificationBase" title="veloxml.base.classification_base.ClassificationBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">ClassificationBase</span></code></a></p>
+<p>Decision Tree Classification model.</p>
+<p>This class implements a decision tree classifier with configurable
+splitting criteria and algorithms.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="veloxml.tree.decision_tree_classification.DecisionTreeClassification.criterion_">
+<span class="sig-name descname"><span class="pre">criterion_</span></span><a class="headerlink" href="#veloxml.tree.decision_tree_classification.DecisionTreeClassification.criterion_" title="Link to this definition"></a></dt>
+<dd><p>The criterion used to measure the quality of a split.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="veloxml.core.html#veloxml.core.c_veloxml_core.Criterion" title="veloxml.core.c_veloxml_core.Criterion">Criterion</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="veloxml.tree.decision_tree_classification.DecisionTreeClassification.split_algorithm_">
+<span class="sig-name descname"><span class="pre">split_algorithm_</span></span><a class="headerlink" href="#veloxml.tree.decision_tree_classification.DecisionTreeClassification.split_algorithm_" title="Link to this definition"></a></dt>
+<dd><p>The algorithm used for splitting nodes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="veloxml.core.html#veloxml.core.c_veloxml_core.SplitAlgorithm" title="veloxml.core.c_veloxml_core.SplitAlgorithm">SplitAlgorithm</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="veloxml.tree.decision_tree_classification.DecisionTreeClassification.max_depth_">
+<span class="sig-name descname"><span class="pre">max_depth_</span></span><a class="headerlink" href="#veloxml.tree.decision_tree_classification.DecisionTreeClassification.max_depth_" title="Link to this definition"></a></dt>
+<dd><p>The maximum depth of the tree.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="veloxml.tree.decision_tree_classification.DecisionTreeClassification.min_samples_split_">
+<span class="sig-name descname"><span class="pre">min_samples_split_</span></span><a class="headerlink" href="#veloxml.tree.decision_tree_classification.DecisionTreeClassification.min_samples_split_" title="Link to this definition"></a></dt>
+<dd><p>The minimum number of samples required to split an internal node.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="veloxml.tree.decision_tree_classification.DecisionTreeClassification.min_samples_leaf_">
+<span class="sig-name descname"><span class="pre">min_samples_leaf_</span></span><a class="headerlink" href="#veloxml.tree.decision_tree_classification.DecisionTreeClassification.min_samples_leaf_" title="Link to this definition"></a></dt>
+<dd><p>The minimum number of samples required in a leaf node.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="veloxml.tree.decision_tree_classification.DecisionTreeClassification.max_leaf_nodes_">
+<span class="sig-name descname"><span class="pre">max_leaf_nodes_</span></span><a class="headerlink" href="#veloxml.tree.decision_tree_classification.DecisionTreeClassification.max_leaf_nodes_" title="Link to this definition"></a></dt>
+<dd><p>The maximum number of leaf nodes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="veloxml.tree.decision_tree_classification.DecisionTreeClassification.min_impurity_decrease_">
+<span class="sig-name descname"><span class="pre">min_impurity_decrease_</span></span><a class="headerlink" href="#veloxml.tree.decision_tree_classification.DecisionTreeClassification.min_impurity_decrease_" title="Link to this definition"></a></dt>
+<dd><p>The minimum impurity decrease required for a split.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="veloxml.tree.decision_tree_classification.DecisionTreeClassification.max_features_">
+<span class="sig-name descname"><span class="pre">max_features_</span></span><a class="headerlink" href="#veloxml.tree.decision_tree_classification.DecisionTreeClassification.max_features_" title="Link to this definition"></a></dt>
+<dd><p>The number of features to consider when looking for the best split.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="veloxml.tree.decision_tree_classification.DecisionTreeClassification.max_bins_">
+<span class="sig-name descname"><span class="pre">max_bins_</span></span><a class="headerlink" href="#veloxml.tree.decision_tree_classification.DecisionTreeClassification.max_bins_" title="Link to this definition"></a></dt>
+<dd><p>The maximum number of bins for histogram-based splitting.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>criterion</strong> (<em>Literal</em><em>[</em><em>&quot;Entropy&quot;</em><em>, </em><em>&quot;Gini&quot;</em><em>, </em><em>&quot;Logloss&quot;</em><em>]</em><em>, </em><em>optional</em>) – The function to measure the quality of a split. Defaults to “Gini”.
+Must be one of [“Entropy”, “Gini”, “Logloss”].</p></li>
+<li><p><strong>split_algorithm</strong> (<em>Literal</em><em>[</em><em>&quot;Standard&quot;</em><em>, </em><em>&quot;Histogram&quot;</em><em>]</em><em>, </em><em>optional</em>) – The algorithm used to split nodes. Defaults to “Standard”.
+Must be one of [“Standard”, “Histogram”].</p></li>
+<li><p><strong>max_depth</strong> (<em>int</em><em>, </em><em>optional</em>) – The maximum depth of the tree. Defaults to 5.</p></li>
+<li><p><strong>min_samples_split</strong> (<em>int</em><em>, </em><em>optional</em>) – The minimum number of samples required to split an internal node. Defaults to 20.</p></li>
+<li><p><strong>min_samples_leaf</strong> (<em>int</em><em>, </em><em>optional</em>) – The minimum number of samples required to be in a leaf node. Defaults to 2.</p></li>
+<li><p><strong>max_leaf_nodes</strong> (<em>int</em><em>, </em><em>optional</em>) – The maximum number of leaf nodes. Defaults to 5.</p></li>
+<li><p><strong>min_impurity_decrease</strong> (<em>float</em><em>, </em><em>optional</em>) – The minimum impurity decrease required for a split. Defaults to 1.0.</p></li>
+<li><p><strong>max_features</strong> (<em>int</em><em>, </em><em>optional</em>) – The number of features to consider when looking for the best split. Defaults to 5.</p></li>
+<li><p><strong>max_bins</strong> (<em>int</em><em>, </em><em>optional</em>) – The maximum number of bins for histogram-based splitting. Defaults to 256.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If an invalid criterion or split algorithm is provided.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="veloxml.tree.decision_tree_classification.DecisionTreeClassification.predict">
+<span class="sig-name descname"><span class="pre">predict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/veloxml/tree/decision_tree_classification.html#DecisionTreeClassification.predict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#veloxml.tree.decision_tree_classification.DecisionTreeClassification.predict" title="Link to this definition"></a></dt>
+<dd><p>Predicts class labels for the given input data.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="veloxml.tree.decision_tree_classification.DecisionTreeClassification.predict_proba">
+<span class="sig-name descname"><span class="pre">predict_proba</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Y</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/veloxml/tree/decision_tree_classification.html#DecisionTreeClassification.predict_proba"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#veloxml.tree.decision_tree_classification.DecisionTreeClassification.predict_proba" title="Link to this definition"></a></dt>
+<dd><p>Predicts class probabilities for the given input data.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="veloxml.tree.decision_tree_classification.DecisionTreeClassification.feature_importances">
+<span class="sig-name descname"><span class="pre">feature_importances</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/veloxml/tree/decision_tree_classification.html#DecisionTreeClassification.feature_importances"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#veloxml.tree.decision_tree_classification.DecisionTreeClassification.feature_importances" title="Link to this definition"></a></dt>
+<dd><p>Returns the feature importances of the trained model.</p>
+</dd></dl>
+
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">model</span> <span class="o">=</span> <span class="n">DecisionTreeClassification</span><span class="p">(</span><span class="n">criterion</span><span class="o">=</span><span class="s2">&quot;Entropy&quot;</span><span class="p">,</span> <span class="n">max_depth</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">min_samples_split</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">predictions</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">probabilities</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">feature_importance</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">feature_importances</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Initializes the Decision Tree Classification model with the specified parameters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>criterion</strong> (<em>Literal</em><em>[</em><em>&quot;Entropy&quot;</em><em>, </em><em>&quot;Gini&quot;</em><em>, </em><em>&quot;Logloss&quot;</em><em>]</em><em>, </em><em>optional</em>) – The function to measure the quality of a split. Defaults to “Gini”.</p></li>
+<li><p><strong>split_algorithm</strong> (<em>Literal</em><em>[</em><em>&quot;Standard&quot;</em><em>, </em><em>&quot;Histogram&quot;</em><em>]</em><em>, </em><em>optional</em>) – The algorithm used to split nodes. Defaults to “Standard”.</p></li>
+<li><p><strong>max_depth</strong> (<em>int</em><em>, </em><em>optional</em>) – The maximum depth of the tree. Defaults to 5.</p></li>
+<li><p><strong>min_samples_split</strong> (<em>int</em><em>, </em><em>optional</em>) – The minimum number of samples required to split an internal node. Defaults to 20.</p></li>
+<li><p><strong>min_samples_leaf</strong> (<em>int</em><em>, </em><em>optional</em>) – The minimum number of samples required in a leaf node. Defaults to 2.</p></li>
+<li><p><strong>max_leaf_nodes</strong> (<em>int</em><em>, </em><em>optional</em>) – The maximum number of leaf nodes. Defaults to 5.</p></li>
+<li><p><strong>min_impurity_decrease</strong> (<em>float</em><em>, </em><em>optional</em>) – The minimum impurity decrease required for a split. Defaults to 1.0.</p></li>
+<li><p><strong>max_features</strong> (<em>int</em><em>, </em><em>optional</em>) – The number of features to consider when looking for the best split. Defaults to 5.</p></li>
+<li><p><strong>max_bins</strong> (<em>int</em><em>, </em><em>optional</em>) – The maximum number of bins for histogram-based splitting. Defaults to 256.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If an invalid criterion or split algorithm is provided.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="veloxml.tree.decision_tree_classification.DecisionTreeClassification.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">criterion</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Gini'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">split_algorithm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Standard'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_depth</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_samples_split</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">20</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_samples_leaf</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_leaf_nodes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_impurity_decrease</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_features</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_bins</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">256</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/veloxml/tree/decision_tree_classification.html#DecisionTreeClassification.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#veloxml.tree.decision_tree_classification.DecisionTreeClassification.__init__" title="Link to this definition"></a></dt>
+<dd><p>Initializes the Decision Tree Classification model with the specified parameters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>criterion</strong> (<em>Literal</em><em>[</em><em>&quot;Entropy&quot;</em><em>, </em><em>&quot;Gini&quot;</em><em>, </em><em>&quot;Logloss&quot;</em><em>]</em><em>, </em><em>optional</em>) – The function to measure the quality of a split. Defaults to “Gini”.</p></li>
+<li><p><strong>split_algorithm</strong> (<em>Literal</em><em>[</em><em>&quot;Standard&quot;</em><em>, </em><em>&quot;Histogram&quot;</em><em>]</em><em>, </em><em>optional</em>) – The algorithm used to split nodes. Defaults to “Standard”.</p></li>
+<li><p><strong>max_depth</strong> (<em>int</em><em>, </em><em>optional</em>) – The maximum depth of the tree. Defaults to 5.</p></li>
+<li><p><strong>min_samples_split</strong> (<em>int</em><em>, </em><em>optional</em>) – The minimum number of samples required to split an internal node. Defaults to 20.</p></li>
+<li><p><strong>min_samples_leaf</strong> (<em>int</em><em>, </em><em>optional</em>) – The minimum number of samples required in a leaf node. Defaults to 2.</p></li>
+<li><p><strong>max_leaf_nodes</strong> (<em>int</em><em>, </em><em>optional</em>) – The maximum number of leaf nodes. Defaults to 5.</p></li>
+<li><p><strong>min_impurity_decrease</strong> (<em>float</em><em>, </em><em>optional</em>) – The minimum impurity decrease required for a split. Defaults to 1.0.</p></li>
+<li><p><strong>max_features</strong> (<em>int</em><em>, </em><em>optional</em>) – The number of features to consider when looking for the best split. Defaults to 5.</p></li>
+<li><p><strong>max_bins</strong> (<em>int</em><em>, </em><em>optional</em>) – The maximum number of bins for histogram-based splitting. Defaults to 256.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If an invalid criterion or split algorithm is provided.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id0">
+<span class="sig-name descname"><span class="pre">feature_importances</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/veloxml/tree/decision_tree_classification.html#DecisionTreeClassification.feature_importances"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id0" title="Link to this definition"></a></dt>
+<dd><p>Returns the feature importances of the trained model.</p>
+<p>Feature importance provides insight into which features contribute most
+to the decision-making process of the model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The feature importance scores.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>array-like</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id1">
+<span class="sig-name descname"><span class="pre">predict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/veloxml/tree/decision_tree_classification.html#DecisionTreeClassification.predict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id1" title="Link to this definition"></a></dt>
+<dd><p>Predicts class labels based on the given input data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>X</strong> (<em>array-like</em>) – The input features for making predictions.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The predicted class labels.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>array-like</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>RuntimeError</strong> – If the model has not been trained before making predictions.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id2">
+<span class="sig-name descname"><span class="pre">predict_proba</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Y</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/veloxml/tree/decision_tree_classification.html#DecisionTreeClassification.predict_proba"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id2" title="Link to this definition"></a></dt>
+<dd><p>Predicts class probabilities for the given input data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> (<em>array-like</em>) – The input features for making probability predictions.</p></li>
+<li><p><strong>Y</strong> (<em>array-like</em>) – The target class labels (may not be necessary for all implementations).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The predicted class probabilities.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>array-like</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>RuntimeError</strong> – If the model has not been trained before making predictions.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-veloxml.tree.random_forest_classification">
+<span id="veloxml-tree-random-forest-classification-module"></span><h2>veloxml.tree.random_forest_classification module<a class="headerlink" href="#module-veloxml.tree.random_forest_classification" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="veloxml.tree.random_forest_classification.RandomForestClassification">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">veloxml.tree.random_forest_classification.</span></span><span class="sig-name descname"><span class="pre">RandomForestClassification</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n_trees</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">criterion</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Gini'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">split_algorithm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Standard'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_depth</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_samples_split</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">20</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_samples_leaf</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_leaf_nodes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_impurity_decrease</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_features</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_bins</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">256</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_jobs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_seed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/veloxml/tree/random_forest_classification.html#RandomForestClassification"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#veloxml.tree.random_forest_classification.RandomForestClassification" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="veloxml.base.html#veloxml.base.classification_base.ClassificationBase" title="veloxml.base.classification_base.ClassificationBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">ClassificationBase</span></code></a></p>
+<p>Random Forest Classification model.</p>
+<p>This class implements a random forest classifier, which is an ensemble learning
+method based on multiple decision trees. It supports configurable criteria,
+splitting algorithms, and parallel execution.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="veloxml.tree.random_forest_classification.RandomForestClassification.n_trees_">
+<span class="sig-name descname"><span class="pre">n_trees_</span></span><a class="headerlink" href="#veloxml.tree.random_forest_classification.RandomForestClassification.n_trees_" title="Link to this definition"></a></dt>
+<dd><p>The number of trees in the forest.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="veloxml.tree.random_forest_classification.RandomForestClassification.criterion_">
+<span class="sig-name descname"><span class="pre">criterion_</span></span><a class="headerlink" href="#veloxml.tree.random_forest_classification.RandomForestClassification.criterion_" title="Link to this definition"></a></dt>
+<dd><p>The function used to measure the quality of a split.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="veloxml.core.html#veloxml.core.c_veloxml_core.Criterion" title="veloxml.core.c_veloxml_core.Criterion">Criterion</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="veloxml.tree.random_forest_classification.RandomForestClassification.split_algorithm_">
+<span class="sig-name descname"><span class="pre">split_algorithm_</span></span><a class="headerlink" href="#veloxml.tree.random_forest_classification.RandomForestClassification.split_algorithm_" title="Link to this definition"></a></dt>
+<dd><p>The algorithm used for splitting nodes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="veloxml.core.html#veloxml.core.c_veloxml_core.SplitAlgorithm" title="veloxml.core.c_veloxml_core.SplitAlgorithm">SplitAlgorithm</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="veloxml.tree.random_forest_classification.RandomForestClassification.max_depth_">
+<span class="sig-name descname"><span class="pre">max_depth_</span></span><a class="headerlink" href="#veloxml.tree.random_forest_classification.RandomForestClassification.max_depth_" title="Link to this definition"></a></dt>
+<dd><p>The maximum depth of each tree.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="veloxml.tree.random_forest_classification.RandomForestClassification.min_samples_split_">
+<span class="sig-name descname"><span class="pre">min_samples_split_</span></span><a class="headerlink" href="#veloxml.tree.random_forest_classification.RandomForestClassification.min_samples_split_" title="Link to this definition"></a></dt>
+<dd><p>The minimum number of samples required to split an internal node.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="veloxml.tree.random_forest_classification.RandomForestClassification.min_samples_leaf_">
+<span class="sig-name descname"><span class="pre">min_samples_leaf_</span></span><a class="headerlink" href="#veloxml.tree.random_forest_classification.RandomForestClassification.min_samples_leaf_" title="Link to this definition"></a></dt>
+<dd><p>The minimum number of samples required in a leaf node.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="veloxml.tree.random_forest_classification.RandomForestClassification.max_leaf_nodes_">
+<span class="sig-name descname"><span class="pre">max_leaf_nodes_</span></span><a class="headerlink" href="#veloxml.tree.random_forest_classification.RandomForestClassification.max_leaf_nodes_" title="Link to this definition"></a></dt>
+<dd><p>The maximum number of leaf nodes per tree.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="veloxml.tree.random_forest_classification.RandomForestClassification.min_impurity_decrease_">
+<span class="sig-name descname"><span class="pre">min_impurity_decrease_</span></span><a class="headerlink" href="#veloxml.tree.random_forest_classification.RandomForestClassification.min_impurity_decrease_" title="Link to this definition"></a></dt>
+<dd><p>The minimum impurity decrease required for a split.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="veloxml.tree.random_forest_classification.RandomForestClassification.max_features_">
+<span class="sig-name descname"><span class="pre">max_features_</span></span><a class="headerlink" href="#veloxml.tree.random_forest_classification.RandomForestClassification.max_features_" title="Link to this definition"></a></dt>
+<dd><p>The number of features to consider when looking for the best split.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="veloxml.tree.random_forest_classification.RandomForestClassification.max_bins_">
+<span class="sig-name descname"><span class="pre">max_bins_</span></span><a class="headerlink" href="#veloxml.tree.random_forest_classification.RandomForestClassification.max_bins_" title="Link to this definition"></a></dt>
+<dd><p>The maximum number of bins for histogram-based splitting.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="veloxml.tree.random_forest_classification.RandomForestClassification.n_jobs_">
+<span class="sig-name descname"><span class="pre">n_jobs_</span></span><a class="headerlink" href="#veloxml.tree.random_forest_classification.RandomForestClassification.n_jobs_" title="Link to this definition"></a></dt>
+<dd><p>The number of parallel jobs for training.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="veloxml.tree.random_forest_classification.RandomForestClassification.random_seed_">
+<span class="sig-name descname"><span class="pre">random_seed_</span></span><a class="headerlink" href="#veloxml.tree.random_forest_classification.RandomForestClassification.random_seed_" title="Link to this definition"></a></dt>
+<dd><p>The seed for random number generation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n_trees</strong> (<em>int</em><em>, </em><em>optional</em>) – The number of trees in the forest. Defaults to 5.</p></li>
+<li><p><strong>criterion</strong> (<em>Literal</em><em>[</em><em>&quot;Entropy&quot;</em><em>, </em><em>&quot;Gini&quot;</em><em>, </em><em>&quot;Logloss&quot;</em><em>]</em><em>, </em><em>optional</em>) – The function to measure the quality of a split. Defaults to “Gini”.
+Must be one of [“Entropy”, “Gini”, “Logloss”].</p></li>
+<li><p><strong>split_algorithm</strong> (<em>Literal</em><em>[</em><em>&quot;Standard&quot;</em><em>, </em><em>&quot;Histogram&quot;</em><em>]</em><em>, </em><em>optional</em>) – The algorithm used to split nodes. Defaults to “Standard”.
+Must be one of [“Standard”, “Histogram”].</p></li>
+<li><p><strong>max_depth</strong> (<em>int</em><em>, </em><em>optional</em>) – The maximum depth of each tree. Defaults to 5.</p></li>
+<li><p><strong>min_samples_split</strong> (<em>int</em><em>, </em><em>optional</em>) – The minimum number of samples required to split an internal node. Defaults to 20.</p></li>
+<li><p><strong>min_samples_leaf</strong> (<em>int</em><em>, </em><em>optional</em>) – The minimum number of samples required in a leaf node. Defaults to 2.</p></li>
+<li><p><strong>max_leaf_nodes</strong> (<em>int</em><em>, </em><em>optional</em>) – The maximum number of leaf nodes per tree. Defaults to 5.</p></li>
+<li><p><strong>min_impurity_decrease</strong> (<em>float</em><em>, </em><em>optional</em>) – The minimum impurity decrease required for a split. Defaults to 1.0.</p></li>
+<li><p><strong>max_features</strong> (<em>int</em><em>, </em><em>optional</em>) – The number of features to consider when looking for the best split. Defaults to 5.</p></li>
+<li><p><strong>max_bins</strong> (<em>int</em><em>, </em><em>optional</em>) – The maximum number of bins for histogram-based splitting. Defaults to 256.</p></li>
+<li><p><strong>n_jobs</strong> (<em>int</em><em>, </em><em>optional</em>) – The number of parallel jobs for training. Defaults to 1.</p></li>
+<li><p><strong>random_seed</strong> (<em>int</em><em>, </em><em>optional</em>) – The seed for random number generation. Defaults to -1.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If an invalid criterion or split algorithm is provided.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="veloxml.tree.random_forest_classification.RandomForestClassification.predict">
+<span class="sig-name descname"><span class="pre">predict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/veloxml/tree/random_forest_classification.html#RandomForestClassification.predict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#veloxml.tree.random_forest_classification.RandomForestClassification.predict" title="Link to this definition"></a></dt>
+<dd><p>Predicts class labels for the given input data.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="veloxml.tree.random_forest_classification.RandomForestClassification.predict_proba">
+<span class="sig-name descname"><span class="pre">predict_proba</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Y</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/veloxml/tree/random_forest_classification.html#RandomForestClassification.predict_proba"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#veloxml.tree.random_forest_classification.RandomForestClassification.predict_proba" title="Link to this definition"></a></dt>
+<dd><p>Predicts class probabilities for the given input data.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="veloxml.tree.random_forest_classification.RandomForestClassification.feature_importances">
+<span class="sig-name descname"><span class="pre">feature_importances</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/veloxml/tree/random_forest_classification.html#RandomForestClassification.feature_importances"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#veloxml.tree.random_forest_classification.RandomForestClassification.feature_importances" title="Link to this definition"></a></dt>
+<dd><p>Returns the feature importances of the trained model.</p>
+</dd></dl>
+
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">model</span> <span class="o">=</span> <span class="n">RandomForestClassification</span><span class="p">(</span><span class="n">n_trees</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">criterion</span><span class="o">=</span><span class="s2">&quot;Entropy&quot;</span><span class="p">,</span> <span class="n">max_depth</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">predictions</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">probabilities</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">feature_importance</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">feature_importances</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Initializes the Random Forest Classification model with the specified parameters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n_trees</strong> (<em>int</em><em>, </em><em>optional</em>) – The number of trees in the forest. Defaults to 5.</p></li>
+<li><p><strong>criterion</strong> (<em>Literal</em><em>[</em><em>&quot;Entropy&quot;</em><em>, </em><em>&quot;Gini&quot;</em><em>, </em><em>&quot;Logloss&quot;</em><em>]</em><em>, </em><em>optional</em>) – The function to measure the quality of a split. Defaults to “Gini”.</p></li>
+<li><p><strong>split_algorithm</strong> (<em>Literal</em><em>[</em><em>&quot;Standard&quot;</em><em>, </em><em>&quot;Histogram&quot;</em><em>]</em><em>, </em><em>optional</em>) – The algorithm used to split nodes. Defaults to “Standard”.</p></li>
+<li><p><strong>max_depth</strong> (<em>int</em><em>, </em><em>optional</em>) – The maximum depth of each tree. Defaults to 5.</p></li>
+<li><p><strong>min_samples_split</strong> (<em>int</em><em>, </em><em>optional</em>) – The minimum number of samples required to split an internal node. Defaults to 20.</p></li>
+<li><p><strong>min_samples_leaf</strong> (<em>int</em><em>, </em><em>optional</em>) – The minimum number of samples required in a leaf node. Defaults to 2.</p></li>
+<li><p><strong>max_leaf_nodes</strong> (<em>int</em><em>, </em><em>optional</em>) – The maximum number of leaf nodes per tree. Defaults to 5.</p></li>
+<li><p><strong>min_impurity_decrease</strong> (<em>float</em><em>, </em><em>optional</em>) – The minimum impurity decrease required for a split. Defaults to 1.0.</p></li>
+<li><p><strong>max_features</strong> (<em>int</em><em>, </em><em>optional</em>) – The number of features to consider when looking for the best split. Defaults to 5.</p></li>
+<li><p><strong>max_bins</strong> (<em>int</em><em>, </em><em>optional</em>) – The maximum number of bins for histogram-based splitting. Defaults to 256.</p></li>
+<li><p><strong>n_jobs</strong> (<em>int</em><em>, </em><em>optional</em>) – The number of parallel jobs for training. Defaults to 1.</p></li>
+<li><p><strong>random_seed</strong> (<em>int</em><em>, </em><em>optional</em>) – The seed for random number generation. Defaults to -1.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If an invalid criterion or split algorithm is provided.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="veloxml.tree.random_forest_classification.RandomForestClassification.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n_trees</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">criterion</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Gini'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">split_algorithm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Standard'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_depth</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_samples_split</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">20</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_samples_leaf</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_leaf_nodes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_impurity_decrease</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_features</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_bins</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">256</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_jobs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_seed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/veloxml/tree/random_forest_classification.html#RandomForestClassification.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#veloxml.tree.random_forest_classification.RandomForestClassification.__init__" title="Link to this definition"></a></dt>
+<dd><p>Initializes the Random Forest Classification model with the specified parameters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n_trees</strong> (<em>int</em><em>, </em><em>optional</em>) – The number of trees in the forest. Defaults to 5.</p></li>
+<li><p><strong>criterion</strong> (<em>Literal</em><em>[</em><em>&quot;Entropy&quot;</em><em>, </em><em>&quot;Gini&quot;</em><em>, </em><em>&quot;Logloss&quot;</em><em>]</em><em>, </em><em>optional</em>) – The function to measure the quality of a split. Defaults to “Gini”.</p></li>
+<li><p><strong>split_algorithm</strong> (<em>Literal</em><em>[</em><em>&quot;Standard&quot;</em><em>, </em><em>&quot;Histogram&quot;</em><em>]</em><em>, </em><em>optional</em>) – The algorithm used to split nodes. Defaults to “Standard”.</p></li>
+<li><p><strong>max_depth</strong> (<em>int</em><em>, </em><em>optional</em>) – The maximum depth of each tree. Defaults to 5.</p></li>
+<li><p><strong>min_samples_split</strong> (<em>int</em><em>, </em><em>optional</em>) – The minimum number of samples required to split an internal node. Defaults to 20.</p></li>
+<li><p><strong>min_samples_leaf</strong> (<em>int</em><em>, </em><em>optional</em>) – The minimum number of samples required in a leaf node. Defaults to 2.</p></li>
+<li><p><strong>max_leaf_nodes</strong> (<em>int</em><em>, </em><em>optional</em>) – The maximum number of leaf nodes per tree. Defaults to 5.</p></li>
+<li><p><strong>min_impurity_decrease</strong> (<em>float</em><em>, </em><em>optional</em>) – The minimum impurity decrease required for a split. Defaults to 1.0.</p></li>
+<li><p><strong>max_features</strong> (<em>int</em><em>, </em><em>optional</em>) – The number of features to consider when looking for the best split. Defaults to 5.</p></li>
+<li><p><strong>max_bins</strong> (<em>int</em><em>, </em><em>optional</em>) – The maximum number of bins for histogram-based splitting. Defaults to 256.</p></li>
+<li><p><strong>n_jobs</strong> (<em>int</em><em>, </em><em>optional</em>) – The number of parallel jobs for training. Defaults to 1.</p></li>
+<li><p><strong>random_seed</strong> (<em>int</em><em>, </em><em>optional</em>) – The seed for random number generation. Defaults to -1.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If an invalid criterion or split algorithm is provided.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id3">
+<span class="sig-name descname"><span class="pre">feature_importances</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/veloxml/tree/random_forest_classification.html#RandomForestClassification.feature_importances"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id3" title="Link to this definition"></a></dt>
+<dd><p>Returns the feature importances of the trained model.</p>
+<p>Feature importance provides insight into which features contribute most
+to the decision-making process of the model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The feature importance scores.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>array-like</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id4">
+<span class="sig-name descname"><span class="pre">predict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/veloxml/tree/random_forest_classification.html#RandomForestClassification.predict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id4" title="Link to this definition"></a></dt>
+<dd><p>Predicts class labels based on the given input data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>X</strong> (<em>array-like</em>) – The input features for making predictions.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The predicted class labels.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>array-like</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>RuntimeError</strong> – If the model has not been trained before making predictions.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id5">
+<span class="sig-name descname"><span class="pre">predict_proba</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Y</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/veloxml/tree/random_forest_classification.html#RandomForestClassification.predict_proba"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id5" title="Link to this definition"></a></dt>
+<dd><p>Predicts class probabilities for the given input data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> (<em>array-like</em>) – The input features for making probability predictions.</p></li>
+<li><p><strong>Y</strong> (<em>array-like</em>) – The target class labels (may not be necessary for all implementations).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The predicted class probabilities.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>array-like</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>RuntimeError</strong> – If the model has not been trained before making predictions.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-veloxml.tree">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-veloxml.tree" title="Link to this heading"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="veloxml.svm.html" class="btn btn-neutral float-left" title="veloxml.svm package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Yuji Chinen.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

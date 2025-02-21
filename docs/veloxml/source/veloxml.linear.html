@@ -1,0 +1,1140 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>veloxml.linear package &mdash; VeloxML 0.0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=d45e8c67"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="veloxml.pca package" href="veloxml.pca.html" />
+    <link rel="prev" title="veloxml.kmeans package" href="veloxml.kmeans.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            VeloxML
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">veloxml</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="veloxml.html">veloxml package</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="veloxml.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="veloxml.base.html">veloxml.base package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="veloxml.core.html">veloxml.core package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="veloxml.kmeans.html">veloxml.kmeans package</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">veloxml.linear package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="veloxml.pca.html">veloxml.pca package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="veloxml.svm.html">veloxml.svm package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="veloxml.tree.html">veloxml.tree package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="veloxml.html#module-veloxml">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">VeloxML</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="modules.html">veloxml</a></li>
+          <li class="breadcrumb-item"><a href="veloxml.html">veloxml package</a></li>
+      <li class="breadcrumb-item active">veloxml.linear package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/source/veloxml.linear.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="veloxml-linear-package">
+<h1>veloxml.linear package<a class="headerlink" href="#veloxml-linear-package" title="Link to this heading"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading"></a></h2>
+</section>
+<section id="module-veloxml.linear.elasticnet_regression">
+<span id="veloxml-linear-elasticnet-regression-module"></span><h2>veloxml.linear.elasticnet_regression module<a class="headerlink" href="#module-veloxml.linear.elasticnet_regression" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="veloxml.linear.elasticnet_regression.ElasticnetRegression">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">veloxml.linear.elasticnet_regression.</span></span><span class="sig-name descname"><span class="pre">ElasticnetRegression</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'FISTA'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lambda_l1</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lambda_l2</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_iter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0001</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">admm_rho</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">penalize_bias</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/veloxml/linear/elasticnet_regression.html#ElasticnetRegression"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#veloxml.linear.elasticnet_regression.ElasticnetRegression" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="veloxml.base.html#veloxml.base.regression_base.RegressionBase" title="veloxml.base.regression_base.RegressionBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">RegressionBase</span></code></a></p>
+<p>Elastic Net Regression model with combined L1 and L2 regularization.</p>
+<p>This class implements Elastic Net Regression, which combines L1 (Lasso) and L2 (Ridge)
+regularization to balance sparsity and shrinkage of coefficients.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="veloxml.linear.elasticnet_regression.ElasticnetRegression.lambda_l1_">
+<span class="sig-name descname"><span class="pre">lambda_l1_</span></span><a class="headerlink" href="#veloxml.linear.elasticnet_regression.ElasticnetRegression.lambda_l1_" title="Link to this definition"></a></dt>
+<dd><p>The L1 regularization strength.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="veloxml.linear.elasticnet_regression.ElasticnetRegression.lambda_l2_">
+<span class="sig-name descname"><span class="pre">lambda_l2_</span></span><a class="headerlink" href="#veloxml.linear.elasticnet_regression.ElasticnetRegression.lambda_l2_" title="Link to this definition"></a></dt>
+<dd><p>The L2 regularization strength.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="veloxml.linear.elasticnet_regression.ElasticnetRegression.max_iter_">
+<span class="sig-name descname"><span class="pre">max_iter_</span></span><a class="headerlink" href="#veloxml.linear.elasticnet_regression.ElasticnetRegression.max_iter_" title="Link to this definition"></a></dt>
+<dd><p>The maximum number of iterations for optimization.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="veloxml.linear.elasticnet_regression.ElasticnetRegression.tol_">
+<span class="sig-name descname"><span class="pre">tol_</span></span><a class="headerlink" href="#veloxml.linear.elasticnet_regression.ElasticnetRegression.tol_" title="Link to this definition"></a></dt>
+<dd><p>The tolerance for stopping criteria.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="veloxml.linear.elasticnet_regression.ElasticnetRegression.admm_rho_">
+<span class="sig-name descname"><span class="pre">admm_rho_</span></span><a class="headerlink" href="#veloxml.linear.elasticnet_regression.ElasticnetRegression.admm_rho_" title="Link to this definition"></a></dt>
+<dd><p>The penalty parameter for ADMM optimization.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="veloxml.linear.elasticnet_regression.ElasticnetRegression.penalize_bias_">
+<span class="sig-name descname"><span class="pre">penalize_bias_</span></span><a class="headerlink" href="#veloxml.linear.elasticnet_regression.ElasticnetRegression.penalize_bias_" title="Link to this definition"></a></dt>
+<dd><p>Whether to apply regularization to the bias term.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="veloxml.linear.elasticnet_regression.ElasticnetRegression.solve_mode_">
+<span class="sig-name descname"><span class="pre">solve_mode_</span></span><a class="headerlink" href="#veloxml.linear.elasticnet_regression.ElasticnetRegression.solve_mode_" title="Link to this definition"></a></dt>
+<dd><p>The solver mode used for optimization.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>CElasticnetSolverMode</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>mode</strong> (<em>Literal</em><em>[</em><em>&quot;FISTA&quot;</em><em>, </em><em>&quot;ADMM&quot;</em><em>]</em><em>, </em><em>optional</em>) – The solver mode used for optimization.
+Defaults to “FISTA”. Must be one of [“FISTA”, “ADMM”].</p></li>
+<li><p><strong>lambda_l1</strong> (<em>float</em><em>, </em><em>optional</em>) – The L1 regularization strength. Defaults to 1.0.</p></li>
+<li><p><strong>lambda_l2</strong> (<em>float</em><em>, </em><em>optional</em>) – The L2 regularization strength. Defaults to 1.0.</p></li>
+<li><p><strong>max_iter</strong> (<em>int</em><em>, </em><em>optional</em>) – The maximum number of iterations for optimization. Defaults to 100.</p></li>
+<li><p><strong>tol</strong> (<em>float</em><em>, </em><em>optional</em>) – The stopping criteria tolerance. Defaults to 1e-4.</p></li>
+<li><p><strong>admm_rho</strong> (<em>float</em><em>, </em><em>optional</em>) – The penalty parameter for ADMM optimization. Defaults to 1.0.</p></li>
+<li><p><strong>penalize_bias</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True, applies regularization to the bias term.
+Defaults to False.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If an invalid mode is provided.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="veloxml.linear.elasticnet_regression.ElasticnetRegression.predict">
+<span class="sig-name descname"><span class="pre">predict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/veloxml/linear/elasticnet_regression.html#ElasticnetRegression.predict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#veloxml.linear.elasticnet_regression.ElasticnetRegression.predict" title="Link to this definition"></a></dt>
+<dd><p>Predicts target values for the given input data.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="veloxml.linear.elasticnet_regression.ElasticnetRegression.get_weights">
+<span class="sig-name descname"><span class="pre">get_weights</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/veloxml/linear/elasticnet_regression.html#ElasticnetRegression.get_weights"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#veloxml.linear.elasticnet_regression.ElasticnetRegression.get_weights" title="Link to this definition"></a></dt>
+<dd><p>Returns the weight coefficients of the trained model.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="veloxml.linear.elasticnet_regression.ElasticnetRegression.get_bias">
+<span class="sig-name descname"><span class="pre">get_bias</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/veloxml/linear/elasticnet_regression.html#ElasticnetRegression.get_bias"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#veloxml.linear.elasticnet_regression.ElasticnetRegression.get_bias" title="Link to this definition"></a></dt>
+<dd><p>Returns the bias term of the trained model.</p>
+</dd></dl>
+
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">model</span> <span class="o">=</span> <span class="n">ElasticnetRegression</span><span class="p">(</span><span class="n">mode</span><span class="o">=</span><span class="s2">&quot;ADMM&quot;</span><span class="p">,</span> <span class="n">lambda_l1</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">lambda_l2</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">predictions</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Initializes the Elastic Net Regression model with the specified parameters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>mode</strong> (<em>Literal</em><em>[</em><em>&quot;FISTA&quot;</em><em>, </em><em>&quot;ADMM&quot;</em><em>]</em><em>, </em><em>optional</em>) – The solver mode used for optimization.
+Defaults to “FISTA”.</p></li>
+<li><p><strong>lambda_l1</strong> (<em>float</em><em>, </em><em>optional</em>) – The L1 regularization strength. Defaults to 1.0.</p></li>
+<li><p><strong>lambda_l2</strong> (<em>float</em><em>, </em><em>optional</em>) – The L2 regularization strength. Defaults to 1.0.</p></li>
+<li><p><strong>max_iter</strong> (<em>int</em><em>, </em><em>optional</em>) – The maximum number of iterations for optimization. Defaults to 100.</p></li>
+<li><p><strong>tol</strong> (<em>float</em><em>, </em><em>optional</em>) – The stopping criteria tolerance. Defaults to 1e-4.</p></li>
+<li><p><strong>admm_rho</strong> (<em>float</em><em>, </em><em>optional</em>) – The penalty parameter for ADMM optimization. Defaults to 1.0.</p></li>
+<li><p><strong>penalize_bias</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True, applies regularization to the bias term.
+Defaults to False.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If an invalid mode is provided.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="veloxml.linear.elasticnet_regression.ElasticnetRegression.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'FISTA'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lambda_l1</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lambda_l2</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_iter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0001</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">admm_rho</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">penalize_bias</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/veloxml/linear/elasticnet_regression.html#ElasticnetRegression.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#veloxml.linear.elasticnet_regression.ElasticnetRegression.__init__" title="Link to this definition"></a></dt>
+<dd><p>Initializes the Elastic Net Regression model with the specified parameters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>mode</strong> (<em>Literal</em><em>[</em><em>&quot;FISTA&quot;</em><em>, </em><em>&quot;ADMM&quot;</em><em>]</em><em>, </em><em>optional</em>) – The solver mode used for optimization.
+Defaults to “FISTA”.</p></li>
+<li><p><strong>lambda_l1</strong> (<em>float</em><em>, </em><em>optional</em>) – The L1 regularization strength. Defaults to 1.0.</p></li>
+<li><p><strong>lambda_l2</strong> (<em>float</em><em>, </em><em>optional</em>) – The L2 regularization strength. Defaults to 1.0.</p></li>
+<li><p><strong>max_iter</strong> (<em>int</em><em>, </em><em>optional</em>) – The maximum number of iterations for optimization. Defaults to 100.</p></li>
+<li><p><strong>tol</strong> (<em>float</em><em>, </em><em>optional</em>) – The stopping criteria tolerance. Defaults to 1e-4.</p></li>
+<li><p><strong>admm_rho</strong> (<em>float</em><em>, </em><em>optional</em>) – The penalty parameter for ADMM optimization. Defaults to 1.0.</p></li>
+<li><p><strong>penalize_bias</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True, applies regularization to the bias term.
+Defaults to False.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If an invalid mode is provided.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id0">
+<span class="sig-name descname"><span class="pre">get_bias</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/veloxml/linear/elasticnet_regression.html#ElasticnetRegression.get_bias"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id0" title="Link to this definition"></a></dt>
+<dd><p>Returns the bias term of the trained model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The bias term of the regression model.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id1">
+<span class="sig-name descname"><span class="pre">get_weights</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/veloxml/linear/elasticnet_regression.html#ElasticnetRegression.get_weights"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id1" title="Link to this definition"></a></dt>
+<dd><p>Returns the weight coefficients of the trained model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The weight coefficients of the regression model.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>array-like</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id2">
+<span class="sig-name descname"><span class="pre">predict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/veloxml/linear/elasticnet_regression.html#ElasticnetRegression.predict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id2" title="Link to this definition"></a></dt>
+<dd><p>Predicts target values based on the given input data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>X</strong> (<em>array-like</em>) – The input features for making predictions.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The predicted target values.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>array-like</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>RuntimeError</strong> – If the model has not been trained before making predictions.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="veloxml.linear.elasticnet_regression.ElasticnetRegression.solve_mode">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">solve_mode</span></span><a class="headerlink" href="#veloxml.linear.elasticnet_regression.ElasticnetRegression.solve_mode" title="Link to this definition"></a></dt>
+<dd><p>Returns the solver mode used for optimization.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The solver mode.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>CElasticnetSolverMode</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-veloxml.linear.lasso_regression">
+<span id="veloxml-linear-lasso-regression-module"></span><h2>veloxml.linear.lasso_regression module<a class="headerlink" href="#module-veloxml.linear.lasso_regression" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="veloxml.linear.lasso_regression.LassoRegression">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">veloxml.linear.lasso_regression.</span></span><span class="sig-name descname"><span class="pre">LassoRegression</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'FISTA'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lambda_l1</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_iter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0001</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">admm_rho</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">penalize_bias</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/veloxml/linear/lasso_regression.html#LassoRegression"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#veloxml.linear.lasso_regression.LassoRegression" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="veloxml.base.html#veloxml.base.regression_base.RegressionBase" title="veloxml.base.regression_base.RegressionBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">RegressionBase</span></code></a></p>
+<p>Lasso Regression model with L1 regularization.</p>
+<p>This class implements Lasso Regression, which applies L1 regularization to
+promote sparsity in the model by reducing some coefficients to zero.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="veloxml.linear.lasso_regression.LassoRegression.lambda_l1_">
+<span class="sig-name descname"><span class="pre">lambda_l1_</span></span><a class="headerlink" href="#veloxml.linear.lasso_regression.LassoRegression.lambda_l1_" title="Link to this definition"></a></dt>
+<dd><p>The regularization strength (lambda).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="veloxml.linear.lasso_regression.LassoRegression.max_iter_">
+<span class="sig-name descname"><span class="pre">max_iter_</span></span><a class="headerlink" href="#veloxml.linear.lasso_regression.LassoRegression.max_iter_" title="Link to this definition"></a></dt>
+<dd><p>The maximum number of iterations for optimization.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="veloxml.linear.lasso_regression.LassoRegression.tol_">
+<span class="sig-name descname"><span class="pre">tol_</span></span><a class="headerlink" href="#veloxml.linear.lasso_regression.LassoRegression.tol_" title="Link to this definition"></a></dt>
+<dd><p>The tolerance for stopping criteria.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="veloxml.linear.lasso_regression.LassoRegression.admm_rho_">
+<span class="sig-name descname"><span class="pre">admm_rho_</span></span><a class="headerlink" href="#veloxml.linear.lasso_regression.LassoRegression.admm_rho_" title="Link to this definition"></a></dt>
+<dd><p>The penalty parameter for ADMM optimization.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="veloxml.linear.lasso_regression.LassoRegression.penalize_bias_">
+<span class="sig-name descname"><span class="pre">penalize_bias_</span></span><a class="headerlink" href="#veloxml.linear.lasso_regression.LassoRegression.penalize_bias_" title="Link to this definition"></a></dt>
+<dd><p>Whether to apply L1 regularization to the bias term.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="veloxml.linear.lasso_regression.LassoRegression.solve_mode_">
+<span class="sig-name descname"><span class="pre">solve_mode_</span></span><a class="headerlink" href="#veloxml.linear.lasso_regression.LassoRegression.solve_mode_" title="Link to this definition"></a></dt>
+<dd><p>The solver mode used for optimization.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>CLassoSolverMode</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>mode</strong> (<em>Literal</em><em>[</em><em>&quot;FISTA&quot;</em><em>, </em><em>&quot;ADMM&quot;</em><em>]</em><em>, </em><em>optional</em>) – The solver mode used for optimization.
+Defaults to “FISTA”. Must be one of [“FISTA”, “ADMM”].</p></li>
+<li><p><strong>lambda_l1</strong> (<em>float</em><em>, </em><em>optional</em>) – The L1 regularization strength. Defaults to 1.0.</p></li>
+<li><p><strong>max_iter</strong> (<em>int</em><em>, </em><em>optional</em>) – The maximum number of iterations for optimization. Defaults to 100.</p></li>
+<li><p><strong>tol</strong> (<em>float</em><em>, </em><em>optional</em>) – The stopping criteria tolerance. Defaults to 1e-4.</p></li>
+<li><p><strong>admm_rho</strong> (<em>float</em><em>, </em><em>optional</em>) – The penalty parameter for ADMM optimization. Defaults to 1.0.</p></li>
+<li><p><strong>penalize_bias</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True, applies L1 regularization to the bias term.
+Defaults to False.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If an invalid mode is provided.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="veloxml.linear.lasso_regression.LassoRegression.predict">
+<span class="sig-name descname"><span class="pre">predict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/veloxml/linear/lasso_regression.html#LassoRegression.predict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#veloxml.linear.lasso_regression.LassoRegression.predict" title="Link to this definition"></a></dt>
+<dd><p>Predicts target values for the given input data.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="veloxml.linear.lasso_regression.LassoRegression.get_weights">
+<span class="sig-name descname"><span class="pre">get_weights</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/veloxml/linear/lasso_regression.html#LassoRegression.get_weights"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#veloxml.linear.lasso_regression.LassoRegression.get_weights" title="Link to this definition"></a></dt>
+<dd><p>Returns the weight coefficients of the trained model.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="veloxml.linear.lasso_regression.LassoRegression.get_bias">
+<span class="sig-name descname"><span class="pre">get_bias</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/veloxml/linear/lasso_regression.html#LassoRegression.get_bias"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#veloxml.linear.lasso_regression.LassoRegression.get_bias" title="Link to this definition"></a></dt>
+<dd><p>Returns the bias term of the trained model.</p>
+</dd></dl>
+
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">model</span> <span class="o">=</span> <span class="n">LassoRegression</span><span class="p">(</span><span class="n">mode</span><span class="o">=</span><span class="s2">&quot;ADMM&quot;</span><span class="p">,</span> <span class="n">lambda_l1</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">predictions</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Initializes the Lasso Regression model with the specified parameters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>mode</strong> (<em>Literal</em><em>[</em><em>&quot;FISTA&quot;</em><em>, </em><em>&quot;ADMM&quot;</em><em>]</em><em>, </em><em>optional</em>) – The solver mode used for optimization.
+Defaults to “FISTA”.</p></li>
+<li><p><strong>lambda_l1</strong> (<em>float</em><em>, </em><em>optional</em>) – The L1 regularization strength. Defaults to 1.0.</p></li>
+<li><p><strong>max_iter</strong> (<em>int</em><em>, </em><em>optional</em>) – The maximum number of iterations for optimization. Defaults to 100.</p></li>
+<li><p><strong>tol</strong> (<em>float</em><em>, </em><em>optional</em>) – The stopping criteria tolerance. Defaults to 1e-4.</p></li>
+<li><p><strong>admm_rho</strong> (<em>float</em><em>, </em><em>optional</em>) – The penalty parameter for ADMM optimization. Defaults to 1.0.</p></li>
+<li><p><strong>penalize_bias</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True, applies L1 regularization to the bias term.
+Defaults to False.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If an invalid mode is provided.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="veloxml.linear.lasso_regression.LassoRegression.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'FISTA'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lambda_l1</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_iter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0001</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">admm_rho</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">penalize_bias</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/veloxml/linear/lasso_regression.html#LassoRegression.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#veloxml.linear.lasso_regression.LassoRegression.__init__" title="Link to this definition"></a></dt>
+<dd><p>Initializes the Lasso Regression model with the specified parameters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>mode</strong> (<em>Literal</em><em>[</em><em>&quot;FISTA&quot;</em><em>, </em><em>&quot;ADMM&quot;</em><em>]</em><em>, </em><em>optional</em>) – The solver mode used for optimization.
+Defaults to “FISTA”.</p></li>
+<li><p><strong>lambda_l1</strong> (<em>float</em><em>, </em><em>optional</em>) – The L1 regularization strength. Defaults to 1.0.</p></li>
+<li><p><strong>max_iter</strong> (<em>int</em><em>, </em><em>optional</em>) – The maximum number of iterations for optimization. Defaults to 100.</p></li>
+<li><p><strong>tol</strong> (<em>float</em><em>, </em><em>optional</em>) – The stopping criteria tolerance. Defaults to 1e-4.</p></li>
+<li><p><strong>admm_rho</strong> (<em>float</em><em>, </em><em>optional</em>) – The penalty parameter for ADMM optimization. Defaults to 1.0.</p></li>
+<li><p><strong>penalize_bias</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True, applies L1 regularization to the bias term.
+Defaults to False.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If an invalid mode is provided.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id3">
+<span class="sig-name descname"><span class="pre">get_bias</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/veloxml/linear/lasso_regression.html#LassoRegression.get_bias"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id3" title="Link to this definition"></a></dt>
+<dd><p>Returns the bias term of the trained model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The bias term of the regression model.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id4">
+<span class="sig-name descname"><span class="pre">get_weights</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/veloxml/linear/lasso_regression.html#LassoRegression.get_weights"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id4" title="Link to this definition"></a></dt>
+<dd><p>Returns the weight coefficients of the trained model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The weight coefficients of the regression model.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>array-like</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id5">
+<span class="sig-name descname"><span class="pre">predict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/veloxml/linear/lasso_regression.html#LassoRegression.predict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id5" title="Link to this definition"></a></dt>
+<dd><p>Predicts target values based on the given input data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>X</strong> (<em>array-like</em>) – The input features for making predictions.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The predicted target values.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>array-like</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>RuntimeError</strong> – If the model has not been trained before making predictions.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="veloxml.linear.lasso_regression.LassoRegression.solve_mode">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">solve_mode</span></span><a class="headerlink" href="#veloxml.linear.lasso_regression.LassoRegression.solve_mode" title="Link to this definition"></a></dt>
+<dd><p>Returns the solver mode used for optimization.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The solver mode.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>CLassoSolverMode</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-veloxml.linear.linear_regression">
+<span id="veloxml-linear-linear-regression-module"></span><h2>veloxml.linear.linear_regression module<a class="headerlink" href="#module-veloxml.linear.linear_regression" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="veloxml.linear.linear_regression.LinearRegression">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">veloxml.linear.linear_regression.</span></span><span class="sig-name descname"><span class="pre">LinearRegression</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'LU'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/veloxml/linear/linear_regression.html#LinearRegression"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#veloxml.linear.linear_regression.LinearRegression" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="veloxml.base.html#veloxml.base.regression_base.RegressionBase" title="veloxml.base.regression_base.RegressionBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">RegressionBase</span></code></a></p>
+<p>Linear Regression model with multiple decomposition methods.</p>
+<p>This class implements a linear regression model with different decomposition
+methods for solving the normal equation, including LU decomposition, QR decomposition,
+and Singular Value Decomposition (SVD).</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="veloxml.linear.linear_regression.LinearRegression.solve_mode_">
+<span class="sig-name descname"><span class="pre">solve_mode_</span></span><a class="headerlink" href="#veloxml.linear.linear_regression.LinearRegression.solve_mode_" title="Link to this definition"></a></dt>
+<dd><p>The decomposition method used for solving
+the linear regression problem.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>CLinearDecompMode</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>mode</strong> (<em>Literal</em><em>[</em><em>&quot;LU&quot;</em><em>, </em><em>&quot;QR&quot;</em><em>, </em><em>&quot;SVD&quot;</em><em>]</em><em>, </em><em>optional</em>) – The decomposition method to use.
+Defaults to “LU”. Must be one of [“LU”, “QR”, “SVD”].</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If an invalid mode is provided.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="veloxml.linear.linear_regression.LinearRegression.predict">
+<span class="sig-name descname"><span class="pre">predict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/veloxml/linear/linear_regression.html#LinearRegression.predict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#veloxml.linear.linear_regression.LinearRegression.predict" title="Link to this definition"></a></dt>
+<dd><p>Predicts target values for the given input data.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="veloxml.linear.linear_regression.LinearRegression.get_weights">
+<span class="sig-name descname"><span class="pre">get_weights</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/veloxml/linear/linear_regression.html#LinearRegression.get_weights"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#veloxml.linear.linear_regression.LinearRegression.get_weights" title="Link to this definition"></a></dt>
+<dd><p>Returns the weight coefficients of the trained model.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="veloxml.linear.linear_regression.LinearRegression.get_bias">
+<span class="sig-name descname"><span class="pre">get_bias</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/veloxml/linear/linear_regression.html#LinearRegression.get_bias"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#veloxml.linear.linear_regression.LinearRegression.get_bias" title="Link to this definition"></a></dt>
+<dd><p>Returns the bias term of the trained model.</p>
+</dd></dl>
+
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">model</span> <span class="o">=</span> <span class="n">LinearRegression</span><span class="p">(</span><span class="n">mode</span><span class="o">=</span><span class="s2">&quot;QR&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">predictions</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Initializes the Linear Regression model with the specified decomposition method.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>mode</strong> (<em>Literal</em><em>[</em><em>&quot;LU&quot;</em><em>, </em><em>&quot;QR&quot;</em><em>, </em><em>&quot;SVD&quot;</em><em>]</em><em>, </em><em>optional</em>) – The decomposition method used
+to solve the normal equation. Defaults to “LU”.</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If the provided mode is invalid.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="veloxml.linear.linear_regression.LinearRegression.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'LU'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/veloxml/linear/linear_regression.html#LinearRegression.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#veloxml.linear.linear_regression.LinearRegression.__init__" title="Link to this definition"></a></dt>
+<dd><p>Initializes the Linear Regression model with the specified decomposition method.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>mode</strong> (<em>Literal</em><em>[</em><em>&quot;LU&quot;</em><em>, </em><em>&quot;QR&quot;</em><em>, </em><em>&quot;SVD&quot;</em><em>]</em><em>, </em><em>optional</em>) – The decomposition method used
+to solve the normal equation. Defaults to “LU”.</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If the provided mode is invalid.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id6">
+<span class="sig-name descname"><span class="pre">get_bias</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/veloxml/linear/linear_regression.html#LinearRegression.get_bias"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id6" title="Link to this definition"></a></dt>
+<dd><p>Returns the bias term of the trained model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The bias term of the regression model.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id7">
+<span class="sig-name descname"><span class="pre">get_weights</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/veloxml/linear/linear_regression.html#LinearRegression.get_weights"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id7" title="Link to this definition"></a></dt>
+<dd><p>Returns the weight coefficients of the trained model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The weight coefficients of the regression model.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>array-like</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id8">
+<span class="sig-name descname"><span class="pre">predict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/veloxml/linear/linear_regression.html#LinearRegression.predict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id8" title="Link to this definition"></a></dt>
+<dd><p>Predicts target values based on the given input data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>X</strong> (<em>array-like</em>) – The input features for making predictions.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The predicted target values.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>array-like</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>RuntimeError</strong> – If the model has not been trained before making predictions.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="veloxml.linear.linear_regression.LinearRegression.solve_mode">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">solve_mode</span></span><a class="headerlink" href="#veloxml.linear.linear_regression.LinearRegression.solve_mode" title="Link to this definition"></a></dt>
+<dd><p>Returns the decomposition method used for solving the regression.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The decomposition mode.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>CLinearDecompMode</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-veloxml.linear.logistic_regression">
+<span id="veloxml-linear-logistic-regression-module"></span><h2>veloxml.linear.logistic_regression module<a class="headerlink" href="#module-veloxml.linear.logistic_regression" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="veloxml.linear.logistic_regression.LogisticRegression">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">veloxml.linear.logistic_regression.</span></span><span class="sig-name descname"><span class="pre">LogisticRegression</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">solver_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'LBFGS'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lamda_l2</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1e-06</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_iter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ls_alpha_init</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ls_rho</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ls_c</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0001</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">history_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/veloxml/linear/logistic_regression.html#LogisticRegression"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#veloxml.linear.logistic_regression.LogisticRegression" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="veloxml.base.html#veloxml.base.classification_base.ClassificationBase" title="veloxml.base.classification_base.ClassificationBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">ClassificationBase</span></code></a></p>
+<p>Logistic Regression model with support for different optimization solvers.</p>
+<p>This class implements Logistic Regression for binary classification, supporting
+L2 regularization and optimization via LBFGS or Newton-CG solvers.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="veloxml.linear.logistic_regression.LogisticRegression.solver_type_">
+<span class="sig-name descname"><span class="pre">solver_type_</span></span><a class="headerlink" href="#veloxml.linear.logistic_regression.LogisticRegression.solver_type_" title="Link to this definition"></a></dt>
+<dd><p>The optimization solver used.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>CLogisticRegressionSolverType</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="veloxml.linear.logistic_regression.LogisticRegression.lamda_l2_">
+<span class="sig-name descname"><span class="pre">lamda_l2_</span></span><a class="headerlink" href="#veloxml.linear.logistic_regression.LogisticRegression.lamda_l2_" title="Link to this definition"></a></dt>
+<dd><p>The L2 regularization strength.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="veloxml.linear.logistic_regression.LogisticRegression.tol_">
+<span class="sig-name descname"><span class="pre">tol_</span></span><a class="headerlink" href="#veloxml.linear.logistic_regression.LogisticRegression.tol_" title="Link to this definition"></a></dt>
+<dd><p>The tolerance for stopping criteria.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="veloxml.linear.logistic_regression.LogisticRegression.max_iter_">
+<span class="sig-name descname"><span class="pre">max_iter_</span></span><a class="headerlink" href="#veloxml.linear.logistic_regression.LogisticRegression.max_iter_" title="Link to this definition"></a></dt>
+<dd><p>The maximum number of iterations for optimization.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="veloxml.linear.logistic_regression.LogisticRegression.ls_alpha_init_">
+<span class="sig-name descname"><span class="pre">ls_alpha_init_</span></span><a class="headerlink" href="#veloxml.linear.logistic_regression.LogisticRegression.ls_alpha_init_" title="Link to this definition"></a></dt>
+<dd><p>Initial step size for line search.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="veloxml.linear.logistic_regression.LogisticRegression.ls_rho_">
+<span class="sig-name descname"><span class="pre">ls_rho_</span></span><a class="headerlink" href="#veloxml.linear.logistic_regression.LogisticRegression.ls_rho_" title="Link to this definition"></a></dt>
+<dd><p>Line search reduction factor.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="veloxml.linear.logistic_regression.LogisticRegression.ls_c_">
+<span class="sig-name descname"><span class="pre">ls_c_</span></span><a class="headerlink" href="#veloxml.linear.logistic_regression.LogisticRegression.ls_c_" title="Link to this definition"></a></dt>
+<dd><p>Line search parameter for Armijo condition.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="veloxml.linear.logistic_regression.LogisticRegression.history_size_">
+<span class="sig-name descname"><span class="pre">history_size_</span></span><a class="headerlink" href="#veloxml.linear.logistic_regression.LogisticRegression.history_size_" title="Link to this definition"></a></dt>
+<dd><p>The history size for LBFGS optimization.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>solver_type</strong> (<em>Literal</em><em>[</em><em>&quot;LBFGS&quot;</em><em>, </em><em>&quot;NEWTONCG&quot;</em><em>]</em><em>, </em><em>optional</em>) – The solver used for optimization.
+Defaults to “LBFGS”. Must be one of [“LBFGS”, “NEWTONCG”].</p></li>
+<li><p><strong>lamda_l2</strong> (<em>float</em><em>, </em><em>optional</em>) – The L2 regularization strength. Defaults to 1.0.</p></li>
+<li><p><strong>tol</strong> (<em>float</em><em>, </em><em>optional</em>) – The stopping criteria tolerance. Defaults to 1e-6.</p></li>
+<li><p><strong>max_iter</strong> (<em>int</em><em>, </em><em>optional</em>) – The maximum number of optimization iterations. Defaults to 100.</p></li>
+<li><p><strong>ls_alpha_init</strong> (<em>float</em><em>, </em><em>optional</em>) – The initial step size for line search. Defaults to 1.0.</p></li>
+<li><p><strong>ls_rho</strong> (<em>float</em><em>, </em><em>optional</em>) – The reduction factor for line search. Defaults to 0.5.</p></li>
+<li><p><strong>ls_c</strong> (<em>float</em><em>, </em><em>optional</em>) – The parameter for the Armijo condition in line search. Defaults to 1e-4.</p></li>
+<li><p><strong>history_size</strong> (<em>int</em><em>, </em><em>optional</em>) – The history size for LBFGS optimization. Defaults to 10.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If an invalid solver type is provided.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="veloxml.linear.logistic_regression.LogisticRegression.predict">
+<span class="sig-name descname"><span class="pre">predict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/veloxml/linear/logistic_regression.html#LogisticRegression.predict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#veloxml.linear.logistic_regression.LogisticRegression.predict" title="Link to this definition"></a></dt>
+<dd><p>Predicts class labels for the given input data.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="veloxml.linear.logistic_regression.LogisticRegression.predict_proba">
+<span class="sig-name descname"><span class="pre">predict_proba</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Y</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/veloxml/linear/logistic_regression.html#LogisticRegression.predict_proba"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#veloxml.linear.logistic_regression.LogisticRegression.predict_proba" title="Link to this definition"></a></dt>
+<dd><p>Predicts class probabilities for the given input data.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="veloxml.linear.logistic_regression.LogisticRegression.get_weights">
+<span class="sig-name descname"><span class="pre">get_weights</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/veloxml/linear/logistic_regression.html#LogisticRegression.get_weights"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#veloxml.linear.logistic_regression.LogisticRegression.get_weights" title="Link to this definition"></a></dt>
+<dd><p>Returns the weight coefficients of the trained model.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="veloxml.linear.logistic_regression.LogisticRegression.get_bias">
+<span class="sig-name descname"><span class="pre">get_bias</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/veloxml/linear/logistic_regression.html#LogisticRegression.get_bias"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#veloxml.linear.logistic_regression.LogisticRegression.get_bias" title="Link to this definition"></a></dt>
+<dd><p>Returns the bias term of the trained model.</p>
+</dd></dl>
+
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">model</span> <span class="o">=</span> <span class="n">LogisticRegression</span><span class="p">(</span><span class="n">solver_type</span><span class="o">=</span><span class="s2">&quot;NEWTONCG&quot;</span><span class="p">,</span> <span class="n">lamda_l2</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">predictions</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">probabilities</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Initializes the Logistic Regression model with the specified parameters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>solver_type</strong> (<em>Literal</em><em>[</em><em>&quot;LBFGS&quot;</em><em>, </em><em>&quot;NEWTONCG&quot;</em><em>]</em><em>, </em><em>optional</em>) – The solver used for optimization.
+Defaults to “LBFGS”.</p></li>
+<li><p><strong>lamda_l2</strong> (<em>float</em><em>, </em><em>optional</em>) – The L2 regularization strength. Defaults to 1.0.</p></li>
+<li><p><strong>tol</strong> (<em>float</em><em>, </em><em>optional</em>) – The stopping criteria tolerance. Defaults to 1e-6.</p></li>
+<li><p><strong>max_iter</strong> (<em>int</em><em>, </em><em>optional</em>) – The maximum number of optimization iterations. Defaults to 100.</p></li>
+<li><p><strong>ls_alpha_init</strong> (<em>float</em><em>, </em><em>optional</em>) – The initial step size for line search. Defaults to 1.0.</p></li>
+<li><p><strong>ls_rho</strong> (<em>float</em><em>, </em><em>optional</em>) – The reduction factor for line search. Defaults to 0.5.</p></li>
+<li><p><strong>ls_c</strong> (<em>float</em><em>, </em><em>optional</em>) – The parameter for the Armijo condition in line search. Defaults to 1e-4.</p></li>
+<li><p><strong>history_size</strong> (<em>int</em><em>, </em><em>optional</em>) – The history size for LBFGS optimization. Defaults to 10.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If an invalid solver type is provided.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="veloxml.linear.logistic_regression.LogisticRegression.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">solver_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'LBFGS'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lamda_l2</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1e-06</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_iter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ls_alpha_init</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ls_rho</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ls_c</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0001</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">history_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/veloxml/linear/logistic_regression.html#LogisticRegression.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#veloxml.linear.logistic_regression.LogisticRegression.__init__" title="Link to this definition"></a></dt>
+<dd><p>Initializes the Logistic Regression model with the specified parameters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>solver_type</strong> (<em>Literal</em><em>[</em><em>&quot;LBFGS&quot;</em><em>, </em><em>&quot;NEWTONCG&quot;</em><em>]</em><em>, </em><em>optional</em>) – The solver used for optimization.
+Defaults to “LBFGS”.</p></li>
+<li><p><strong>lamda_l2</strong> (<em>float</em><em>, </em><em>optional</em>) – The L2 regularization strength. Defaults to 1.0.</p></li>
+<li><p><strong>tol</strong> (<em>float</em><em>, </em><em>optional</em>) – The stopping criteria tolerance. Defaults to 1e-6.</p></li>
+<li><p><strong>max_iter</strong> (<em>int</em><em>, </em><em>optional</em>) – The maximum number of optimization iterations. Defaults to 100.</p></li>
+<li><p><strong>ls_alpha_init</strong> (<em>float</em><em>, </em><em>optional</em>) – The initial step size for line search. Defaults to 1.0.</p></li>
+<li><p><strong>ls_rho</strong> (<em>float</em><em>, </em><em>optional</em>) – The reduction factor for line search. Defaults to 0.5.</p></li>
+<li><p><strong>ls_c</strong> (<em>float</em><em>, </em><em>optional</em>) – The parameter for the Armijo condition in line search. Defaults to 1e-4.</p></li>
+<li><p><strong>history_size</strong> (<em>int</em><em>, </em><em>optional</em>) – The history size for LBFGS optimization. Defaults to 10.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If an invalid solver type is provided.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id9">
+<span class="sig-name descname"><span class="pre">get_bias</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/veloxml/linear/logistic_regression.html#LogisticRegression.get_bias"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id9" title="Link to this definition"></a></dt>
+<dd><p>Returns the bias term of the trained model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The bias term of the logistic regression model.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id10">
+<span class="sig-name descname"><span class="pre">get_weights</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/veloxml/linear/logistic_regression.html#LogisticRegression.get_weights"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id10" title="Link to this definition"></a></dt>
+<dd><p>Returns the weight coefficients of the trained model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The weight coefficients of the logistic regression model.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>array-like</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id11">
+<span class="sig-name descname"><span class="pre">predict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/veloxml/linear/logistic_regression.html#LogisticRegression.predict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id11" title="Link to this definition"></a></dt>
+<dd><p>Predicts class labels based on the given input data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>X</strong> (<em>array-like</em>) – The input features for making predictions.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The predicted class labels.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>array-like</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>RuntimeError</strong> – If the model has not been trained before making predictions.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id12">
+<span class="sig-name descname"><span class="pre">predict_proba</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Y</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/veloxml/linear/logistic_regression.html#LogisticRegression.predict_proba"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id12" title="Link to this definition"></a></dt>
+<dd><p>Predicts class probabilities for the given input data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> (<em>array-like</em>) – The input features for making probability predictions.</p></li>
+<li><p><strong>Y</strong> (<em>array-like</em>) – The target class labels (may not be necessary for all implementations).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The predicted class probabilities.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>array-like</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>RuntimeError</strong> – If the model has not been trained before making predictions.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-veloxml.linear.ridge_regression">
+<span id="veloxml-linear-ridge-regression-module"></span><h2>veloxml.linear.ridge_regression module<a class="headerlink" href="#module-veloxml.linear.ridge_regression" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="veloxml.linear.ridge_regression.RidgeRegression">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">veloxml.linear.ridge_regression.</span></span><span class="sig-name descname"><span class="pre">RidgeRegression</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lamda_l2</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">penalize_bias</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/veloxml/linear/ridge_regression.html#RidgeRegression"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#veloxml.linear.ridge_regression.RidgeRegression" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="veloxml.base.html#veloxml.base.regression_base.RegressionBase" title="veloxml.base.regression_base.RegressionBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">RegressionBase</span></code></a></p>
+<p>Ridge Regression model with L2 regularization.</p>
+<p>This class implements Ridge Regression, which applies L2 regularization
+to prevent overfitting by penalizing large coefficients.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="veloxml.linear.ridge_regression.RidgeRegression.lamda_l2_">
+<span class="sig-name descname"><span class="pre">lamda_l2_</span></span><a class="headerlink" href="#veloxml.linear.ridge_regression.RidgeRegression.lamda_l2_" title="Link to this definition"></a></dt>
+<dd><p>The regularization strength (lambda).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="veloxml.linear.ridge_regression.RidgeRegression.penalize_bias_">
+<span class="sig-name descname"><span class="pre">penalize_bias_</span></span><a class="headerlink" href="#veloxml.linear.ridge_regression.RidgeRegression.penalize_bias_" title="Link to this definition"></a></dt>
+<dd><p>Whether to apply L2 regularization to the bias term.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>lamda_l2</strong> (<em>float</em><em>, </em><em>optional</em>) – The regularization strength.
+Defaults to 1.0.</p></li>
+<li><p><strong>penalize_bias</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True, applies regularization to the bias term.
+Defaults to False.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="veloxml.linear.ridge_regression.RidgeRegression.predict">
+<span class="sig-name descname"><span class="pre">predict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/veloxml/linear/ridge_regression.html#RidgeRegression.predict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#veloxml.linear.ridge_regression.RidgeRegression.predict" title="Link to this definition"></a></dt>
+<dd><p>Predicts target values for the given input data.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="veloxml.linear.ridge_regression.RidgeRegression.get_weights">
+<span class="sig-name descname"><span class="pre">get_weights</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/veloxml/linear/ridge_regression.html#RidgeRegression.get_weights"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#veloxml.linear.ridge_regression.RidgeRegression.get_weights" title="Link to this definition"></a></dt>
+<dd><p>Returns the weight coefficients of the trained model.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="veloxml.linear.ridge_regression.RidgeRegression.get_bias">
+<span class="sig-name descname"><span class="pre">get_bias</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/veloxml/linear/ridge_regression.html#RidgeRegression.get_bias"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#veloxml.linear.ridge_regression.RidgeRegression.get_bias" title="Link to this definition"></a></dt>
+<dd><p>Returns the bias term of the trained model.</p>
+</dd></dl>
+
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">model</span> <span class="o">=</span> <span class="n">RidgeRegression</span><span class="p">(</span><span class="n">lamda_l2</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">penalize_bias</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">predictions</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Initializes the Ridge Regression model with the specified L2 regularization strength.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>lamda_l2</strong> (<em>float</em><em>, </em><em>optional</em>) – The regularization strength. Defaults to 1.0.</p></li>
+<li><p><strong>penalize_bias</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True, applies regularization to the bias term.
+Defaults to False.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="veloxml.linear.ridge_regression.RidgeRegression.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lamda_l2</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">penalize_bias</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/veloxml/linear/ridge_regression.html#RidgeRegression.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#veloxml.linear.ridge_regression.RidgeRegression.__init__" title="Link to this definition"></a></dt>
+<dd><p>Initializes the Ridge Regression model with the specified L2 regularization strength.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>lamda_l2</strong> (<em>float</em><em>, </em><em>optional</em>) – The regularization strength. Defaults to 1.0.</p></li>
+<li><p><strong>penalize_bias</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True, applies regularization to the bias term.
+Defaults to False.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id13">
+<span class="sig-name descname"><span class="pre">get_bias</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/veloxml/linear/ridge_regression.html#RidgeRegression.get_bias"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id13" title="Link to this definition"></a></dt>
+<dd><p>Returns the bias term of the trained model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The bias term of the regression model.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id14">
+<span class="sig-name descname"><span class="pre">get_weights</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/veloxml/linear/ridge_regression.html#RidgeRegression.get_weights"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id14" title="Link to this definition"></a></dt>
+<dd><p>Returns the weight coefficients of the trained model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The weight coefficients of the regression model.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>array-like</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id15">
+<span class="sig-name descname"><span class="pre">predict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/veloxml/linear/ridge_regression.html#RidgeRegression.predict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id15" title="Link to this definition"></a></dt>
+<dd><p>Predicts target values based on the given input data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>X</strong> (<em>array-like</em>) – The input features for making predictions.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The predicted target values.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>array-like</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>RuntimeError</strong> – If the model has not been trained before making predictions.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-veloxml.linear">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-veloxml.linear" title="Link to this heading"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="veloxml.kmeans.html" class="btn btn-neutral float-left" title="veloxml.kmeans package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="veloxml.pca.html" class="btn btn-neutral float-right" title="veloxml.pca package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Yuji Chinen.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
