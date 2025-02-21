@@ -31,7 +31,7 @@ jobs:
         run: |
           sudo apt update
           sudo apt install -y ninja-build cmake g++ gcc libtbb-dev libomp-dev
-          echo "TBB_DIR=/usr/lib/x86_64-linux-gnu/cmake/TBB" >> $GITHUB_ENV
+          echo "TBB_DIR=echo "TBB_DIR=/usr/include/tbb" >> $GITHUB_ENV
           pip install -U build scikit-build ninja pytest cibuildwheel
           
       - name: Install dependencies (macOS)
