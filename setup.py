@@ -16,8 +16,8 @@ setup(
         "pybind11",
     ],
     cmake_args=[
-        "-DCMAKE_C_COMPILER=/usr/local/bin/gcc",
-        "-DCMAKE_CXX_COMPILER=/usr/local/bin/g++",
+        "-DCMAKE_C_COMPILER=gcc",
+        "-DCMAKE_CXX_COMPILER=g++",
         "-DBUILD_TESTS=OFF",
         "-DBUILD_GMOCK=OFF",
         "-DINSTALL_GTEST=OFF",
