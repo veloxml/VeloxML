@@ -7,23 +7,23 @@ import os
 import sys
 import subprocess
 
-def find_executable(name):
-    """指定したコマンドのフルパスを取得する"""
-    try:
-        return subprocess.check_output(["which", name], text=True).strip()
-    except subprocess.CalledProcessError:
-        return None
+# def find_executable(name):
+#     """指定したコマンドのフルパスを取得する"""
+#     try:
+#         return subprocess.check_output(["which", name], text=True).strip()
+#     except subprocess.CalledProcessError:
+#         return None
 
 if sys.platform == "darwin":  # macOS
     TBB_PREFIX = os.popen("brew --prefix tbb").read().strip()
     TBB_DIR = os.path.join(TBB_PREFIX, "lib/cmake/tbb")
-    CC = os.environ.get("CMAKE_C_COMPILER", find_executable("gcc-13") or "/opt/homebrew/bin/gcc-13")
-    CXX = os.environ.get("CMAKE_CXX_COMPILER", find_executable("g++-13") or "/opt/homebrew/bin/g++-13")
+    CC = os.environ.get("CMAKE_C_COMPILER", "/opt/homebrew/bin/gcc-13")
+    CXX = os.environ.get("CMAKE_CXX_COMPILER", "/opt/homebrew/bin/g++-13")
 
 elif sys.platform.startswith("linux"):
     TBB_DIR = os.environ.get("TBB_DIR", "/usr/lib/x86_64-linux-gnu/cmake/TBB")
-    CC = find_executable("gcc") or "/usr/bin/gcc"
-    CXX = find_executable("g++") or "/usr/bin/g++"
+    CC = "/usr/bin/gcc"
+    CXX = "/usr/bin/g++"
 elif sys.platform == "win32":
     VCPKG_ROOT = os.environ.get("VCPKG_ROOT", "C:/vcpkg")
     TBB_DIR = os.path.join(VCPKG_ROOT, "installed", "x64-windows", "share", "tbb")

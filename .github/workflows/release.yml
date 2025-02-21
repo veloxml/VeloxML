@@ -69,7 +69,9 @@ jobs:
           echo "Using GCC: $GCC_PATH"
           echo "Using G++: $GXX_PATH"
           TBB_PREFIX=$(brew --prefix tbb)
+          PKG_CONFIG_PATH="/opt/homebrew/opt/openblas/lib/pkgconfig"
           echo "TBB_DIR=${TBB_PREFIX}/lib/cmake/tbb" >> $GITHUB_ENV
+          echo "PKG_CONFIG_PATH=${PKG_CONFIG_PATH}" >> $GITHUB_ENV
           pip install -U build scikit-build ninja pytest cibuildwheel
 
       - name: Install dependencies (Windows)

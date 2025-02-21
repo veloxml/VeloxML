@@ -40,3 +40,6 @@ veloxml = ["core/*.so", "**/*.py"]  # .soファイルを含める
 
 [tool.setuptools.exclude-package-data]
 veloxml = ["core/include/gtest/*", "core/lib/gtest*"]
+
+[tool.cibuildwheel]
+build = "cp310-* cp311-* cp312-*"
