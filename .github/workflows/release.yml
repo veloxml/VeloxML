@@ -27,20 +27,26 @@ jobs:
         if: runner.os == 'Linux'
         run: |
           sudo apt update
-          sudo apt install -y ninja-build cmake g++
+          sudo apt install -y ninja-build cmake g++ gcc
           pip install -U build scikit-build ninja pytest cibuildwheel
+          echo "CC=$(which gcc)" >> $GITHUB_ENV
+          echo "CXX=$(which g++)" >> $GITHUB_ENV
 
       - name: Install dependencies (macOS)
         if: runner.os == 'macOS'
         run: |
           brew install ninja cmake gcc
           pip install -U build scikit-build ninja pytest cibuildwheel
+          echo "CC=$(which gcc)" >> $GITHUB_ENV
+          echo "CXX=$(which g++)" >> $GITHUB_ENV
 
       - name: Install dependencies (Windows)
         if: runner.os == 'Windows'
         run: |
           choco install mingw ninja cmake
           pip install -U build scikit-build ninja pytest cibuildwheel
+          echo "CC=$(which gcc)" >> $GITHUB_ENV
+          echo "CXX=$(which g++)" >> $GITHUB_ENV
 
       - name: Build Python Wheels
         run: cibuildwheel --output-dir wheelhouse
