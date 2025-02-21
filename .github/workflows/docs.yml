@@ -1,0 +1,39 @@
+name: Build & Deploy Docs
+
+on:
+  push:
+    branches:
+      - main  # mainブランチへのpush時に実行
+
+jobs:
+  build:
+    name: Generate Sphinx Docs
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements_docs.txt
+
+      - name: Install project
+        run: pip install -e .
+
+      - name: Build Docs
+        run: |
+          export PYTHONPATH=.
+          sphinx-apidoc -f -o docs/source ./veloxml
+          sphinx-build -b html ./docs docs/build
+
+      - name: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: gh-pages
+          folder: docs/build
