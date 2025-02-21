@@ -43,8 +43,6 @@ veloxml = ["core/include/gtest/*", "core/lib/gtest*"]
 
 [tool.cibuildwheel]
 build = "cp310-* cp311-* cp312-*"
-
-[tool.cibuildwheel]
 test-requires = "pytest"
 test-command = "pytest {project}/tests"
 
