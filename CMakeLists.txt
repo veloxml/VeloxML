@@ -72,15 +72,26 @@ elseif(CMAKE_CXX_COMPILER_ID MATCHES "Clang")
         add_link_options(-fopenmp)
     endif()
 endif()
+
 # ------------------------------------------------------------------------------
 # TBB 設定
 # ------------------------------------------------------------------------------
-find_package(TBB CONFIG REQUIRED)
 
-if(NOT TARGET TBB::tbb)
-    message(FATAL_ERROR "TBB target not found!")
+# OS によって TBB の検索方法を変更
+if(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")  # macOS
+    find_package(TBB CONFIG REQUIRED)
+elseif(${CMAKE_SYSTEM_NAME} MATCHES "Linux")  # Ubuntu
+    find_package(PkgConfig REQUIRED)
+    pkg_check_modules(TBB REQUIRED tbb)
 else()
-    message(STATUS "TBB Found! ${}")
+    message(FATAL_ERROR "Unsupported OS for TBB!")
+endif()
+
+# TBB が見つかったか確認
+if(NOT TBB_FOUND)
+    message(FATAL_ERROR "TBB not found!")
+else()
+    message(STATUS "TBB Found!")
 endif()
 
 # TBB のヘッダーパスを追加
