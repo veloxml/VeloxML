@@ -12,7 +12,7 @@ jobs:
 
     strategy:
       matrix:
-        os: [macos-13, macos-latest, windows-latest]
+        os: [macos-14]
         build_type: ["Release"]
         c_compiler: ["gcc"]
         cxx_compiler: ["g++"]
@@ -91,11 +91,14 @@ jobs:
           echo "TBB_DIR=${{ github.workspace }}/vcpkg/installed/x64-windows/share/tbb" >> $GITHUB_ENV
           pip install -U build scikit-build ninja pytest cibuildwheel
 
-      - name: Build Python Wheels
+      - name: Build Python Wheels (macOS Apple Silicon)
+        if: runner.os == 'macOS' && runner.arch == 'ARM64'
         run: python -m cibuildwheel --output-dir wheelhouse
         env:
           TBB_DIR: ${{ env.TBB_DIR }}
           CMAKE_ARGS: "-DTBB_DIR=${{ env.TBB_DIR }} -DCMAKE_PREFIX_PATH=${{ env.TBB_DIR }}"
+          CIBW_BUILD: "cp38-macosx_arm64 cp39-macosx_arm64 cp310-macosx_arm64, cp311-macosx_arm64, cp312-macosx_arm64, cp313-macosx_arm64"
+          MACOSX_DEPLOYMENT_TARGET: "14.0"
 
       - name: Build Source Distribution (sdist)
         run: python -m build --sdist --outdir wheelhouse

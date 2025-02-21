@@ -42,7 +42,6 @@ veloxml = ["core/*.so", "**/*.py"]  # .soファイルを含める
 veloxml = ["core/include/gtest/*", "core/lib/gtest*"]
 
 [tool.cibuildwheel]
-build = "cp312-*"
 test-requires = "pytest"
 test-command = "pytest {project}/tests"
 
