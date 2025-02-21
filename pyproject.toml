@@ -17,7 +17,7 @@ readme = "README.md"
 dependencies = [
     "numpy",
     "pybind11",
-] # 必要な依存関係を追加
+] 
 
 [project.optional-dependencies]
 dev = [

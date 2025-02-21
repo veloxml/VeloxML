@@ -5,7 +5,7 @@ import os, sys
 
 import os
 import sys
-import subprocess
+import platform
 
 # def find_executable(name):
 #     """指定したコマンドのフルパスを取得する"""
@@ -19,13 +19,17 @@ if sys.platform == "darwin":  # macOS
     TBB_DIR = os.path.join(TBB_PREFIX, "lib/cmake/tbb")
     
     # 実行中のマシンのアーキテクチャを判別 (arm64: Apple Silicon, x86_64: Intel)
-    machine = sys.platform.machine()
+    machine = platform.machine()
     if machine == "arm64":
         default_cc = "/opt/homebrew/bin/gcc-13"
         default_cxx = "/opt/homebrew/bin/g++-13"
+        PKG_CONFIG_PATH = "/usr/local/opt/openblas/lib/pkgconfig"
+
     else:
         default_cc = "/usr/local/opt/gcc/bin/gcc-13"
         default_cxx = " /usr/local/opt/gcc/bin/g++-13"
+        PKG_CONFIG_PATH = "/usr/local/opt/openblas/lib/pkgconfig"
+
     
     # 環境変数に値が設定されていなければデフォルト値を利用
     CC = os.environ.get("CMAKE_C_COMPILER", default_cc)
@@ -71,6 +75,7 @@ setup(
         "-DINSTALL_GTEST=OFF",
         f"-DTBB_DIR={TBB_DIR}",
         f"-DCMAKE_PREFIX_PATH={TBB_DIR}",
+        f"-DPKG_CONFIG_PATH={PKG_CONFIG_PATH}"
     ],
     include_package_data=True,  # .so を含める
 )
