@@ -1,0 +1,596 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>veloxml.base package &mdash; VeloxML 0.0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=d45e8c67"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="veloxml.core package" href="veloxml.core.html" />
+    <link rel="prev" title="veloxml package" href="veloxml.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            VeloxML
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">veloxml</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="veloxml.html">veloxml package</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="veloxml.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l4 current"><a class="current reference internal" href="#">veloxml.base package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="veloxml.core.html">veloxml.core package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="veloxml.kmeans.html">veloxml.kmeans package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="veloxml.linear.html">veloxml.linear package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="veloxml.pca.html">veloxml.pca package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="veloxml.svm.html">veloxml.svm package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="veloxml.tree.html">veloxml.tree package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="veloxml.html#module-contents">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">VeloxML</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="modules.html">veloxml</a></li>
+          <li class="breadcrumb-item"><a href="veloxml.html">veloxml package</a></li>
+      <li class="breadcrumb-item active">veloxml.base package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/source/veloxml.base.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="veloxml-base-package">
+<h1>veloxml.base package<a class="headerlink" href="#veloxml-base-package" title="Link to this heading"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading"></a></h2>
+</section>
+<section id="module-veloxml.base.classification_base">
+<span id="veloxml-base-classification-base-module"></span><h2>veloxml.base.classification_base module<a class="headerlink" href="#module-veloxml.base.classification_base" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="veloxml.base.classification_base.ClassificationBase">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">veloxml.base.classification_base.</span></span><span class="sig-name descname"><span class="pre">ClassificationBase</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/veloxml/base/classification_base.html#ClassificationBase"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#veloxml.base.classification_base.ClassificationBase" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#veloxml.base.estimator_base.EstimatorBase" title="veloxml.base.estimator_base.EstimatorBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">EstimatorBase</span></code></a></p>
+<p>Base class for classification models.</p>
+<p>This class provides a foundation for classification models, extending <cite>EstimatorBase</cite>.
+It defines common functionality for fitting a model to training data and making predictions,
+including probability-based predictions.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="veloxml.base.classification_base.ClassificationBase.model">
+<span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#veloxml.base.classification_base.ClassificationBase.model" title="Link to this definition"></a></dt>
+<dd><p>The underlying classification model instance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>object</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="veloxml.base.classification_base.ClassificationBase.fit">
+<span class="sig-name descname"><span class="pre">fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Y</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/veloxml/base/classification_base.html#ClassificationBase.fit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#veloxml.base.classification_base.ClassificationBase.fit" title="Link to this definition"></a></dt>
+<dd><p>Trains the model using the given input data and target values.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="veloxml.base.classification_base.ClassificationBase.predict">
+<span class="sig-name descname"><span class="pre">predict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/veloxml/base/classification_base.html#ClassificationBase.predict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#veloxml.base.classification_base.ClassificationBase.predict" title="Link to this definition"></a></dt>
+<dd><p>Predicts class labels based on the given input data.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="veloxml.base.classification_base.ClassificationBase.predict_proba">
+<span class="sig-name descname"><span class="pre">predict_proba</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Y</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/veloxml/base/classification_base.html#ClassificationBase.predict_proba"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#veloxml.base.classification_base.ClassificationBase.predict_proba" title="Link to this definition"></a></dt>
+<dd><p>Predicts class probabilities for the given input data.</p>
+</dd></dl>
+
+<p>Initializes the classification base class with a given model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>model</strong> (<em>object</em>) – The classification model instance to be used.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="veloxml.base.classification_base.ClassificationBase.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/veloxml/base/classification_base.html#ClassificationBase.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#veloxml.base.classification_base.ClassificationBase.__init__" title="Link to this definition"></a></dt>
+<dd><p>Initializes the classification base class with a given model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>model</strong> (<em>object</em>) – The classification model instance to be used.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id0">
+<span class="sig-name descname"><span class="pre">fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Y</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/veloxml/base/classification_base.html#ClassificationBase.fit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id0" title="Link to this definition"></a></dt>
+<dd><p>Trains the classification model using the given input data and target values.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> (<em>array-like</em>) – The input features used for training.</p></li>
+<li><p><strong>Y</strong> (<em>array-like</em>) – The target class labels corresponding to X.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The instance itself after fitting the model.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#veloxml.base.classification_base.ClassificationBase" title="veloxml.base.classification_base.ClassificationBase">ClassificationBase</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id1">
+<span class="sig-name descname"><span class="pre">predict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/veloxml/base/classification_base.html#ClassificationBase.predict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id1" title="Link to this definition"></a></dt>
+<dd><p>Predicts class labels based on the given input data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>X</strong> (<em>array-like</em>) – The input features for making predictions.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The predicted class labels.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>array-like</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id2">
+<span class="sig-name descname"><span class="pre">predict_proba</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Y</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/veloxml/base/classification_base.html#ClassificationBase.predict_proba"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id2" title="Link to this definition"></a></dt>
+<dd><p>Predicts class probabilities for the given input data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> (<em>array-like</em>) – The input features for making probability predictions.</p></li>
+<li><p><strong>Y</strong> (<em>array-like</em>) – The target class labels (this argument may not be necessary,
+depending on the implementation of the underlying model).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The predicted class probabilities.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>array-like</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-veloxml.base.estimator_base">
+<span id="veloxml-base-estimator-base-module"></span><h2>veloxml.base.estimator_base module<a class="headerlink" href="#module-veloxml.base.estimator_base" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="veloxml.base.estimator_base.EstimatorBase">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">veloxml.base.estimator_base.</span></span><span class="sig-name descname"><span class="pre">EstimatorBase</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/veloxml/base/estimator_base.html#EstimatorBase"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#veloxml.base.estimator_base.EstimatorBase" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ABC</span></code></p>
+<p>Abstract base class for all estimators.</p>
+<p>This class defines a common interface for all estimators, enforcing
+the implementation of <cite>fit</cite> and <cite>predict</cite> methods in derived classes.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="veloxml.base.estimator_base.EstimatorBase.model">
+<span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#veloxml.base.estimator_base.EstimatorBase.model" title="Link to this definition"></a></dt>
+<dd><p>The underlying model instance used for estimation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>object</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="veloxml.base.estimator_base.EstimatorBase.fit">
+<span class="sig-name descname"><span class="pre">fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Y</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/veloxml/base/estimator_base.html#EstimatorBase.fit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#veloxml.base.estimator_base.EstimatorBase.fit" title="Link to this definition"></a></dt>
+<dd><p>Abstract method for training the model with input data X and target values Y.
+Must be implemented in subclasses.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="veloxml.base.estimator_base.EstimatorBase.predict">
+<span class="sig-name descname"><span class="pre">predict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/veloxml/base/estimator_base.html#EstimatorBase.predict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#veloxml.base.estimator_base.EstimatorBase.predict" title="Link to this definition"></a></dt>
+<dd><p>Abstract method for making predictions based on input data X.
+Must be implemented in subclasses.</p>
+</dd></dl>
+
+<p>Initializes the estimator with a given model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>model</strong> (<em>object</em>) – The model instance to be used for estimation.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="veloxml.base.estimator_base.EstimatorBase.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/veloxml/base/estimator_base.html#EstimatorBase.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#veloxml.base.estimator_base.EstimatorBase.__init__" title="Link to this definition"></a></dt>
+<dd><p>Initializes the estimator with a given model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>model</strong> (<em>object</em>) – The model instance to be used for estimation.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id3">
+<em class="property"><span class="k"><span class="pre">abstractmethod</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Y</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/veloxml/base/estimator_base.html#EstimatorBase.fit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id3" title="Link to this definition"></a></dt>
+<dd><p>Trains the model using the given input data and target values.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> (<em>array-like</em>) – The input features used for training.</p></li>
+<li><p><strong>Y</strong> (<em>array-like</em>) – The target values corresponding to X.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>NotImplementedError</strong> – This method must be implemented in a subclass.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id4">
+<em class="property"><span class="k"><span class="pre">abstractmethod</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">predict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/veloxml/base/estimator_base.html#EstimatorBase.predict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id4" title="Link to this definition"></a></dt>
+<dd><p>Predicts target values based on the given input data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>X</strong> (<em>array-like</em>) – The input features for making predictions.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The predicted target values.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>array-like</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>NotImplementedError</strong> – This method must be implemented in a subclass.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-veloxml.base.regression_base">
+<span id="veloxml-base-regression-base-module"></span><h2>veloxml.base.regression_base module<a class="headerlink" href="#module-veloxml.base.regression_base" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="veloxml.base.regression_base.RegressionBase">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">veloxml.base.regression_base.</span></span><span class="sig-name descname"><span class="pre">RegressionBase</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/veloxml/base/regression_base.html#RegressionBase"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#veloxml.base.regression_base.RegressionBase" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#veloxml.base.estimator_base.EstimatorBase" title="veloxml.base.estimator_base.EstimatorBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">EstimatorBase</span></code></a></p>
+<p>Base class for regression models.</p>
+<p>This class provides a foundation for regression models, extending <cite>EstimatorBase</cite>.
+It defines common functionality for fitting a model to training data and making predictions.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="veloxml.base.regression_base.RegressionBase.model">
+<span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#veloxml.base.regression_base.RegressionBase.model" title="Link to this definition"></a></dt>
+<dd><p>The underlying regression model instance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>object</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="veloxml.base.regression_base.RegressionBase.fit">
+<span class="sig-name descname"><span class="pre">fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Y</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/veloxml/base/regression_base.html#RegressionBase.fit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#veloxml.base.regression_base.RegressionBase.fit" title="Link to this definition"></a></dt>
+<dd><p>Trains the model using the given input data and target values.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="veloxml.base.regression_base.RegressionBase.predict">
+<span class="sig-name descname"><span class="pre">predict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/veloxml/base/regression_base.html#RegressionBase.predict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#veloxml.base.regression_base.RegressionBase.predict" title="Link to this definition"></a></dt>
+<dd><p>Predicts target values based on the given input data.</p>
+</dd></dl>
+
+<p>Initializes the regression base class with a given model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>model</strong> (<em>object</em>) – The regression model instance to be used.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="veloxml.base.regression_base.RegressionBase.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/veloxml/base/regression_base.html#RegressionBase.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#veloxml.base.regression_base.RegressionBase.__init__" title="Link to this definition"></a></dt>
+<dd><p>Initializes the regression base class with a given model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>model</strong> (<em>object</em>) – The regression model instance to be used.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id5">
+<span class="sig-name descname"><span class="pre">fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Y</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/veloxml/base/regression_base.html#RegressionBase.fit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id5" title="Link to this definition"></a></dt>
+<dd><p>Trains the regression model using the given input data and target values.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> (<em>array-like</em>) – The input features used for training.</p></li>
+<li><p><strong>Y</strong> (<em>array-like</em>) – The target values corresponding to X.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The instance itself after fitting the model.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#veloxml.base.regression_base.RegressionBase" title="veloxml.base.regression_base.RegressionBase">RegressionBase</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id6">
+<span class="sig-name descname"><span class="pre">predict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/veloxml/base/regression_base.html#RegressionBase.predict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id6" title="Link to this definition"></a></dt>
+<dd><p>Predicts target values based on the given input data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>X</strong> (<em>array-like</em>) – The input features for making predictions.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The predicted target values.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>array-like</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-veloxml.base.unsupervised_base">
+<span id="veloxml-base-unsupervised-base-module"></span><h2>veloxml.base.unsupervised_base module<a class="headerlink" href="#module-veloxml.base.unsupervised_base" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="veloxml.base.unsupervised_base.UnsupervisedEstimatorBase">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">veloxml.base.unsupervised_base.</span></span><span class="sig-name descname"><span class="pre">UnsupervisedEstimatorBase</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/veloxml/base/unsupervised_base.html#UnsupervisedEstimatorBase"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#veloxml.base.unsupervised_base.UnsupervisedEstimatorBase" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#veloxml.base.estimator_base.EstimatorBase" title="veloxml.base.estimator_base.EstimatorBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">EstimatorBase</span></code></a></p>
+<p>Base class for unsupervised learning models.</p>
+<p>This class provides a foundation for unsupervised learning models, extending <cite>EstimatorBase</cite>.
+It defines common functionality such as fitting the model, making predictions,
+and transforming data.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="veloxml.base.unsupervised_base.UnsupervisedEstimatorBase.model">
+<span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#veloxml.base.unsupervised_base.UnsupervisedEstimatorBase.model" title="Link to this definition"></a></dt>
+<dd><p>The underlying unsupervised learning model instance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>object</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="veloxml.base.unsupervised_base.UnsupervisedEstimatorBase.fit">
+<span class="sig-name descname"><span class="pre">fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Y</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/veloxml/base/unsupervised_base.html#UnsupervisedEstimatorBase.fit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#veloxml.base.unsupervised_base.UnsupervisedEstimatorBase.fit" title="Link to this definition"></a></dt>
+<dd><p>Trains the model using the given input data.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="veloxml.base.unsupervised_base.UnsupervisedEstimatorBase.predict">
+<span class="sig-name descname"><span class="pre">predict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Y</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/veloxml/base/unsupervised_base.html#UnsupervisedEstimatorBase.predict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#veloxml.base.unsupervised_base.UnsupervisedEstimatorBase.predict" title="Link to this definition"></a></dt>
+<dd><p>Predicts cluster labels or other outputs depending on the model type.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="veloxml.base.unsupervised_base.UnsupervisedEstimatorBase.transform">
+<span class="sig-name descname"><span class="pre">transform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/veloxml/base/unsupervised_base.html#UnsupervisedEstimatorBase.transform"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#veloxml.base.unsupervised_base.UnsupervisedEstimatorBase.transform" title="Link to this definition"></a></dt>
+<dd><p>Transforms the input data into a different representation (e.g., dimensionality reduction).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="veloxml.base.unsupervised_base.UnsupervisedEstimatorBase.fit_predict">
+<span class="sig-name descname"><span class="pre">fit_predict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/veloxml/base/unsupervised_base.html#UnsupervisedEstimatorBase.fit_predict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#veloxml.base.unsupervised_base.UnsupervisedEstimatorBase.fit_predict" title="Link to this definition"></a></dt>
+<dd><p>Fits the model to the data and returns predictions.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="veloxml.base.unsupervised_base.UnsupervisedEstimatorBase.fit_transform">
+<span class="sig-name descname"><span class="pre">fit_transform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/veloxml/base/unsupervised_base.html#UnsupervisedEstimatorBase.fit_transform"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#veloxml.base.unsupervised_base.UnsupervisedEstimatorBase.fit_transform" title="Link to this definition"></a></dt>
+<dd><p>Fits the model to the data and transforms it.</p>
+</dd></dl>
+
+<p>Initializes the unsupervised learning base class with a given model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>model</strong> (<em>object</em>) – The unsupervised learning model instance to be used.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="veloxml.base.unsupervised_base.UnsupervisedEstimatorBase.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/veloxml/base/unsupervised_base.html#UnsupervisedEstimatorBase.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#veloxml.base.unsupervised_base.UnsupervisedEstimatorBase.__init__" title="Link to this definition"></a></dt>
+<dd><p>Initializes the unsupervised learning base class with a given model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>model</strong> (<em>object</em>) – The unsupervised learning model instance to be used.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id7">
+<span class="sig-name descname"><span class="pre">fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Y</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/veloxml/base/unsupervised_base.html#UnsupervisedEstimatorBase.fit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id7" title="Link to this definition"></a></dt>
+<dd><p>Trains the unsupervised learning model using the given input data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> (<em>array-like</em>) – The input features used for training.</p></li>
+<li><p><strong>Y</strong> (<em>array-like</em><em>, </em><em>optional</em>) – Unused parameter included for compatibility.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The instance itself after fitting the model.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#veloxml.base.unsupervised_base.UnsupervisedEstimatorBase" title="veloxml.base.unsupervised_base.UnsupervisedEstimatorBase">UnsupervisedEstimatorBase</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id8">
+<span class="sig-name descname"><span class="pre">fit_predict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/veloxml/base/unsupervised_base.html#UnsupervisedEstimatorBase.fit_predict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id8" title="Link to this definition"></a></dt>
+<dd><p>Fits the model to the data and then returns predictions.</p>
+<p>This is commonly used in clustering models.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>X</strong> (<em>array-like</em>) – The input data.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The predicted labels or other outputs after fitting the model.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>array-like</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id9">
+<span class="sig-name descname"><span class="pre">fit_transform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/veloxml/base/unsupervised_base.html#UnsupervisedEstimatorBase.fit_transform"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id9" title="Link to this definition"></a></dt>
+<dd><p>Fits the model to the data and then transforms it.</p>
+<p>This is commonly used in dimensionality reduction techniques.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>X</strong> (<em>array-like</em>) – The input data.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The transformed representation of the input data.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>array-like</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id10">
+<span class="sig-name descname"><span class="pre">predict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Y</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/veloxml/base/unsupervised_base.html#UnsupervisedEstimatorBase.predict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id10" title="Link to this definition"></a></dt>
+<dd><p>Predicts outputs based on the given input data.</p>
+<p>In clustering models, this typically returns cluster labels.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> (<em>array-like</em>) – The input features for making predictions.</p></li>
+<li><p><strong>Y</strong> (<em>array-like</em><em>, </em><em>optional</em>) – Unused parameter included for compatibility.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The predicted labels or other outputs.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>array-like</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id11">
+<span class="sig-name descname"><span class="pre">transform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/veloxml/base/unsupervised_base.html#UnsupervisedEstimatorBase.transform"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id11" title="Link to this definition"></a></dt>
+<dd><p>Transforms the input data into a different representation.</p>
+<p>Used in dimensionality reduction and feature extraction techniques.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>X</strong> (<em>array-like</em>) – The input data to transform.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The transformed representation of the input data.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>array-like</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-veloxml.base">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-veloxml.base" title="Link to this heading"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="veloxml.html" class="btn btn-neutral float-left" title="veloxml package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="veloxml.core.html" class="btn btn-neutral float-right" title="veloxml.core package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Yuji Chinen.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

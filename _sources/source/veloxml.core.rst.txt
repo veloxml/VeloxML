@@ -1,0 +1,10 @@
+veloxml.core package
+====================
+
+Module contents
+---------------
+
+.. automodule:: veloxml.core
+   :members:
+   :show-inheritance:
+   :undoc-members:
