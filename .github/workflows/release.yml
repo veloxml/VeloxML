@@ -30,18 +30,24 @@ jobs:
         if: runner.os == 'Linux'
         run: |
           sudo apt update
-          sudo apt install -y ninja-build cmake g++ gcc libtbb-dev
+          sudo apt install -y ninja-build cmake g++ gcc libtbb-dev libomp-dev
           pip install -U build scikit-build ninja pytest cibuildwheel
       - name: Install dependencies (macOS)
         if: runner.os == 'macOS'
         run: |
-          brew install ninja cmake gcc tbb
+          brew install ninja cmake gcc tbb libomp openblas
+          GCC_PATH=$(brew --prefix gcc)/bin/gcc-13
+          GXX_PATH=$(brew --prefix gcc)/bin/g++-13
+          echo "CC=${GCC_PATH}" >> $GITHUB_ENV
+          echo "CXX=${GXX_PATH}" >> $GITHUB_ENV
+          echo "Using GCC: $GCC_PATH"
+          echo "Using G++: $GXX_PATH"
           pip install -U build scikit-build ninja pytest cibuildwheel
 
       - name: Install dependencies (Windows)
         if: runner.os == 'Windows'
         run: |
-          choco install mingw ninja cmake tbb
+          choco install mingw ninja cmake tbb 
           pip install -U build scikit-build ninja pytest cibuildwheel
 
       - name: Build Python Wheels

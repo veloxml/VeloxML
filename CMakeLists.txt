@@ -117,15 +117,22 @@ else()
     message(FATAL_ERROR "Python3 not found! Please install Python3 development headers.")
 endif()
 
-# OpenBLAS 設定（Mac 用）
-set(OPENBLAS_INCLUDE_DIR "/opt/homebrew/Cellar/openblas/0.3.29/include")
-set(OPENBLAS_LIB "/opt/homebrew/Cellar/openblas/0.3.29/lib/libopenblas.dylib")
-if (EXISTS ${OPENBLAS_LIB})
-    message(STATUS "Found OpenBLAS: ${OPENBLAS_LIB}")
-else()
-    message(FATAL_ERROR "OpenBLAS not found! Install it using 'brew install openblas'")
+# ------------------------------------------------------------------------------
+# OpenBLAS 設定 (macOS)
+# ------------------------------------------------------------------------------
+if (APPLE)
+    execute_process(COMMAND brew --prefix openblas OUTPUT_VARIABLE OPENBLAS_PREFIX OUTPUT_STRIP_TRAILING_WHITESPACE)
+    
+    set(OPENBLAS_INCLUDE_DIR "${OPENBLAS_PREFIX}/include")
+    set(OPENBLAS_LIB "${OPENBLAS_PREFIX}/lib/libopenblas.dylib")
+
+    if (EXISTS ${OPENBLAS_LIB})
+        message(STATUS "Found OpenBLAS: ${OPENBLAS_LIB}")
+    else()
+        message(FATAL_ERROR "OpenBLAS not found! Install it using 'brew install openblas'")
+    endif()
 endif()
-execute_process(COMMAND which python OUTPUT_VARIABLE PYTHON_EXECUTABLE OUTPUT_STRIP_TRAILING_WHITESPACE)
+
 # ------------------------------------------------------------------------------
 # 外部コンテンツ: pybind11 の取得
 # ------------------------------------------------------------------------------
