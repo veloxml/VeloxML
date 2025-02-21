@@ -33,8 +33,30 @@ jobs:
           sudo apt install -y ninja-build cmake g++ gcc libtbb-dev libomp-dev
           echo "CC=$(which gcc)" >> $GITHUB_ENV
           echo "CXX=$(which g++)" >> $GITHUB_ENV
-          echo "TBB_DIR=/usr/include/tbb" >> $GITHUB_ENV
           pip install -U build scikit-build ninja pytest cibuildwheel
+
+      - name: Check and Set TBB Environment Variables (Linux)
+        if: runner.os == 'Linux'
+        run: |
+          echo "Checking installed TBB packages..."
+          dpkg -l | grep tbb || true
+          
+          echo "Searching for TBBConfig.cmake..."
+          TBB_CONFIG_PATH=$(find /usr -name "TBBConfig.cmake" 2>/dev/null | head -n 1)
+          
+          if [[ -n "$TBB_CONFIG_PATH" ]]; then
+            TBB_DIR=$(dirname "$TBB_CONFIG_PATH")
+            echo "Found TBBConfig.cmake at: $TBB_CONFIG_PATH"
+            echo "Setting TBB_DIR to: $TBB_DIR"
+            echo "TBB_DIR=$TBB_DIR" >> $GITHUB_ENV
+          else
+            echo "TBBConfig.cmake not found! TBB might not be installed correctly."
+            exit 1
+          fi
+
+          echo "Checking environment variables..."
+          env | grep TBB || true
+      
       - name: Install dependencies (macOS)
         if: runner.os == 'macOS'
         run: |
