@@ -30,18 +30,18 @@ jobs:
         if: runner.os == 'Linux'
         run: |
           sudo apt update
-          sudo apt install -y ninja-build cmake g++ gcc
+          sudo apt install -y ninja-build cmake g++ gcc libtbb-dev
           pip install -U build scikit-build ninja pytest cibuildwheel
       - name: Install dependencies (macOS)
         if: runner.os == 'macOS'
         run: |
-          brew install ninja cmake gcc
+          brew install ninja cmake gcc tbb
           pip install -U build scikit-build ninja pytest cibuildwheel
 
       - name: Install dependencies (Windows)
         if: runner.os == 'Windows'
         run: |
-          choco install mingw ninja cmake
+          choco install mingw ninja cmake tbb
           pip install -U build scikit-build ninja pytest cibuildwheel
 
       - name: Build Python Wheels
