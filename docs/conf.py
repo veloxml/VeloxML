@@ -5,8 +5,8 @@
 
 import os
 import sys
-sys.path.insert(0, os.path.abspath('../veloxml'))
-sys.path.insert(0, os.path.abspath('../veloxml/core'))  # c_veloxml_core のパスを追加
+sys.path.insert(0, os.path.abspath('../../'))
+sys.path.insert(0, os.path.abspath('../../'))  # c_veloxml_core のパスを追加
 
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
@@ -40,8 +40,6 @@ html_static_path = ['_static']
 autodoc_default_options = {
     'members': True,             # クラスや関数の docstring を出力
     'undoc-members': True,       # docstring がないメンバーも出力
-    'private-members': True,     # _ で始まる関数・変数も出力
-    'special-members': '__init__', # __init__ の docstring も出力
     'show-inheritance': True,    # 継承関係を表示
 }
 

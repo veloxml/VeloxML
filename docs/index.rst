@@ -13,5 +13,5 @@ VeloxML documentation
    :maxdepth: 2
    :caption: Contents:
 
-   ./veloxml/modules
+   ./source/modules
 
