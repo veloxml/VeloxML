@@ -1,5 +1,6 @@
 ![Docs workflow](https://github.com/veloxml/VeloxML/actions/workflows/docs.yml/badge.svg)
 ![Release workflow](https://github.com/veloxml/VeloxML/actions/workflows/release.yml/badge.svg)
+[![PyPI Downloads](https://static.pepy.tech/badge/veloxml)](https://pepy.tech/projects/veloxml)
 
 # VeloxML - High-Performance Machine Learning Library for Python (Powered by C++)
 
