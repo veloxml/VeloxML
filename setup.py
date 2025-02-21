@@ -26,8 +26,8 @@ if sys.platform == "darwin":  # macOS
         PKG_CONFIG_PATH = "/usr/local/opt/openblas/lib/pkgconfig"
 
     else:
-        default_cc = "/usr/local/opt/gcc/bin/gcc-13"
-        default_cxx = " /usr/local/opt/gcc/bin/g++-13"
+        default_cc = "gcc-13"
+        default_cxx = "g++-13"
         PKG_CONFIG_PATH = "/usr/local/opt/openblas/lib/pkgconfig"
 
     

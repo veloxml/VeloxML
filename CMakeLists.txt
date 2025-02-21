@@ -9,12 +9,17 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3 -march=native")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -frtti")
 
+# ------------------------------------------------------------------------------
 # テストビルドのON/OFF切替
+# ------------------------------------------------------------------------------
 option(BUILD_TESTS "Build unit tests" ON)
 
+# ------------------------------------------------------------------------------
 # SIMD 命令を有効化（Mac では Clang 用のオプションを適用）
+# ------------------------------------------------------------------------------
 if (CMAKE_SYSTEM_PROCESSOR MATCHES "arm" OR CMAKE_OSX_ARCHITECTURES STREQUAL "arm64")
     message(STATUS "Using ARM NEON (AArch64) settings.")
+
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -march=native -ffast-math -ftree-vectorize")
 elseif (CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
     message(STATUS "Using GCC with AVX2 settings.")
