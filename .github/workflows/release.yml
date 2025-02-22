@@ -6,7 +6,8 @@ on:
       - "v*.*.*"
 
 permissions:
-  id-token: write  # ← OIDC トークンの取得を許可
+  contents: write  # ← リリースを作成・更新するための権限を追加
+  id-token: write  # ← OIDC を使用する場合に必要
 
 jobs:
   build:
@@ -132,6 +133,8 @@ jobs:
           echo "${{ secrets.GITHUB_TOKEN }}" | gh auth login --with-token
 
       - name: Create GitHub Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           gh release create "${{ github.ref_name }}" wheelhouse/* \
             --title "Release ${{ github.ref_name }}" \
