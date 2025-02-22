@@ -140,7 +140,7 @@ else()
 endif()
 
 # ------------------------------------------------------------------------------
-# OpenBLAS 設定 (macOS)
+# OpenBLAS 設定 (macOS, Linux, Windows)
 # ------------------------------------------------------------------------------
 if (APPLE)
     execute_process(COMMAND brew --prefix openblas OUTPUT_VARIABLE OPENBLAS_PREFIX OUTPUT_STRIP_TRAILING_WHITESPACE)
@@ -152,6 +152,32 @@ if (APPLE)
         message(STATUS "Found OpenBLAS: ${OPENBLAS_LIB}")
     else()
         message(FATAL_ERROR "OpenBLAS not found! Install it using 'brew install openblas'")
+    endif()
+
+elseif (UNIX AND NOT APPLE)  # Linux
+    find_path(OPENBLAS_INCLUDE_DIR NAMES openblas_config.h PATHS /usr/include /usr/local/include)
+    find_library(OPENBLAS_LIB NAMES openblas PATHS /usr/lib /usr/local/lib /usr/lib/x86_64-linux-gnu)
+
+    if (OPENBLAS_LIB)
+        message(STATUS "Found OpenBLAS: ${OPENBLAS_LIB}")
+    else()
+        message(FATAL_ERROR "OpenBLAS not found! Install it using 'sudo apt install libopenblas-dev' or equivalent package manager.")
+    endif()
+
+elseif (WIN32)  # Windows
+    if (DEFINED ENV{VCPKG_ROOT})
+        set(VCPKG_ROOT "$ENV{VCPKG_ROOT}")
+    else()
+        set(VCPKG_ROOT "C:/vcpkg")
+    endif()
+
+    set(OPENBLAS_INCLUDE_DIR "${VCPKG_ROOT}/installed/x64-windows/include")
+    set(OPENBLAS_LIB "${VCPKG_ROOT}/installed/x64-windows/lib/openblas.lib")
+
+    if (EXISTS ${OPENBLAS_LIB})
+        message(STATUS "Found OpenBLAS: ${OPENBLAS_LIB}")
+    else()
+        message(FATAL_ERROR "OpenBLAS not found! Install it using 'vcpkg install openblas' and set VCPKG_ROOT")
     endif()
 endif()
 
