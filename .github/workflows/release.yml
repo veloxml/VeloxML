@@ -34,42 +34,7 @@ jobs:
       - name: Install dependencies (Linux)
         if: runner.os == 'Linux'
         run: |
-          sudo apt update
-          sudo apt install -y ninja-build cmake libtbb-dev libomp-dev libopenblas-dev liblapack-dev
-          CC=$(which gcc-14)
-          CMAKE_C_COMPILER=$(which gcc-14)
-          CXX=$(which g++-14)
-          CMAKE_CXX_COMPILER=$(which g++-14)
-          echo GCC-14 is at: $(which gcc-14)
-          echo G++-14 is at: $(which g++-14)
-          echo "CC=$(which gcc-14)" >> $GITHUB_ENV
-          echo "CMAKE_C_COMPILER=$(which gcc-14)" >> $GITHUB_ENV
-          echo "CXX=$(which g++-14)" >> $GITHUB_ENV
-          echo "CMAKE_CXX_COMPILER=$(which g++-14)" >> $GITHUB_ENV
           pip install -U build scikit-build ninja pytest cibuildwheel
-
-      - name: Check and Set TBB Environment Variables (Linux)
-        if: runner.os == 'Linux'
-        run: |
-          echo "Checking installed TBB packages..."
-          dpkg -l | grep tbb || true
-          
-          echo "Searching for TBBConfig.cmake..."
-          TBB_CONFIG_PATH=$(find /usr -name "TBBConfig.cmake" 2>/dev/null | head -n 1)
-          
-          if [[ -n "$TBB_CONFIG_PATH" ]]; then
-            TBB_DIR=$(dirname "$TBB_CONFIG_PATH")
-            echo "Found TBBConfig.cmake at: $TBB_CONFIG_PATH"
-            echo "Setting TBB_DIR to: $TBB_DIR"
-            echo "TBB_DIR=$TBB_DIR" >> $GITHUB_ENV
-            echo "CMAKE_PREFIX_PATH=$TBB_DIR" >> $GITHUB_ENV
-          else
-            echo "TBBConfig.cmake not found! TBB might not be installed correctly."
-            exit 1
-          fi
-
-          echo "Checking environment variables..."
-          env | grep TBB || true
 
       - name: Install dependencies (macOS)
         if: runner.os == 'macOS'
@@ -113,6 +78,15 @@ jobs:
           CIBW_BUILD: "cp39-macosx_arm64 cp310-macosx_arm64 cp311-macosx_arm64 cp312-macosx_arm64 cp313-macosx_arm64"
           MACOSX_DEPLOYMENT_TARGET: "14.0"
 
+      - name: Build Python Wheels (macOS Intel)
+        if: runner.os == 'macOS' && runner.arch == 'x64'
+        run: python -m cibuildwheel --output-dir wheelhouse
+        env:
+          TBB_DIR: ${{ env.TBB_DIR }}
+          CMAKE_ARGS: "-DTBB_DIR=${{ env.TBB_DIR }} -DCMAKE_PREFIX_PATH=${{ env.TBB_DIR }}"
+          CIBW_BUILD: "cp39-macosx_arm64 cp310-macosx_arm64 cp311-macosx_arm64 cp312-macosx_arm64 cp313-macosx_arm64"
+          MACOSX_DEPLOYMENT_TARGET: "13.0"
+
       - name: Build Python Wheels (Linux x86_64)
         if: runner.os == 'Linux' && runner.arch == 'x64'
         run: python -m cibuildwheel --output-dir wheelhouse
@@ -123,8 +97,6 @@ jobs:
         if: runner.os == 'Linux' && runner.arch == 'arm64'
         run: python -m cibuildwheel --output-dir wheelhouse
         env:
-          TBB_DIR: ${{ env.TBB_DIR }}
-          CMAKE_ARGS: "-DTBB_DIR=${{ env.TBB_DIR }} -DCMAKE_PREFIX_PATH=${{ env.TBB_DIR }}"
           CIBW_BUILD: "cp39-manylinux_aarch64 cp310-manylinux_aarch64 cp311-manylinux_aarch64 cp312-manylinux_aarch64 cp313-manylinux_aarch64"
 
       - name: Build Python Wheels (Windows amd64)
