@@ -5,6 +5,9 @@ on:
     tags:
       - "v*.*.*"
 
+permissions:
+  id-token: write  # ← OIDC トークンの取得を許可
+
 jobs:
   build:
     name: Build & Test (${{ matrix.os }})
