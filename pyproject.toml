@@ -53,7 +53,7 @@ build = "cp312-macosx_arm64 cp313-macosx_arm64"
 #test-command = "pytest {package}/tests"
 
 [tool.cibuildwheel.linux]
-before-all = """cd /etc/yum.repos.d/ && yum install -y wget\
+before-all = """cd /etc/yum.repos.d/ && yum install -y wget &&\
     wget https://copr-fe.cloud.fedoraproject.org/coprs/rhscl/devtoolset-3/repo/epel-6/rhscl-devtoolset-3-epel-6.repo && \
     yum install -y devtoolset-3-gcc devtoolset-3-binutils && yum -y install devtoolset-3-gcc-c++ devtoolset-3-gcc-gfortran && \
     scl enable devtoolset-3 bash && yum install -y openblas* lapack* libgomp tbb*"""
