@@ -42,8 +42,8 @@ if sys.platform == "darwin":  # macOS
 
 elif sys.platform.startswith("linux"):
     TBB_DIR = os.environ.get("TBB_DIR", "/usr/lib/x86_64-linux-gnu/cmake/TBB")
-    CC = os.environ.get("CC", "gcc-14")
-    CXX = os.environ.get("CXX", "g++-14")
+    CC =  os.popen("which gcc-14").read().strip()
+    CXX = os.popen("which g++-14").read().strip()
     PKG_CONFIG_PATH = ""
 elif sys.platform == "win32":
     VCPKG_ROOT = os.environ.get("VCPKG_ROOT", "C:/vcpkg")
