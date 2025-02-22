@@ -97,9 +97,8 @@ jobs:
         env:
           TBB_DIR: ${{ env.TBB_DIR }}
           CMAKE_ARGS: "-DTBB_DIR=${{ env.TBB_DIR }} -DCMAKE_PREFIX_PATH=${{ env.TBB_DIR }}"
-          CIBW_BUILD: "cp39-macosx_arm64 cp310-macosx_arm64, cp311-macosx_arm64, cp312-macosx_arm64, cp313-macosx_arm64"
+          CIBW_BUILD: "cp39-macosx_arm64 cp310-macosx_arm64 cp311-macosx_arm64 cp312-macosx_arm64 cp313-macosx_arm64"
           MACOSX_DEPLOYMENT_TARGET: "14.0"
-          # CIBW_BEFORE_TEST: pip install -e .
 
       - name: Build Source Distribution (sdist)
         run: python -m build --sdist --outdir wheelhouse
@@ -148,6 +147,11 @@ jobs:
         with:
           name: python-wheels
           path: wheelhouse/
+
+      - name: Copy to dist
+        run: |
+          mkdir -p dist
+          cp wheelhouse/* dist/
 
       - name: Publish distribution 📦 to PyPI
         uses: pypa/gh-action-pypi-publish@release/v1
