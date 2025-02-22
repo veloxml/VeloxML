@@ -132,7 +132,7 @@ jobs:
         run: |
           gh release create "${{ github.ref_name }}" wheelhouse/* \
             --title "Release ${{ github.ref_name }}" \
-            --notes "Auto-generated release."
+            --notes "Alpha release."
 
   publish-pypi:
     name: Publish to PyPI
