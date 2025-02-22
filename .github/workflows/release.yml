@@ -35,13 +35,15 @@ jobs:
         if: runner.os == 'Linux'
         run: |
           sudo apt update
-          sudo apt install -y ninja-build cmake g++ gcc libtbb-dev libomp-dev libopenblas-dev liblapack-dev software-properties-common
-          sudo add-apt-repository universe && sudo apt update
-          sudo apt install gcc-14 g++-14
+          sudo apt install -y ninja-build cmake g++ gcc libtbb-dev libomp-dev libopenblas-dev liblapack-dev
           CC=$(which gcc-14)
+          CMAKE_C_COMPILER=$(which gcc-14)
           CXX=$(which g++-14)
+          CMAKE_CXX_COMPILER=$(which g++-14)
           echo "CC=$(which gcc-14)" >> $GITHUB_ENV
+          echo "CMAKE_C_COMPILER=$(which gcc-14)" >> $GITHUB_ENV
           echo "CXX=$(which g++-14)" >> $GITHUB_ENV
+          echo "CMAKE_CXX_COMPILER=$(which g++-14)" >> $GITHUB_ENV
           pip install -U build scikit-build ninja pytest cibuildwheel
 
       - name: Check and Set TBB Environment Variables (Linux)
