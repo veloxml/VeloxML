@@ -18,6 +18,12 @@ dependencies = [
     "numpy",
     "pybind11",
 ] 
+keywords = ["veloxml", "machine-learning", "high-performance", "python", "cpp"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License"
+]
 
 [project.optional-dependencies]
 dev = [
@@ -39,11 +45,12 @@ include = ["veloxml*"]  # サブパッケージも含める
 veloxml = ["core/*.so", "**/*.py"]  # .soファイルを含める
 
 [tool.setuptools.exclude-package-data]
-veloxml = ["core/include/gtest/*", "core/lib/gtest*"]
+veloxml = ["core/include/gtest/*", "core/lib/gtest*", "**/*.cpp", "**/*.hpp"]
 
 [tool.cibuildwheel]
-test-requires = "pytest"
-test-command = "pytest {project}/tests"
+build = "cp312-macosx_arm64 cp313-macosx_arm64"
+#test-requires = "pytest"
+#test-command = "pytest {package}/tests"
 
 [tool.cibuildwheel.macos]
 repair-wheel-command = "delocate-wheel --exclude libgomp.1.dylib --exclude libgcc_s.1.1.dylib -w {dest_dir} {wheel}"

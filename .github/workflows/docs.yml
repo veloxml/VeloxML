@@ -3,7 +3,7 @@ name: Build & Deploy Docs
 on:
   push:
     branches:
-      - main  # mainブランチへのpush時に実行
+      - gh-pages  # mainブランチへのpush時に実行
 
 jobs:
   build:
