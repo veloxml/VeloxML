@@ -117,9 +117,7 @@ jobs:
         if: runner.os == 'Linux' && runner.arch == 'x64'
         run: python -m cibuildwheel --output-dir wheelhouse
         env:
-          TBB_DIR: ${{ env.TBB_DIR }}
-          CIBW_ENVIRONMENT_LINUX: "CC=${{ env.CC }} CXX=${{ env.CXX }} TBB_DIR=${{ env.TBB_DIR }} CMAKE_PREFIX_PATH=${{ env.TBB_DIR }}"
-          CMAKE_ARGS: "-DTBB_DIR=${{ env.TBB_DIR }} -DCMAKE_PREFIX_PATH=${{ env.TBB_DIR }}"
+          CIBW_ENVIRONMENT_LINUX: "CC=${{ gcc }} CXX=${{ g++ }}"
           CIBW_BUILD: "cp39-manylinux_x86_64 cp310-manylinux_x86_64 cp311-manylinux_x86_64 cp312-manylinux_x86_64 cp313-manylinux_x86_64"
 
       - name: Build Python Wheels (Linux aarch64)
