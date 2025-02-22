@@ -35,9 +35,11 @@ jobs:
         if: runner.os == 'Linux'
         run: |
           sudo apt update
-          sudo apt install -y ninja-build cmake g++ gcc libtbb-dev libomp-dev libopenblas-dev liblapack-dev
-          echo "CC=$(which gcc)" >> $GITHUB_ENV
-          echo "CXX=$(which g++)" >> $GITHUB_ENV
+          sudo apt install -y ninja-build cmake g++ gcc libtbb-dev libomp-dev libopenblas-dev liblapack-dev software-properties-common
+          sudo add-apt-repository universe && sudo apt update
+          sudo apt install gcc-14 g++-14
+          echo "CC=$(which gcc-14)" >> $GITHUB_ENV
+          echo "CXX=$(which g++-14)" >> $GITHUB_ENV
           pip install -U build scikit-build ninja pytest cibuildwheel
 
       - name: Check and Set TBB Environment Variables (Linux)
@@ -114,7 +116,7 @@ jobs:
           CIBW_BUILD: "cp39-manylinux_x86_64 cp310-manylinux_x86_64 cp311-manylinux_x86_64 cp312-manylinux_x86_64 cp313-manylinux_x86_64"
 
       - name: Build Python Wheels (Linux aarch64)
-        if: runner.os == 'Linux' && runner.arch == 'ARM64'
+        if: runner.os == 'Linux' && runner.arch == 'arm64'
         run: python -m cibuildwheel --output-dir wheelhouse
         env:
           TBB_DIR: ${{ env.TBB_DIR }}
@@ -130,7 +132,7 @@ jobs:
           CIBW_BUILD: "cp39-win_amd64 cp310-win_amd64 cp311-win_amd64 cp312-win_amd64 cp313-win_amd64"
 
       - name: Build Python Wheels (Windows arm64)
-        if: runner.os == 'Windows' && runner.arch == 'amd64'
+        if: runner.os == 'Windows' && runner.arch == 'arm64'
         run: python -m cibuildwheel --output-dir wheelhouse
         env:
           TBB_DIR: ${{ env.TBB_DIR }}
