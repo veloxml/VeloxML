@@ -38,6 +38,8 @@ jobs:
           sudo apt install -y ninja-build cmake g++ gcc libtbb-dev libomp-dev libopenblas-dev liblapack-dev software-properties-common
           sudo add-apt-repository universe && sudo apt update
           sudo apt install gcc-14 g++-14
+          CC=$(which gcc-14)
+          CXX=$(which g++-14)
           echo "CC=$(which gcc-14)" >> $GITHUB_ENV
           echo "CXX=$(which g++-14)" >> $GITHUB_ENV
           pip install -U build scikit-build ninja pytest cibuildwheel
