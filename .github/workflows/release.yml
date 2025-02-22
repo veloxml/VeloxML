@@ -105,6 +105,38 @@ jobs:
           CIBW_BUILD: "cp39-macosx_arm64 cp310-macosx_arm64 cp311-macosx_arm64 cp312-macosx_arm64 cp313-macosx_arm64"
           MACOSX_DEPLOYMENT_TARGET: "14.0"
 
+      - name: Build Python Wheels (Linux x86_64)
+        if: runner.os == 'Linux' && runner.arch == 'x64'
+        run: python -m cibuildwheel --output-dir wheelhouse
+        env:
+          TBB_DIR: ${{ env.TBB_DIR }}
+          CMAKE_ARGS: "-DTBB_DIR=${{ env.TBB_DIR }} -DCMAKE_PREFIX_PATH=${{ env.TBB_DIR }}"
+          CIBW_BUILD: "cp39-manylinux_x86_64 cp310-manylinux_x86_64 cp311-manylinux_x86_64 cp312-manylinux_x86_64 cp313-manylinux_x86_64"
+
+      - name: Build Python Wheels (Linux aarch64)
+        if: runner.os == 'Linux' && runner.arch == 'ARM64'
+        run: python -m cibuildwheel --output-dir wheelhouse
+        env:
+          TBB_DIR: ${{ env.TBB_DIR }}
+          CMAKE_ARGS: "-DTBB_DIR=${{ env.TBB_DIR }} -DCMAKE_PREFIX_PATH=${{ env.TBB_DIR }}"
+          CIBW_BUILD: "cp39-manylinux_aarch64 cp310-manylinux_aarch64 cp311-manylinux_aarch64 cp312-manylinux_aarch64 cp313-manylinux_aarch64"
+
+      - name: Build Python Wheels (Windows amd64)
+        if: runner.os == 'Windows' && runner.arch == 'amd64'
+        run: python -m cibuildwheel --output-dir wheelhouse
+        env:
+          TBB_DIR: ${{ env.TBB_DIR }}
+          CMAKE_ARGS: "-DTBB_DIR=${{ env.TBB_DIR }} -DCMAKE_PREFIX_PATH=${{ env.TBB_DIR }}"
+          CIBW_BUILD: "cp39-win_amd64 cp310-win_amd64 cp311-win_amd64 cp312-win_amd64 cp313-win_amd64"
+
+      - name: Build Python Wheels (Windows arm64)
+        if: runner.os == 'Windows' && runner.arch == 'amd64'
+        run: python -m cibuildwheel --output-dir wheelhouse
+        env:
+          TBB_DIR: ${{ env.TBB_DIR }}
+          CMAKE_ARGS: "-DTBB_DIR=${{ env.TBB_DIR }} -DCMAKE_PREFIX_PATH=${{ env.TBB_DIR }}"
+          CIBW_BUILD: "cp39-win_arm64 cp310-win_arm64 cp311-win_arm64 cp312-win_arm64 cp313-win_arm64"
+
       - name: Build Source Distribution (sdist)
         run: python -m build --sdist --outdir wheelhouse
 
