@@ -54,7 +54,7 @@ build = "cp312-macosx_arm64 cp313-macosx_arm64"
 
 [tool.cibuildwheel.linux]
 before-all = """
-    yum install scl-utils centos-release-scl && yum -y install devtoolset-9 && \
+    yum install -y scl-utils centos-release-scl && yum -y install devtoolset-9 && \
     source scl_source enable devtoolset-9 && yum install -y openblas* lapack* libgomp tbb*"""
 
 [tool.cibuildwheel.macos]
