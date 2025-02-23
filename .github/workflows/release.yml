@@ -144,11 +144,14 @@ jobs:
         if: runner.os == 'macOS' && runner.arch == 'ARM64'
         run: python -m build --sdist --outdir wheelhouse
 
-      - name: Create Unique Directory
-        run: mkdir -p wheelhouse/${{ runner.os }}
+      - name: Make directory
+        run: mkdir -p wheelhouse/${{ matrix.os }}
 
-      - name: Move artifacts to unique directory
-        run: mv wheelhouse/* wheelhouse/${{ runner.os }}/
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: artifact-${{ matrix.os }}
+          path: wheelhouse/${{ matrix.os }}
       
   artifact-merge:
     name: Upload Artifacts
@@ -156,17 +159,13 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Upload Artifacts
-        uses: actions/upload-artifact@v4
+      - name: Merge Artifacts
+        uses: actions/upload-artifact/merge@v4
         with:
-          name: my-artifact-merged
-          path: wheelhouse/
-          if-no-files-found: warn
-          compression-level: 6
-          overwrite: false
+          name: merged-artifact
+          pattern: artifact-*
+          retention-days: 1
+          compression-level: 9
 
   release:
     name: Publish to GitHub Releases
@@ -174,14 +173,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
       - name: Download Artifacts
         uses: actions/download-artifact@v4
         with:
-          name: my-artifact-merged
-          path: wheelhouse/
+          name: artifact-merge
+          path: dist/
 
       - name: Set up GitHub CLI
         run: |
@@ -191,7 +187,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          gh release create "${{ github.ref_name }}" wheelhouse/* \
+          gh release create "${{ github.ref_name }}" dist/* \
             --title "Release ${{ github.ref_name }}" \
             --notes "Alpha release."
 
@@ -206,12 +202,7 @@ jobs:
       - name: Download Artifacts
         uses: actions/download-artifact@v4
         with:
-          path: wheelhouse/
-
-      - name: Copy to dist
-        run: |
-          mkdir -p dist
-          cp wheelhouse/*/* dist/
+          path: dist/
 
       - name: Publish distribution 📦 to PyPI
         uses: pypa/gh-action-pypi-publish@release/v1
