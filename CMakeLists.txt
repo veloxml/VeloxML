@@ -19,6 +19,9 @@ option(BUILD_TESTS "Build unit tests" ON)
 # ------------------------------------------------------------------------------
 include(CheckCXXCompilerFlag)
 
+# ユーザーオプション（デフォルト: OFF）
+option(ENABLE_AVX512 "Enable AVX-512 optimizations" OFF)
+
 if (CMAKE_SYSTEM_PROCESSOR MATCHES "arm64|aarch64" OR CMAKE_OSX_ARCHITECTURES STREQUAL "arm64")
     message(STATUS "Using ARM NEON (AArch64) settings.")
 
@@ -37,20 +40,22 @@ elseif (CMAKE_SYSTEM_PROCESSOR MATCHES "armv7l") # 32-bit ARM (ARMv7)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -march=armv7-a -mfpu=neon -ffast-math -ftree-vectorize")
 
 elseif (CMAKE_SYSTEM_PROCESSOR MATCHES "x86_64")
-    # AVX-512 をチェック
+    # AVX-512 のサポートをチェック
     check_cxx_compiler_flag("-mavx512f" HAS_AVX512)
-    if (HAS_AVX512)
+    
+    if (ENABLE_AVX512 AND HAS_AVX512)
         message(STATUS "Using AVX-512 settings.")
         set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -march=native -mavx512f -mfma -ffast-math")
     else()
-        message(STATUS "Using AVX2 settings (AVX-512 not supported).")
+        message(STATUS "Using AVX2 settings (AVX-512 disabled or not supported).")
         set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -march=native -mavx2 -mfma -ffast-math")
     endif()
 
 elseif (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC" AND CMAKE_SYSTEM_PROCESSOR MATCHES "x86_64")
     # MSVC では /arch:AVX512 をサポートするか確認
     check_cxx_compiler_flag("/arch:AVX512" HAS_AVX512_MSVC)
-    if (HAS_AVX512_MSVC)
+    
+    if (ENABLE_AVX512 AND HAS_AVX512_MSVC)
         message(STATUS "Using MSVC with AVX-512 settings.")
         set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /arch:AVX512 /fp:fast")
     else()
@@ -58,6 +63,7 @@ elseif (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC" AND CMAKE_SYSTEM_PROCESSOR MATCHES
         set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /arch:AVX2 /fp:fast")
     endif()
 endif()
+
 
 # ------------------------------------------------------------------------------
 # OpenMP 設定

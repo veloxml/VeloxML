@@ -43,7 +43,7 @@ void RidgeRegression::applyRegularization(double *A, int dim, double lambda, boo
 {
     // 最後の対角要素はバイアス項として、penalize_bias が false なら変更しない
     int limit = penalize_bias ? dim : (dim - 1);
-    #ifdef __AVX512F__
+#ifdef __AVX512F__
     int i = 0;
     for (; i <= limit - 8; i += 8)
     {
@@ -54,7 +54,7 @@ void RidgeRegression::applyRegularization(double *A, int dim, double lambda, boo
         {
             idx[j] = (i + j) * (dim + 1);
         }
-        __m256i index = _mm256_load_si256(reinterpret_cast<const __m256i*>(idx));  // 修正
+        __m256i index = _mm256_load_si256(reinterpret_cast<const __m256i *>(idx)); // 修正
         __m512d diag = _mm512_i32gather_pd(index, A, 8);
         diag = _mm512_add_pd(diag, reg);
         _mm512_i32scatter_pd(A, index, diag, 8);
@@ -152,7 +152,7 @@ void RidgeRegression::fit(const std::vector<double> &X, const std::vector<double
     if (n <= 0 || m <= 0)
         throw std::invalid_argument("Invalid dimensions for X");
 
-        if (X.size() != static_cast<size_t>(n * m) || Y.size() != static_cast<size_t>(n))
+    if (X.size() != static_cast<size_t>(n * m) || Y.size() != static_cast<size_t>(n))
         throw std::invalid_argument("Input size does not match dimensions");
     computeRegression(X.data(), static_cast<int>(n), static_cast<int>(m), Y.data());
 }
