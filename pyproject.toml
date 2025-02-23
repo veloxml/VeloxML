@@ -12,7 +12,6 @@ description = "High-Performance Machine Learning Library for Python (Powered by 
 authors = [
     { name = "Yuji Chinen", email = "veloxml1113@gmail.com" }
 ]
-license = "MIT"
 readme = "README.md"
 dependencies = [
     "numpy",
@@ -22,6 +21,7 @@ keywords = ["veloxml", "machine-learning", "high-performance", "python", "cpp"]
 classifiers = [
     "Development Status :: 3 - Alpha",
     "Intended Audience :: Developers",
+    License :: "MIT",
     "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
