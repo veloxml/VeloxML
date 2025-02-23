@@ -34,6 +34,8 @@ if sys.platform == "darwin":  # macOS
     CC = os.environ.get("CMAKE_C_COMPILER", default_cc)
     CXX = os.environ.get("CMAKE_CXX_COMPILER", default_cxx)
     
+    Python3_LIBRARIES = ""
+    
     # 確認用の出力
     print("TBB_DIR:", TBB_DIR)
     print("C Compiler:", CC)
@@ -53,6 +55,7 @@ elif sys.platform == "win32":
     CC = os.environ.get("CMAKE_C_COMPILER", "C:/mingw64/bin/gcc.exe")
     CXX = os.environ.get("CMAKE_CXX_COMPILER", "C:/mingw64/bin/g++.exe")
     PKG_CONFIG_PATH = ""
+    Python3_LIBRARIES = ""
 else:
     raise RuntimeError("Unsupported OS")
 
@@ -71,7 +74,6 @@ setup(
         "-DBUILD_TESTS=OFF",
         "-DBUILD_GMOCK=OFF",
         "-DINSTALL_GTEST=OFF",
-        f"-DPython3_LIBRARIES:PATH={Python3_LIBRARIES}",
         f"-DBLAS_INCLUDE_DIRS:PATH=/usr/include/openblas",   
         f"-DTBB_DIR:PATH={TBB_DIR}",
         f"-DCMAKE_PREFIX_PATH:PATH={TBB_DIR}",
