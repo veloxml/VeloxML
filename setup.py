@@ -33,7 +33,7 @@ if sys.platform == "darwin":  # macOS
     # 環境変数に値が設定されていなければデフォルト値を利用
     CC = os.environ.get("CMAKE_C_COMPILER", default_cc)
     CXX = os.environ.get("CMAKE_CXX_COMPILER", default_cxx)
-
+    
     # 確認用の出力
     print("TBB_DIR:", TBB_DIR)
     print("C Compiler:", CC)
@@ -45,6 +45,7 @@ elif sys.platform.startswith("linux"):
     CXX = os.environ.get("CMAKE_CXX_COMPILER", "/usr/local/gcc-14.2.0/bin/g++")
     
     PKG_CONFIG_PATH = ""
+    Python3_LIBRARIES = os.popen("python3 -c 'import sysconfig; print(sysconfig.get_config_var(\"LIBDIR\"))'").read().strip()
 elif sys.platform == "win32":
     VCPKG_ROOT = os.environ.get("VCPKG_ROOT", "C:/vcpkg")
     TBB_DIR = os.path.join(VCPKG_ROOT, "installed", "x64-windows", "share", "tbb")
@@ -61,7 +62,6 @@ setup(
     description="High-Performance Machine Learning Library for Python (Powered by C++)",
     author="Yuji Chinen",
     author_email="veloxml1113@gmail.com",
-    license="MIT",
     packages=find_packages(where=".", include=["veloxml", "veloxml.*"]),
     package_dir={".": "veloxml"},  
     cmake_install_dir=".",  
@@ -71,10 +71,11 @@ setup(
         "-DBUILD_TESTS=OFF",
         "-DBUILD_GMOCK=OFF",
         "-DINSTALL_GTEST=OFF",
-        f"-DBLAS_INCLUDE_DIRS=/usr/include/openblas",
-        f"-DTBB_DIR={TBB_DIR}",
-        f"-DCMAKE_PREFIX_PATH={TBB_DIR}",
-        f"-DPKG_CONFIG_PATH={PKG_CONFIG_PATH}",
+        f"-DPython3_LIBRARIES:PATH={Python3_LIBRARIES}",
+        f"-DBLAS_INCLUDE_DIRS:PATH=/usr/include/openblas",   
+        f"-DTBB_DIR:PATH={TBB_DIR}",
+        f"-DCMAKE_PREFIX_PATH:PATH={TBB_DIR}",
+        f"-DPKG_CONFIG_PATH:PATH={PKG_CONFIG_PATH}",
     ],
     include_package_data=True,  # .so を含める
 )

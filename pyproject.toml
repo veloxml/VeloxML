@@ -12,7 +12,8 @@ description = "High-Performance Machine Learning Library for Python (Powered by 
 authors = [
     { name = "Yuji Chinen", email = "veloxml1113@gmail.com" }
 ]
-license = { file = "LICENSE" }
+license = "MIT"  # or license = {file = "LICENSE.txt"} for legacy declaration
+license-files = ["LICEN[CS]E.*"]
 readme = "README.md"
 dependencies = [
     "numpy",
@@ -22,13 +23,11 @@ keywords = ["veloxml", "machine-learning", "high-performance", "python", "cpp"]
 classifiers = [
     "Development Status :: 3 - Alpha",
     "Intended Audience :: Developers",
-    "License :: OSI Approved :: MIT License",
     "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
-    "Programming Language :: Python :: 3.13",
-    "Programming Language :: C++"
+    "Programming Language :: C++",
 ]
 
 [project.optional-dependencies]
@@ -54,11 +53,12 @@ veloxml = ["core/*.so", "**/*.py"]  # .soファイルを含める
 veloxml = ["core/include/gtest/*", "core/lib/gtest*", "**/*.cpp", "**/*.hpp"]
 
 [tool.cibuildwheel]
-build = "cp39* cp310* cp311* cp312* cp313*"
 #test-requires = "pytest"
 #test-command = "pytest {package}/tests"
 
 [tool.cibuildwheel.linux]
+build = "cp39-manylinux* cp310-manylinux* cp311-manylinux* cp312-manylinux*"
+archs = "auto64"
 
 before-build = """
     python -m ensurepip --upgrade && pip install scikit-build ninja cmake pybind11 && \
@@ -71,6 +71,8 @@ environment = "PATH=$PATH:/usr/local/bin CMAKE_INCLUDE_PATH=/usr/include/openbla
 manylinux-x86_64-image =  "veloxml/for-build-linux-x86_64:latest"
 manylinux-aarch64-image = "veloxml/for-build-linux-aarch64:latest"
 
+repair-wheel-command = ""
+
 [tool.cibuildwheel.macos]
-build = "cp312* cp313*"
+build = "cp39* cp310* cp311* cp312* cp313*"
 repair-wheel-command = "delocate-wheel --exclude libgomp.1.dylib --exclude libgcc_s.1.1.dylib -w {dest_dir} {wheel}"

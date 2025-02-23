@@ -15,21 +15,48 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -frtti")
 option(BUILD_TESTS "Build unit tests" ON)
 
 # ------------------------------------------------------------------------------
-# SIMD 命令を有効化（Mac では Clang 用のオプションを適用）
+# SIMD 命令を有効化（AVX-512, AVX2, ARM NEON, SVE ）
 # ------------------------------------------------------------------------------
-if (CMAKE_SYSTEM_PROCESSOR MATCHES "arm" OR CMAKE_OSX_ARCHITECTURES STREQUAL "arm64")
+include(CheckCXXCompilerFlag)
+
+if (CMAKE_SYSTEM_PROCESSOR MATCHES "arm64|aarch64" OR CMAKE_OSX_ARCHITECTURES STREQUAL "arm64")
     message(STATUS "Using ARM NEON (AArch64) settings.")
 
+    # NEON を有効化
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -march=native -ffast-math -ftree-vectorize")
-elseif (CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
-    message(STATUS "Using GCC with AVX2 settings.")
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -march=native -mavx2 -mfma -ffast-math")
-elseif (CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
-    message(STATUS "Using Clang with AVX2 settings.")
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -march=native -mavx2 -mfma -ffast-math")
-elseif (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
-    message(STATUS "Using MSVC with AVX2 settings.")
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /arch:AVX2 /fp:fast")
+
+    # SVE をサポートしている場合
+    check_cxx_compiler_flag("-march=armv8-a+sve" HAS_SVE)
+    if (HAS_SVE)
+        message(STATUS "Enabling ARM SVE support.")
+        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -march=armv8-a+sve")
+    endif()
+
+elseif (CMAKE_SYSTEM_PROCESSOR MATCHES "armv7l") # 32-bit ARM (ARMv7)
+    message(STATUS "Using ARMv7 with NEON settings.")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -march=armv7-a -mfpu=neon -ffast-math -ftree-vectorize")
+
+elseif (CMAKE_SYSTEM_PROCESSOR MATCHES "x86_64")
+    # AVX-512 をチェック
+    check_cxx_compiler_flag("-mavx512f" HAS_AVX512)
+    if (HAS_AVX512)
+        message(STATUS "Using AVX-512 settings.")
+        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -march=native -mavx512f -mfma -ffast-math")
+    else()
+        message(STATUS "Using AVX2 settings (AVX-512 not supported).")
+        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -march=native -mavx2 -mfma -ffast-math")
+    endif()
+
+elseif (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC" AND CMAKE_SYSTEM_PROCESSOR MATCHES "x86_64")
+    # MSVC では /arch:AVX512 をサポートするか確認
+    check_cxx_compiler_flag("/arch:AVX512" HAS_AVX512_MSVC)
+    if (HAS_AVX512_MSVC)
+        message(STATUS "Using MSVC with AVX-512 settings.")
+        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /arch:AVX512 /fp:fast")
+    else()
+        message(STATUS "Using MSVC with AVX2 settings.")
+        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /arch:AVX2 /fp:fast")
+    endif()
 endif()
 
 # ------------------------------------------------------------------------------
@@ -76,8 +103,8 @@ elseif(CMAKE_CXX_COMPILER_ID MATCHES "GNU")
         # Linux 環境の場合
         if(UNIX AND NOT APPLE)
             set(OpenMP_CXX_LIB_NAMES "gomp")
-            set(OpenMP_omp_LIBRARY "/usr/lib64/libgomp.so.1.0.0")
-            set(OpenMP_INCLUDE_DIR "/usr/include")
+            set(OpenMP_omp_LIBRARY "/usr/lib64/libomp.so")
+            set(OpenMP_INCLUDE_DIR "/usr/local/gcc-14.2.0/lib/gcc/aarch64-unknown-linux-gnu/14.2.0/include/")
         
         # macOS 環境の場合 (Homebrew の libomp)
         elseif(APPLE)
@@ -181,7 +208,7 @@ elseif(${CMAKE_SYSTEM_NAME} MATCHES "Linux")  # Linux
         message(STATUS "Python Library: ${Python3_LIBRARIES}")
 
         # Python バージョン番号を抽出 (例: "python3.9" → "3.9")
-        string(REGEX MATCH "python([0-9]+\\.[0-9]+)" PYTHON_VERSION_MATCH ${Python3_INCLUDE_DIRS})
+        string(REGEX MATCH "python(3\\.[0-9]+)" PYTHON_VERSION_MATCH ${Python3_INCLUDE_DIRS})
         set(PYTHON_VERSION ${CMAKE_MATCH_1})  # "3.9" を取得
         message(STATUS "Detected Python Version: ${PYTHON_VERSION}")
     
@@ -244,10 +271,11 @@ elseif (UNIX AND NOT APPLE)  # Linux
 
             # 変数としてセット
             set(OPENBLAS_LIB ${OPENBLAS_LIB_PATH} CACHE STRING "Path to OpenBLAS library" FORCE)
+            set(OpenBLAS_LIBRA-NOTFOUND FALSE)
         endif()
         set(OPENBLAS_INCLUDE_DIR "/usr/include/openblas")
 
-
+        message(STATUS "Finding LAPACK library...")
         # find コマンドで OpenBLAS のライブラリを検索
         execute_process(
             COMMAND find /usr /usr/lib64 -type f -name "liblapack.*"
@@ -257,12 +285,12 @@ elseif (UNIX AND NOT APPLE)  # Linux
 
         # 結果が見つかったかチェック
         if(LAPACK_LIB_PATH)
-            message(STATUS "Found OpenBLAS Library: ${LAPACK_LIB_PATH}")
+            message(STATUS "Found LAPACK Library: ${LAPACK_LIB_PATH}")
 
             # 最初の結果のみを取得 (複数ヒットする場合は最初の行を使用)
             string(REGEX MATCH "([^\n]+)" LAPACK_LIB_PATH ${LAPACK_LIB_PATH})
 
-            message(STATUS "Using OpenBLAS Library: ${LAPACK_LIB_PATH}")
+            message(STATUS "Using LAPACK Library: ${LAPACK_LIB_PATH}")
 
             # 変数としてセット
             set(LAPACK_LIBRARIES ${LAPACK_LIB_PATH} CACHE STRING "Path to LAPACK library" FORCE)
@@ -316,15 +344,6 @@ FetchContent_MakeAvailable(pybind11)
 file(GLOB BUILD_SOURCES "src/*.cpp" "src/*/*.cpp" "scr/*/binding/*.cpp")
 
 add_library(VeloxML SHARED ${BUILD_SOURCES})
-
-if (APPLE)
-    target_link_libraries(VeloxML PUBLIC "-framework CoreFoundation")
-    set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -undefined dynamic_lookup")
-    message(STATUS "Using macOS: -framework CoreFoundation")
-    set(CMAKE_OSX_SYSROOT "")
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-pragmas -Wno-ignored-attributes")
-endif()
-
 target_include_directories(VeloxML PUBLIC
     ${Python3_INCLUDE_DIRS}
     include
@@ -340,6 +359,11 @@ target_link_libraries(VeloxML PUBLIC
     pybind11::embed
     ${Python3_LIBRARIES}
 )
+
+if (APPLE)
+    target_link_libraries(VeloxML PUBLIC "-framework CoreFoundation")
+    set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -undefined dynamic_lookup")
+endif()
 
 # ------------------------------------------------------------------------------
 # Python バインドのビルド設定
