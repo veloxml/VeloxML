@@ -210,11 +210,12 @@ jobs:
       - name: Download Artifacts
         uses: actions/download-artifact@v4
         with:
-          path: dist/
+          name: merged-artifact
+          path: wheelhouse/
 
       - name: Flatten directory
         run: |
-          mv dist/*/* dist/
+          mkdir -p dist && mv wheelhouse/*/* dist/
 
       - name: Publish distribution 📦 to PyPI
         uses: pypa/gh-action-pypi-publish@release/v1
