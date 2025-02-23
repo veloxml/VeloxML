@@ -43,7 +43,7 @@ void RidgeRegression::applyRegularization(double *A, int dim, double lambda, boo
 {
     // 最後の対角要素はバイアス項として、penalize_bias が false なら変更しない
     int limit = penalize_bias ? dim : (dim - 1);
-#ifdef __AVX512F__
+    #ifdef __AVX512F__
     int i = 0;
     for (; i <= limit - 8; i += 8)
     {
@@ -54,7 +54,7 @@ void RidgeRegression::applyRegularization(double *A, int dim, double lambda, boo
         {
             idx[j] = (i + j) * (dim + 1);
         }
-        __m512i index = _mm512_load_si512(idx);
+        __m256i index = _mm256_load_si256(reinterpret_cast<const __m256i*>(idx));  // 修正
         __m512d diag = _mm512_i32gather_pd(index, A, 8);
         diag = _mm512_add_pd(diag, reg);
         _mm512_i32scatter_pd(A, index, diag, 8);
