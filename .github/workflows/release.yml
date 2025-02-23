@@ -16,7 +16,7 @@ jobs:
 
     strategy:
       matrix:
-        os: [macos-13, macos-14, windows-latest, windows-2025-arm]
+        os: [macos-13, macos-14, windows-latest]
         build_type: ["Release"]
         c_compiler: ["gcc"]
         cxx_compiler: ["g++"]
@@ -133,6 +133,7 @@ jobs:
           CIBW_BUILD: "cp39-win_arm64 cp310-win_arm64 cp311-win_arm64 cp312-win_arm64 cp313-win_arm64"
 
       - name: Build Source Distribution (sdist)
+        if: runner.os == 'macOS' && runner.arch == 'ARM64'
         run: python -m build --sdist --outdir wheelhouse
 
       - name: Upload Wheels
