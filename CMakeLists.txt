@@ -114,7 +114,7 @@ endif()
 if(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
     include_directories(SYSTEM "${TBB_PREFIX}/include")
 elseif(${CMAKE_SYSTEM_NAME} MATCHES "Linux")
-    include_directories(SYSTEM "/usr/include")
+    include_directories(SYSTEM "${TBB_DIR}/include")
 elseif(${CMAKE_SYSTEM_NAME} MATCHES "Windows")
     include_directories(SYSTEM "$ENV{VCPKG_ROOT}/installed/x64-windows/include")
 endif()
@@ -129,41 +129,78 @@ if(CMAKE_CXX_COMPILER_ID MATCHES "Clang")
     add_link_options(-fsanitize=address)
 endif()
 
+# ------------------------------------------------------------------------------
 # Python3 設定
-find_package(Python3 COMPONENTS Interpreter Development REQUIRED)
-if(Python3_FOUND)
-    message(STATUS "Found Python3: ${Python3_EXECUTABLE}")
-    message(STATUS "Python Include Dir: ${Python3_INCLUDE_DIRS}")
-    message(STATUS "Python Library: ${Python3_LIBRARIES}")
-else()
-    message(FATAL_ERROR "Python3 not found! Please install Python3 development headers.")
+# ------------------------------------------------------------------------------
+if (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")  # macOS
+    find_package(Python3 COMPONENTS Interpreter Development REQUIRED)
+    if(Python3_FOUND)
+        message(STATUS "Found Python3: ${Python3_EXECUTABLE}")
+        message(STATUS "Python Include Dir: ${Python3_INCLUDE_DIRS}")
+        message(STATUS "Python Library: ${Python3_LIBRARIES}")
+    else()
+        message(FATAL_ERROR "Python3 not found! Please install Python3 development headers.")
+    endif()
+elseif(${CMAKE_SYSTEM_NAME} MATCHES "Linux")  # Linux
+    # Python3 を検索
+    find_package(Python COMPONENTS Interpreter Development REQUIRED)
+
+    if (Python_FOUND)
+        # 3. 結果を表示
+        message(STATUS "Python Include Dir: ${Python_INCLUDE_DIRS}")
+        message(STATUS "Python Library: ${Python_LIBRARIES}")
+
+        # 4. 実際に存在するかチェック
+        if (EXISTS ${PYTHON_LIBRARY})
+            message(STATUS "Python Library found at: ${Python_LIBRARIES}")
+        else()
+            message(WARNING "Python Library not found at: ${Python_LIBRARIES}. You may need to set it manually.")
+        endif()
+    else()
+        message(FATAL_ERROR "Python3 not found! Please install Python3 development headers.")
+    endif()
 endif()
 
 # ------------------------------------------------------------------------------
-# OpenBLAS 設定 (macOS, Linux, Windows)
+# OpenBLAS + LAPACK 設定 (macOS, Linux, Windows)
 # ------------------------------------------------------------------------------
+
+find_package(BLAS REQUIRED)
+
+if(BLAS_FOUND)
+    message(STATUS "Found BLAS Libraries: ${BLAS_LIBRARIES}")
+    message(STATUS "Found BLAS Includes: ${BLAS_INCLUDE_DIRS}")
+else()
+    message(FATAL_ERROR "BLAS not found! Install OpenBLAS using the appropriate package manager.")
+endif()
+
 if (APPLE)
     execute_process(COMMAND brew --prefix openblas OUTPUT_VARIABLE OPENBLAS_PREFIX OUTPUT_STRIP_TRAILING_WHITESPACE)
-    
+
     set(OPENBLAS_INCLUDE_DIR "${OPENBLAS_PREFIX}/include")
     set(OPENBLAS_LIB "${OPENBLAS_PREFIX}/lib/libopenblas.dylib")
 
     if (EXISTS ${OPENBLAS_LIB})
-        message(STATUS "Found OpenBLAS: ${OPENBLAS_LIB}")
+        message(STATUS "Using OpenBLAS: ${OPENBLAS_LIB}")
+        set(BLAS_LIBRARIES ${OPENBLAS_LIB})
+        set(BLAS_INCLUDE_DIRS ${OPENBLAS_INCLUDE_DIR})
     else()
         message(FATAL_ERROR "OpenBLAS not found! Install it using 'brew install openblas'")
     endif()
 
 elseif (UNIX AND NOT APPLE)  # Linux
-    find_path(OPENBLAS_INCLUDE_DIR NAMES openblas_config.h PATHS /usr/include /usr/local/include)
-    find_library(OPENBLAS_LIB NAMES openblas PATHS /usr/lib /usr/local/lib /usr/lib/x86_64-linux-gnu)
+    set(OPENBLAS_LIB  ${BLAS_LIBRARIES})
+    set(OPENBLAS_INCLUDE_DIR ${BLAS_INCLUDE_DIRS})
 
-    if (OPENBLAS_LIB)
-        message(STATUS "Found OpenBLAS: ${OPENBLAS_LIB}")
+    # LAPACKを検出
+    find_package(LAPACK REQUIRED)
+
+    if(LAPACK_FOUND)
+        message(STATUS "Found LAPACK: ${LAPACK_LIBRARIES}")
+        message(STATUS "Found LAPACK: ${LAPACK_INCLUDE_DIRS}")
     else()
-        message(FATAL_ERROR "OpenBLAS not found! Install it using 'sudo apt install libopenblas-dev' or equivalent package manager.")
+        message(FATAL_ERROR "LAPACK not found! Install it using your package manager.")
     endif()
-
 elseif (WIN32)  # Windows
     if (DEFINED ENV{VCPKG_ROOT})
         set(VCPKG_ROOT "$ENV{VCPKG_ROOT}")
@@ -175,11 +212,22 @@ elseif (WIN32)  # Windows
     set(OPENBLAS_LIB "${VCPKG_ROOT}/installed/x64-windows/lib/openblas.lib")
 
     if (EXISTS ${OPENBLAS_LIB})
-        message(STATUS "Found OpenBLAS: ${OPENBLAS_LIB}")
+        message(STATUS "Using OpenBLAS: ${OPENBLAS_LIB}")
+        set(BLAS_LIBRARIES ${OPENBLAS_LIB})
+        set(BLAS_INCLUDE_DIRS ${OPENBLAS_INCLUDE_DIR})
     else()
         message(FATAL_ERROR "OpenBLAS not found! Install it using 'vcpkg install openblas' and set VCPKG_ROOT")
     endif()
+
+    find_package(LAPACK REQUIRED)
+    if(LAPACK_FOUND)
+        message(STATUS "Found LAPACK: ${LAPACK_LIBRARIES}")
+        message(STATUS "Found LAPACK: ${LAPACK_INCLUDE_DIRS}")
+    else()
+        message(FATAL_ERROR "LAPACK not found! Install it using your package manager.")
+    endif()
 endif()
+
 
 # ------------------------------------------------------------------------------
 # 外部コンテンツ: pybind11 の取得
@@ -211,10 +259,14 @@ target_link_libraries(VeloxML PUBLIC
     TBB::tbb
     ${OPENBLAS_LIB}
     pybind11::module
+    pybind11::embed
     ${Python3_LIBRARIES}
-    "-framework CoreFoundation"
 )
-set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -undefined dynamic_lookup")
+
+if (APPLE)
+    target_link_libraries(VeloxML PUBLIC "-framework CoreFoundation")
+    set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -undefined dynamic_lookup")
+endif()
 
 # ------------------------------------------------------------------------------
 # Python バインドのビルド設定
@@ -242,11 +294,7 @@ endif()
 
 install(TARGETS c_veloxml_core LIBRARY DESTINATION "${CMAKE_INSTALL_PREFIX}/veloxml/core")
 
-# ビルド
-add_executable(MyExecutable src/main.cpp)
-target_link_libraries(MyExecutable PRIVATE VeloxML)
-# target_link_libraries(${VELOXML_MODULE_NAME} PUBLIC pybind11::headers)
-
+# テスト
 if(BUILD_TESTS)
     FetchContent_Declare(
         googletest

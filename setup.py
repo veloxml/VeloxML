@@ -24,10 +24,9 @@ if sys.platform == "darwin":  # macOS
         default_cc = "/opt/homebrew/bin/gcc-13"
         default_cxx = "/opt/homebrew/bin/g++-13"
         PKG_CONFIG_PATH = "/usr/local/opt/openblas/lib/pkgconfig"
-
     else:
-        default_cc = "gcc-13"
-        default_cxx = "g++-13"
+        default_cc = "/usr/local/bin/gcc-13"
+        default_cxx = "/usr/local/bin/g++-13"
         PKG_CONFIG_PATH = "/usr/local/opt/openblas/lib/pkgconfig"
 
     
@@ -41,9 +40,10 @@ if sys.platform == "darwin":  # macOS
     print("C++ Compiler:", CXX)
 
 elif sys.platform.startswith("linux"):
-    TBB_DIR = os.environ.get("TBB_DIR", "/usr/lib/x86_64-linux-gnu/cmake/TBB")
-    CC =  os.environ.get("CMAKE_C_COMPILER", "/usr/bin/gcc-14")
-    CXX = os.environ.get("CMAKE_CXX_COMPILER", "/usr/bin/g++-14")
+    TBB_DIR = os.environ.get("TBB_DIR", "/usr/local/tbb")
+    CC =  os.environ.get("CMAKE_C_COMPILER", "/usr/local/gcc-14.2.0/bin/gcc")
+    CXX = os.environ.get("CMAKE_CXX_COMPILER", "/usr/local/gcc-14.2.0/bin/g++")
+    
     PKG_CONFIG_PATH = ""
 elif sys.platform == "win32":
     VCPKG_ROOT = os.environ.get("VCPKG_ROOT", "C:/vcpkg")
@@ -65,19 +65,16 @@ setup(
     packages=find_packages(where=".", include=["veloxml", "veloxml.*"]),
     package_dir={".": "veloxml"},  
     cmake_install_dir=".",  
-    install_requires=[
-        "numpy",
-        "pybind11",
-    ],
     cmake_args=[
         f"-DCMAKE_C_COMPILER={CC}",
         f"-DCMAKE_CXX_COMPILER={CXX}",
         "-DBUILD_TESTS=OFF",
         "-DBUILD_GMOCK=OFF",
         "-DINSTALL_GTEST=OFF",
+        f"-DBLAS_INCLUDE_DIRS=/usr/include/openblas",
         f"-DTBB_DIR={TBB_DIR}",
         f"-DCMAKE_PREFIX_PATH={TBB_DIR}",
-        f"-DPKG_CONFIG_PATH={PKG_CONFIG_PATH}"
+        f"-DPKG_CONFIG_PATH={PKG_CONFIG_PATH}",
     ],
     include_package_data=True,  # .so を含める
 )
