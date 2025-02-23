@@ -48,34 +48,19 @@ veloxml = ["core/*.so", "**/*.py"]  # .soファイルを含める
 veloxml = ["core/include/gtest/*", "core/lib/gtest*", "**/*.cpp", "**/*.hpp"]
 
 [tool.cibuildwheel]
-
+build = "cp39* cp310* cp311* cp312* cp313*"
 #test-requires = "pytest"
 #test-command = "pytest {package}/tests"
 
 [tool.cibuildwheel.linux]
-build = """
-    cp39-manylinux_x86_64 cp310-manylinux_x86_64 cp311-manylinux_x86_64 cp312-manylinux_x86_64 cp313-manylinux_x86_64 \\
-    cp39-manylinux_aarch64 cp310-manylinux_aarch64 cp311-manylinux_aarch64 cp312-manylinux_aarch64 cp313-manylinux_aarch64
-"""
 
-before-all = """
-    yum install -y wget && \
-    yum install -y gmp  gmp-devel  mpfr  mpfr-devel  libmpc  libmpc-devel  && yum install -y kernel-devel kernel-headers && \ 
-    wget https://ftp.tsukuba.wide.ad.jp/software/gcc/releases/gcc-14.2.0/gcc-14.2.0.tar.gz &&  \
-    tar -zvxf gcc-14.2.0.tar.gz && cd gcc-14.2.0 && mkdir build && cd build && \
-    ../configure --enable-languages=c,c++ --prefix=/usr/local/gcc-14.2.0 --enable-checking=release --disable-bootstrap --disable-multilib && \
-    make -j$(nproc) && make install && \
-    yum install -y openblas* lapack* libgomp && yum groupinstall -y 'Development Tools' && \
-    cd /root/ && wget https://github.com/uxlfoundation/oneTBB/archive/refs/tags/v2022.0.0.tar.gz && \
-    tar -zvxf v2022.0.0.tar.gz && cd oneTBB-2022.0.0/ && mkdir build && cd build && cmake -DCMAKE_INSTALL_PREFIX=/usr/local/tbb -DTBB_TEST=OFF .. && \
-    cmake --build . && cmake --install . 
-"""
+before-build = "pip install scikit-build ninja cmake pybind11"
 
-environment = "PATH=$PATH:/usr/local/bin PYTHON_CONFIGURE_OPTS='--enable-shared' CMAKE_INCLUDE_PATH=/usr/include/openblas:$CMAKE_INCLUDE_PATH"
+environment = "PATH=$PATH:/usr/local/bin CMAKE_INCLUDE_PATH=/usr/include/openblas:$CMAKE_INCLUDE_PATH"
 
-manylinux-x86_64-image = "manylinux_2_28"
-manylinux-aarch64-image = "manylinux_2_28"
+manylinux-x86_64-image =  "veloxml/for-build-linux-x86_64:latest"
+manylinux-aarch64-image = "veloxml/for-build-linux-aarch64:latest"
 
 [tool.cibuildwheel.macos]
-build = "cp312*"
+build = "cp312* cp313*"
 repair-wheel-command = "delocate-wheel --exclude libgomp.1.dylib --exclude libgcc_s.1.1.dylib -w {dest_dir} {wheel}"
