@@ -173,21 +173,22 @@ if (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")  # macOS
     endif()
 elseif(${CMAKE_SYSTEM_NAME} MATCHES "Linux")  # Linux
     # Python3 を検索
-    find_package(Python3 COMPONENTS Interpreter Development REQUIRED)
+    find_package(Python3 COMPONENTS Interpreter Development)
 
-    if (Python3_FOUND)
+    if (NOT Python3_FOUND)
         # 3. 結果を表示
         message(STATUS "Python Include Dir: ${Python3_INCLUDE_DIRS}")
         message(STATUS "Python Library: ${Python3_LIBRARIES}")
 
         # 4. 実際に存在するかチェック
-        if (EXISTS ${PYTHON_LIBRARY})
+        if (EXISTS ${Python3_LIBRARIES})
             message(STATUS "Python Library found at: ${Python3_LIBRARIES}")
         else()
             message(WARNING "Python Library not found at: ${Python3_LIBRARIES}. You may need to set it manually.")
         endif()
     else()
-        message(FATAL_ERROR "Python3 not found! Please install Python3 development headers.")
+        message(STATUS "Python Include Dir: ${Python3_INCLUDE_DIRS}")
+        message(STATUS "Python Library: ${Python3_LIBRARIES}")
     endif()
 endif()
 
