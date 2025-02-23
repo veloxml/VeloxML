@@ -1,4 +1,4 @@
-name: Release Build
+name: Release Build without Linux
 
 on:
   push:
@@ -16,8 +16,7 @@ jobs:
 
     strategy:
       matrix:
-        # os: [ubuntu-latest, ubuntu-24.04-arm, macos-13, macos-14, windows-latest, windows-latest-arm]
-        os: [ubuntu-24.04-arm]
+        os: [macos-13, macos-14, windows-latest, windows-latest-arm]
         build_type: ["Release"]
         c_compiler: ["gcc"]
         cxx_compiler: ["g++"]
@@ -109,7 +108,7 @@ jobs:
         if: runner.os == 'Linux' && runner.arch == 'x64'
         run: python -m cibuildwheel --output-dir wheelhouse
         env:
-          CIBW_BUILD: "cp39-manylinux_x86_64 cp310-manylinux_x86_64 cp311-manylinux_x86_64 cp312-manylinux_x86_64 cp313-manylinux_x86_64"
+          CIBW_BUILD: "cp39-manylinux_x86_64 cp310-manylinux_x86_64 cp311-manylinux_x86_64 cp312-manylinux_x86_64"
 
       - name: Build Python Wheels (Linux aarch64)
         if: runner.os == 'Linux' && runner.arch == 'arm64'

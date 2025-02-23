@@ -180,9 +180,18 @@ elseif(${CMAKE_SYSTEM_NAME} MATCHES "Linux")  # Linux
         message(STATUS "Python Include Dir: ${Python3_INCLUDE_DIRS}")
         message(STATUS "Python Library: ${Python3_LIBRARIES}")
 
+        # Python バージョン番号を抽出 (例: "python3.9" → "3.9")
+        string(REGEX MATCH "python([0-9]+\\.[0-9]+)" PYTHON_VERSION_MATCH ${Python3_INCLUDE_DIRS})
+        set(PYTHON_VERSION ${CMAKE_MATCH_1})  # "3.9" を取得
+        message(STATUS "Detected Python Version: ${PYTHON_VERSION}")
+    
+        # /usr/local/lib/libpython{X}.so のパスを作成
+        set(Python3_LIBRARIES "/usr/local/lib/libpython${PYTHON_VERSION}.so")
+
         # 4. 実際に存在するかチェック
         if (EXISTS ${Python3_LIBRARIES})
             message(STATUS "Python Library found at: ${Python3_LIBRARIES}")
+            set(Python3_LIBRARIES-NOTFOUND FALSE)
         else()
             message(WARNING "Python Library not found at: ${Python3_LIBRARIES}. You may need to set it manually.")
         endif()
@@ -212,14 +221,54 @@ if (APPLE)
 
 elseif (UNIX AND NOT APPLE)  # Linux
 
-    set(BLAS_LIBRARIES "/usr/lib64/libopenblaso-r0.3.26.so")
-    set(BLAS_INCLUDE_DIRS "/usr/include/openblas")
+    find_package(OpenBLAS)
 
-    set(LAPACK_LIBRARIES "/usr/lib64/liblapacke.so.3.9.0")
-    set(LAPACK_INCLUDE_DIRS "/usr/include/openblas")
+    if (NOT OpenBLAS_FOUND)
+        message(WARNING "OpenBLAS が自動検出できませんでした。手動設定を適用します。")
 
-    set(OPENBLAS_LIB  ${BLAS_LIBRARIES})
-    set(OPENBLAS_INCLUDE_DIR ${BLAS_INCLUDE_DIRS})
+        # find コマンドで OpenBLAS のライブラリを検索
+        execute_process(
+            COMMAND find /usr /usr/local -type f -name "libopenblas-*.so"
+            OUTPUT_VARIABLE OPENBLAS_LIB_PATH
+            OUTPUT_STRIP_TRAILING_WHITESPACE
+        )
+
+        # 結果が見つかったかチェック
+        if(OPENBLAS_LIB_PATH)
+            message(STATUS "Found OpenBLAS Library: ${OPENBLAS_LIB_PATH}")
+
+            # 最初の結果のみを取得 (複数ヒットする場合は最初の行を使用)
+            string(REGEX MATCH "([^\n]+)" OPENBLAS_LIB_PATH ${OPENBLAS_LIB_PATH})
+
+            message(STATUS "Using OpenBLAS Library: ${OPENBLAS_LIB_PATH}")
+
+            # 変数としてセット
+            set(OPENBLAS_LIB ${OPENBLAS_LIB_PATH} CACHE STRING "Path to OpenBLAS library" FORCE)
+        endif()
+        set(OPENBLAS_INCLUDE_DIR "/usr/include/openblas")
+
+
+        # find コマンドで OpenBLAS のライブラリを検索
+        execute_process(
+            COMMAND find /usr /usr/lib64 -type f -name "liblapack.*"
+            OUTPUT_VARIABLE LAPACK_LIB_PATH
+            OUTPUT_STRIP_TRAILING_WHITESPACE
+        )
+
+        # 結果が見つかったかチェック
+        if(LAPACK_LIB_PATH)
+            message(STATUS "Found OpenBLAS Library: ${LAPACK_LIB_PATH}")
+
+            # 最初の結果のみを取得 (複数ヒットする場合は最初の行を使用)
+            string(REGEX MATCH "([^\n]+)" LAPACK_LIB_PATH ${LAPACK_LIB_PATH})
+
+            message(STATUS "Using OpenBLAS Library: ${LAPACK_LIB_PATH}")
+
+            # 変数としてセット
+            set(LAPACK_LIBRARIES ${LAPACK_LIB_PATH} CACHE STRING "Path to LAPACK library" FORCE)
+        endif()
+        set(LAPACK_INCLUDE_DIRS "/usr/include/openblas")
+    endif()
 
 elseif (WIN32)  # Windows
     if (DEFINED ENV{VCPKG_ROOT})
