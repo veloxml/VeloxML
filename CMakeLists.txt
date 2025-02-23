@@ -199,7 +199,9 @@ endif()
 find_package(BLAS)
 
 if(NOT BLAS_FOUND)
-    message(FATAL_ERROR "BLAS not found! Install OpenBLAS using the appropriate package manager.")
+    message(WARNING "BLAS not found! Install OpenBLAS using the appropriate package manager.")
+    set(BLAS_LIBRARIES "/usr/lib64/libopenblaso-r0.3.26.so")
+    set(BLAS_INCLUDE_DIRS "/usr/include/openblas")
 else()
     message(STATUS "Found BLAS Libraries: ${BLAS_LIBRARIES}")
     message(STATUS "Found BLAS Includes: ${BLAS_INCLUDE_DIRS}")
@@ -224,13 +226,15 @@ elseif (UNIX AND NOT APPLE)  # Linux
     set(OPENBLAS_INCLUDE_DIR ${BLAS_INCLUDE_DIRS})
 
     # LAPACKを検出
-    find_package(LAPACK REQUIRED)
+    find_package(LAPACK)
 
-    if(LAPACK_FOUND)
+    if(NOT LAPACK_FOUND)
+        message(WARNING "LAPACK not found! Install it using your package manager.")
+        set(LAPACK_LIBRARIES "/usr/lib64/liblapacke.so.3.9.0")
+        set(LAPACK_INCLUDE_DIRS "/usr/include/openblas")
+    else()
         message(STATUS "Found LAPACK: ${LAPACK_LIBRARIES}")
         message(STATUS "Found LAPACK: ${LAPACK_INCLUDE_DIRS}")
-    else()
-        message(FATAL_ERROR "LAPACK not found! Install it using your package manager.")
     endif()
 elseif (WIN32)  # Windows
     if (DEFINED ENV{VCPKG_ROOT})
