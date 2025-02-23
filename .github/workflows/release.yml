@@ -16,7 +16,7 @@ jobs:
 
     strategy:
       matrix:
-        os: [macos-13, macos-14, windows-latest, windows-latest-arm]
+        os: [macos-13, macos-14, windows-latest, windows-2025-arm]
         build_type: ["Release"]
         c_compiler: ["gcc"]
         cxx_compiler: ["g++"]
@@ -117,7 +117,7 @@ jobs:
           CIBW_BUILD: "cp39-manylinux_aarch64 cp310-manylinux_aarch64 cp311-manylinux_aarch64 cp312-manylinux_aarch64 cp313-manylinux_aarch64"
 
       - name: Build Python Wheels (Windows amd64)
-        if: runner.os == 'Windows' && runner.arch == 'amd64'
+        if: runner.os == 'Windows' && runner.arch == 'x86'
         run: python -m cibuildwheel --output-dir wheelhouse
         env:
           TBB_DIR: ${{ env.TBB_DIR }}
