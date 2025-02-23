@@ -64,11 +64,41 @@ if(CMAKE_CXX_COMPILER_ID MATCHES "AppleClang")
     message(STATUS "Using OpenMP include dir: ${OpenMP_INCLUDE_DIR}")
 elseif(CMAKE_CXX_COMPILER_ID MATCHES "GNU")
     message(STATUS "Using GNU GCC")
-    find_package(OpenMP REQUIRED)
-    add_compile_options(-fopenmp)
-    add_link_options(-fopenmp)
-    # gprof用フラグを追加（C++ コンパイラ）
-    # set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pg")
+    
+    find_package(OpenMP)
+    
+    if(NOT OpenMP_CXX_FOUND)
+        message(WARNING "OpenMP が自動検出できませんでした。GCC 用に手動設定を適用します。")
+
+        # OpenMP用フラグの手動設定
+        set(OpenMP_CXX_FLAGS "-fopenmp")
+
+        # Linux 環境の場合
+        if(UNIX AND NOT APPLE)
+            set(OpenMP_CXX_LIB_NAMES "gomp")
+            set(OpenMP_omp_LIBRARY "/usr/lib/x86_64-linux-gnu/libgomp.so")
+            set(OpenMP_INCLUDE_DIR "/usr/include")
+        
+        # macOS 環境の場合 (Homebrew の libomp)
+        elseif(APPLE)
+            set(OpenMP_CXX_LIB_NAMES "omp")
+            set(OpenMP_omp_LIBRARY "/opt/homebrew/opt/libomp/lib/libomp.dylib")
+            set(OpenMP_INCLUDE_DIR "/opt/homebrew/opt/libomp/include")
+        endif()
+        
+        set(OpenMP_CXX_FOUND TRUE)
+    endif()
+
+    # OpenMP::OpenMP_CXX ターゲットを明示的に追加
+    if(NOT TARGET OpenMP::OpenMP_CXX)
+        add_library(OpenMP::OpenMP_CXX INTERFACE IMPORTED)
+        set_target_properties(OpenMP::OpenMP_CXX PROPERTIES
+            INTERFACE_COMPILE_OPTIONS "${OpenMP_CXX_FLAGS}"
+            INTERFACE_LINK_LIBRARIES "${OpenMP_omp_LIBRARY}"
+            INTERFACE_INCLUDE_DIRECTORIES "${OpenMP_INCLUDE_DIR}"
+        )
+    endif()
+
 elseif(CMAKE_CXX_COMPILER_ID MATCHES "Clang")
     message(STATUS "Using Clang")
     find_package(OpenMP)
