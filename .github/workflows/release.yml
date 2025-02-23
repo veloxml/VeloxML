@@ -96,7 +96,7 @@ jobs:
         if: runner.os == 'Windows'
         shell: cmd
         run: |
-          python -m cibuildwheel --output-dir wheelhouse
+          cibuildwheel.exe --output-dir wheelhouse
         env:
           TBB_DIR: ${{ env.TBB_DIR }}
           CMAKE_ARGS: "-DTBB_DIR=${{ env.TBB_DIR }} -DCMAKE_PREFIX_PATH=${{ env.TBB_DIR }}"
@@ -147,7 +147,7 @@ jobs:
       - name: Upload Wheels
         uses: actions/upload-artifact@v4
         with:
-          name: python-wheels
+          name: my-artifact-${{ github.run_id }}-${{ github.job }}  # 一意の名前を付ける
           path: wheelhouse/*
 
   release:
@@ -162,7 +162,6 @@ jobs:
       - name: Download Artifacts
         uses: actions/download-artifact@v4
         with:
-          name: python-wheels
           path: wheelhouse/
 
       - name: Set up GitHub CLI
@@ -188,7 +187,6 @@ jobs:
       - name: Download Artifacts
         uses: actions/download-artifact@v4
         with:
-          name: python-wheels
           path: wheelhouse/
 
       - name: Copy to dist
