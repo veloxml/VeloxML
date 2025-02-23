@@ -196,13 +196,13 @@ endif()
 # OpenBLAS + LAPACK 設定 (macOS, Linux, Windows)
 # ------------------------------------------------------------------------------
 
-find_package(BLAS REQUIRED)
+find_package(BLAS)
 
-if(BLAS_FOUND)
+if(NOT BLAS_FOUND)
+    message(FATAL_ERROR "BLAS not found! Install OpenBLAS using the appropriate package manager.")
+else()
     message(STATUS "Found BLAS Libraries: ${BLAS_LIBRARIES}")
     message(STATUS "Found BLAS Includes: ${BLAS_INCLUDE_DIRS}")
-else()
-    message(FATAL_ERROR "BLAS not found! Install OpenBLAS using the appropriate package manager.")
 endif()
 
 if (APPLE)
