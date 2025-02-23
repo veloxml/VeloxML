@@ -316,6 +316,15 @@ FetchContent_MakeAvailable(pybind11)
 file(GLOB BUILD_SOURCES "src/*.cpp" "src/*/*.cpp" "scr/*/binding/*.cpp")
 
 add_library(VeloxML SHARED ${BUILD_SOURCES})
+
+if (APPLE)
+    target_link_libraries(VeloxML PUBLIC "-framework CoreFoundation")
+    set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -undefined dynamic_lookup")
+    message(STATUS "Using macOS: -framework CoreFoundation")
+    set(CMAKE_OSX_SYSROOT "")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-pragmas -Wno-ignored-attributes")
+endif()
+
 target_include_directories(VeloxML PUBLIC
     ${Python3_INCLUDE_DIRS}
     include
@@ -331,11 +340,6 @@ target_link_libraries(VeloxML PUBLIC
     pybind11::embed
     ${Python3_LIBRARIES}
 )
-
-if (APPLE)
-    target_link_libraries(VeloxML PUBLIC "-framework CoreFoundation")
-    set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -undefined dynamic_lookup")
-endif()
 
 # ------------------------------------------------------------------------------
 # Python バインドのビルド設定
