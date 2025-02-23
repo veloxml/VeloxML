@@ -76,7 +76,7 @@ elseif(CMAKE_CXX_COMPILER_ID MATCHES "GNU")
         # Linux 環境の場合
         if(UNIX AND NOT APPLE)
             set(OpenMP_CXX_LIB_NAMES "gomp")
-            set(OpenMP_omp_LIBRARY "/usr/lib/x86_64-linux-gnu/libgomp.so")
+            set(OpenMP_omp_LIBRARY "/usr/lib64/libgomp.so.1.0.0")
             set(OpenMP_INCLUDE_DIR "/usr/include")
         
         # macOS 環境の場合 (Homebrew の libomp)
@@ -173,18 +173,18 @@ if (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")  # macOS
     endif()
 elseif(${CMAKE_SYSTEM_NAME} MATCHES "Linux")  # Linux
     # Python3 を検索
-    find_package(Python COMPONENTS Interpreter Development REQUIRED)
+    find_package(Python3 COMPONENTS Interpreter Development REQUIRED)
 
-    if (Python_FOUND)
+    if (Python3_FOUND)
         # 3. 結果を表示
-        message(STATUS "Python Include Dir: ${Python_INCLUDE_DIRS}")
-        message(STATUS "Python Library: ${Python_LIBRARIES}")
+        message(STATUS "Python Include Dir: ${Python3_INCLUDE_DIRS}")
+        message(STATUS "Python Library: ${Python3_LIBRARIES}")
 
         # 4. 実際に存在するかチェック
         if (EXISTS ${PYTHON_LIBRARY})
-            message(STATUS "Python Library found at: ${Python_LIBRARIES}")
+            message(STATUS "Python Library found at: ${Python3_LIBRARIES}")
         else()
-            message(WARNING "Python Library not found at: ${Python_LIBRARIES}. You may need to set it manually.")
+            message(WARNING "Python Library not found at: ${Python3_LIBRARIES}. You may need to set it manually.")
         endif()
     else()
         message(FATAL_ERROR "Python3 not found! Please install Python3 development headers.")
