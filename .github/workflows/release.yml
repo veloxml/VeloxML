@@ -212,5 +212,9 @@ jobs:
         with:
           path: dist/
 
+      - name: Flatten directory
+        run: |
+          mv dist/*/* dist/
+
       - name: Publish distribution 📦 to PyPI
         uses: pypa/gh-action-pypi-publish@release/v1
