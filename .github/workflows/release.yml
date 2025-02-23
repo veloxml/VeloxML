@@ -84,8 +84,13 @@ jobs:
             mingw-w64-x86_64-tbb
             mingw-w64-x86_64-openblas
             mingw-w64-x86_64-python
-            mingw-w64-x86_64-python-pip
-            mingw-w64-x86_64-python-cibuildwheel
+            mingw-w64-x86_64-python-pipx
+      
+      - name: Install cibuildwheel (Windows x86_64)
+        if: runner.os == 'Windows'
+        shell: cmd
+        run: |
+          pipx install cibuildwheel
 
       - name: Build Python Wheels (Windows x86_64)
         if: runner.os == 'Windows'
