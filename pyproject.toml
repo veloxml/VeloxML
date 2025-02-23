@@ -13,7 +13,6 @@ authors = [
     { name = "Yuji Chinen", email = "veloxml1113@gmail.com" }
 ]
 license = "MIT"  # or license = {file = "LICENSE.txt"} for legacy declaration
-license-files = ["LICEN[CS]E.*"]
 readme = "README.md"
 dependencies = [
     "numpy",
