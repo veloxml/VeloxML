@@ -151,7 +151,9 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: artifact-${{ matrix.os }}
-          path: wheelhouse/${{ matrix.os }}
+          path: wheelhouse/
+          retention-days: 1
+          compression-level: 9
       
   artifact-merge:
     name: Upload Artifacts
@@ -159,6 +161,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
       - name: Merge Artifacts
         uses: actions/upload-artifact/merge@v4
         with:
@@ -173,10 +178,13 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
       - name: Download Artifacts
         uses: actions/download-artifact@v4
         with:
-          name: artifact-merge
+          name: merged-artifact
           path: dist/
 
       - name: Set up GitHub CLI
