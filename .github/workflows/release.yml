@@ -144,15 +144,33 @@ jobs:
         if: runner.os == 'macOS' && runner.arch == 'ARM64'
         run: python -m build --sdist --outdir wheelhouse
 
-      - name: Upload Wheels
+      - name: Create Unique Directory
+        run: mkdir -p wheelhouse/${{ runner.os }}
+
+      - name: Move artifacts to unique directory
+        run: mv wheelhouse/* wheelhouse/${{ runner.os }}/
+      
+  artifact-merge:
+    name: Upload Artifacts
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Upload Artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: my-artifact-${{ github.run_id }}-${{ github.job }}  # 一意の名前を付ける
-          path: wheelhouse/*
+          name: my-artifact-merged
+          path: wheelhouse/
+          if-no-files-found: warn
+          compression-level: 6
+          overwrite: false
 
   release:
     name: Publish to GitHub Releases
-    needs: build
+    needs: artifact-merge
     runs-on: ubuntu-latest
 
     steps:
@@ -162,6 +180,7 @@ jobs:
       - name: Download Artifacts
         uses: actions/download-artifact@v4
         with:
+          name: my-artifact-merged
           path: wheelhouse/
 
       - name: Set up GitHub CLI
@@ -192,7 +211,7 @@ jobs:
       - name: Copy to dist
         run: |
           mkdir -p dist
-          cp wheelhouse/* dist/
+          cp wheelhouse/*/* dist/
 
       - name: Publish distribution 📦 to PyPI
         uses: pypa/gh-action-pypi-publish@release/v1
