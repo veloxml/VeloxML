@@ -23,6 +23,12 @@ classifiers = [
     "Development Status :: 3 - Alpha",
     "Intended Audience :: Developers",
     "License :: OSI Approved :: MIT License"
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: C++",
 ]
 
 [project.optional-dependencies]
@@ -54,7 +60,7 @@ build = "cp39* cp310* cp311* cp312* cp313*"
 
 [tool.cibuildwheel.linux]
 
-before-build = "pip install scikit-build ninja cmake pybind11"
+before-build = "python -m ensurepip --upgrade && pip install scikit-build ninja cmake pybind11"
 
 environment = "PATH=$PATH:/usr/local/bin CMAKE_INCLUDE_PATH=/usr/include/openblas:$CMAKE_INCLUDE_PATH"
 
