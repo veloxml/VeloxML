@@ -98,9 +98,9 @@ before-build =  """
     where /r D:\\a\\_temp pkg-config 
 """
 environment = """
-    CMAKE_C_COMPILER=D:/a/_temp/msys64/mingw64/bin/gcc.exe \
-    CMAKE_CXX_COMPILER=D:/a/_temp/msys64/mingw64/bin/g++.exe \
-    CMAKE_INCLUDE_PATH=D:/a/_temp/msys64/mingw64/include:$CMAKE_INCLUDE_PATH \
-    CMAKE_LIBRARY_PATH=D:/a/_temp/msys64/mingw64/lib:$CMAKE_LIBRARY_PATH \
-    TBB_DIR=D:/a/_temp/msys64/mingw64/usr/lib/tbb
+    CMAKE_C_COMPILER=D:\\a\\_temp\\msys64\\mingw64\\bin\\gcc.exe \
+    CMAKE_CXX_COMPILER=D:\\a\\_temp\\msys64\\mingw64\\bin\\g++.exe \
+    CMAKE_INCLUDE_PATH=D:\\a\\_temp\\msys64\\mingw64\\include \
+    CMAKE_LIBRARY_PATH=D:\\a\\_temp\\msys64\\mingw64\\lib: \
+    TBB_DIR=D:\\a\\_temp\\msys64\\mingw64\\usr\\lib\\tbb
 """
