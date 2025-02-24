@@ -37,20 +37,17 @@ endif()
 # ------------------------------------------------------------------------------
 if(CMAKE_CXX_COMPILER_ID MATCHES "AppleClang")
     message(STATUS "Using AppleClang")
-    # message(STATUS "Using Clang: enabling llvm profiling and vectorizer verbose options")
-    # set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fprofile-instr-generate -fcoverage-mapping -Rpass=loop-vectorize -Rpass-missed=loop-vectorize -Rpass-analysis=loop-vectorize -fxray-instrument")
+    
     find_package(OpenMP)
     if(NOT OpenMP_CXX_FOUND)
         message(STATUS "OpenMP が自動検出できませんでした。AppleClang 用に手動設定を適用します。")
-        # AppleClangの場合、-Xpreprocessor と -fopenmp を個別の引数として指定
-        set(OpenMP_CXX_FLAGS "-Xpreprocessor;-fopenmp")
+        set(OpenMP_CXX_FLAGS "-Xpreprocessor -fopenmp")
         set(OpenMP_CXX_LIB_NAMES "omp")
-        # Homebrewでインストールされた libomp のパスを指定（バージョンに合わせて変更）
         set(OpenMP_omp_LIBRARY "/opt/homebrew/Cellar/libomp/19.1.7/lib/libomp.dylib")
-        # ここで omp.h があるディレクトリを指定
         set(OpenMP_INCLUDE_DIR "/opt/homebrew/Cellar/libomp/19.1.7/include")
         set(OpenMP_CXX_FOUND TRUE)
     endif()
+
     if(NOT TARGET OpenMP::OpenMP_CXX)
         add_library(OpenMP::OpenMP_CXX INTERFACE IMPORTED)
         set_target_properties(OpenMP::OpenMP_CXX PROPERTIES
@@ -59,9 +56,11 @@ if(CMAKE_CXX_COMPILER_ID MATCHES "AppleClang")
             INTERFACE_INCLUDE_DIRECTORIES "${OpenMP_INCLUDE_DIR}"
         )
     endif()
+
     message(STATUS "Using OpenMP compile options: ${OpenMP_CXX_FLAGS}")
     message(STATUS "Using OpenMP library: ${OpenMP_omp_LIBRARY}")
     message(STATUS "Using OpenMP include dir: ${OpenMP_INCLUDE_DIR}")
+
 elseif(CMAKE_CXX_COMPILER_ID MATCHES "GNU")
     message(STATUS "Using GNU GCC")
     
@@ -69,11 +68,9 @@ elseif(CMAKE_CXX_COMPILER_ID MATCHES "GNU")
     
     if(NOT OpenMP_CXX_FOUND)
         message(WARNING "OpenMP が自動検出できませんでした。GCC 用に手動設定を適用します。")
-
-        # OpenMP用フラグの手動設定
         set(OpenMP_CXX_FLAGS "-fopenmp")
 
-        # Linux 環境の場合
+        # Linux 環境
         if(UNIX AND NOT APPLE AND CMAKE_SYSTEM_PROCESSOR MATCHES "aarch")
             set(OpenMP_CXX_LIB_NAMES "gomp")
             set(OpenMP_omp_LIBRARY "/opt/rh/gcc-toolset-14/root/usr/lib/gcc/aarch64-redhat-linux/14/libgomp.so")
@@ -84,7 +81,7 @@ elseif(CMAKE_CXX_COMPILER_ID MATCHES "GNU")
             set(OpenMP_omp_LIBRARY "/opt/rh/gcc-toolset-14/root/usr/lib/gcc/x86_64-redhat-linux/14/libgomp.so")
             set(OpenMP_INCLUDE_DIR "/opt/rh/gcc-toolset-14/root/usr/lib/gcc/x86_64-redhat-linux/14/include")
             
-        # macOS 環境の場合 (Homebrew の libomp)
+        # macOS 環境 (Homebrew の libomp)
         elseif(APPLE)
             set(OpenMP_CXX_LIB_NAMES "omp")
             set(OpenMP_omp_LIBRARY "/opt/homebrew/opt/libomp/lib/libomp.dylib")
@@ -94,7 +91,6 @@ elseif(CMAKE_CXX_COMPILER_ID MATCHES "GNU")
         set(OpenMP_CXX_FOUND TRUE)
     endif()
 
-    # OpenMP::OpenMP_CXX ターゲットを明示的に追加
     if(NOT TARGET OpenMP::OpenMP_CXX)
         add_library(OpenMP::OpenMP_CXX INTERFACE IMPORTED)
         set_target_properties(OpenMP::OpenMP_CXX PROPERTIES
@@ -111,7 +107,34 @@ elseif(CMAKE_CXX_COMPILER_ID MATCHES "Clang")
         add_compile_options(-fopenmp)
         add_link_options(-fopenmp)
     endif()
+
+elseif(CMAKE_CXX_COMPILER_ID MATCHES "MSVC")
+    message(STATUS "Using MSVC (Microsoft Visual Studio)")
+
+    find_package(OpenMP)
+    if(NOT OpenMP_CXX_FOUND)
+        message(STATUS "OpenMP が自動検出できませんでした。MSVC 用に手動設定を適用します。")
+
+        # MSVC では /openmp フラグを追加
+        set(OpenMP_CXX_FLAGS "/openmp")
+        set(OpenMP_CXX_LIB_NAMES "vcomp")
+        set(OpenMP_omp_LIBRARY "vcomp.lib")  # MSVC の OpenMP ライブラリ
+        set(OpenMP_CXX_FOUND TRUE)
+    endif()
+
+    if(NOT TARGET OpenMP::OpenMP_CXX)
+        add_library(OpenMP::OpenMP_CXX INTERFACE IMPORTED)
+        set_target_properties(OpenMP::OpenMP_CXX PROPERTIES
+            INTERFACE_COMPILE_OPTIONS "${OpenMP_CXX_FLAGS}"
+            INTERFACE_LINK_LIBRARIES "${OpenMP_omp_LIBRARY}"
+        )
+    endif()
+
+    message(STATUS "Using OpenMP compile options: ${OpenMP_CXX_FLAGS}")
+    message(STATUS "Using OpenMP library: ${OpenMP_omp_LIBRARY}")
+
 endif()
+
 
 # ------------------------------------------------------------------------------
 # TBB 設定
