@@ -1,9 +1,11 @@
 [build-system]
-requires = ["scikit-build-core", "pybind11", "cmake", "ninja"]
+requires = ["scikit-build-core", "pybind11", "cmake", "ninja", "dynamic-metadata"]
 build-backend = "scikit_build_core.build"
 
-[tool.cmake]
-args = ["-DBUILD_TESTS=OFF", "-DBUILD_GMOCK=OFF", "-DINSTALL_GTEST=OFF"]
+[tool.dynamic-metadata.version]
+provider = "dynamic_metadata.plugins.regex"
+input = "src/my_package/__init__.py"
+regex = '(?i)^(__version__|VERSION) *= *([\'"])v?(?P<value>.+?)\2'
 
 [tool.mypy]
 files = "setup.py"
