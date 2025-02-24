@@ -99,12 +99,6 @@ jobs:
         run: |
           export PATH="/mingw64/bin:$PATH"
           which pkg-config 
-      
-      # - name: Install cibuildwheel (Windows x86_64)
-      #   if: runner.os == 'Windows'
-      #   shell: msys2 {0}
-      #   run: |
-      #     pip install cibuildwheel --break-system-packages 
 
       - name: Build Python Wheels (Windows x86_64)
         if: runner.os == 'Windows'
