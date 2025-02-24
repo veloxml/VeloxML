@@ -145,7 +145,7 @@ elseif(${CMAKE_SYSTEM_NAME} MATCHES "Windows")  # Windows
     endif()
 
     # OpenBLAS を `pkg-config` で検出
-    find_package(PkgConfig REQUIRED)
+    find_package(PkgConfig REQUIRED HINTS "/mingw64/bin/pkg-config")
     pkg_check_modules(TBB REQUIRED tbb)
 
     find_package(TBB REQUIRED)

@@ -75,7 +75,7 @@ elif sys.platform == "win32":
     CC = "D:/a/_temp/msys64/mingw64/bin/gcc.exe"
     CXX = "D:/a/_temp/msys64/mingw64/bin/g++.exe"
     PKG_CONFIG_PATH = "D:/a/_temp/msys64/mingw64/openblas/lib/pkgconfig"
-    PKG_CONFIG_EXEC_PATH = "D:/a/_temp/msys64/mingw64/bin/pkg-config"
+    PKG_CONFIG_EXEC_PATH = "/mingw64/bin/pkg-config"
 else:
     raise RuntimeError("Unsupported OS")
 
