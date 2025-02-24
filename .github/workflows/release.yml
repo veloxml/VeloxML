@@ -17,7 +17,7 @@ jobs:
     strategy:
       matrix:
         # os: [ ubuntu-latest, ubuntu-latest-arm, macos-13, macos-14, windows-latest ]
-        os: [ ubuntu-latest, ubuntu-24.04-arm ]
+        os: [ windows-latest ]
         build_type: ["Release"]
         c_compiler: ["gcc"]
         cxx_compiler: ["g++"]
@@ -131,14 +131,6 @@ jobs:
         run: python -m cibuildwheel --output-dir wheelhouse
         env:
           CIBW_BUILD: "cp39-manylinux_aarch64 cp310-manylinux_aarch64 cp311-manylinux_aarch64 cp312-manylinux_aarch64"
-
-      - name: Build Python Wheels (Windows arm64)
-        if: runner.os == 'Windows' && runner.arch == 'arm64'
-        run: python -m cibuildwheel --output-dir wheelhouse
-        env:
-          TBB_DIR: ${{ env.TBB_DIR }}
-          CMAKE_ARGS: "-DTBB_DIR=${{ env.TBB_DIR }} -DCMAKE_PREFIX_PATH=${{ env.TBB_DIR }}"
-          CIBW_BUILD: "cp39-win_arm64 cp310-win_arm64 cp311-win_arm64 cp312-win_arm64 cp313-win_arm64"
 
       - name: Build Source Distribution (sdist)
         if: runner.os == 'macOS' && runner.arch == 'ARM64'
