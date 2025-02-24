@@ -69,8 +69,10 @@ elif sys.platform == "win32":
     TBB_DIR = f"{site_packages_path}/"
     
     # WindowsでGCCを確実に使うためのパス設定
-    CC = "C:/msys64/mingw64/bin/gcc.exe"
-    CXX = "C:/mingw64/mingw64/bin/g++.exe"
+    # CC = "C:/msys64/mingw64/bin/gcc.exe"
+    # CXX = "C:/mingw64/mingw64/bin/g++.exe"
+    CC = ""
+    CXX = ""
     PKG_CONFIG_PATH = ""
 else:
     raise RuntimeError("Unsupported OS")
