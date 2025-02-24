@@ -112,6 +112,11 @@ jobs:
         run: |
           D:/a/_temp/msys64/mingw64/bin/gcc.exe --version
 
+      - name: Install cibuildwheel (Windows)
+        if: runner.os == 'Windows'
+        shell: msys2 {0}
+        run: pip install -U cibuildwheel --break-system-packages
+
       - name: Build Python Wheels (Windows x86_64)
         if: runner.os == 'Windows'
         run: python -m cibuildwheel --output-dir wheelhouse
