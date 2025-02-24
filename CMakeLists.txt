@@ -281,7 +281,7 @@ elseif (UNIX AND NOT APPLE)  # Linux
     endif()
 
 elseif (WIN32)  # Windows
-    set(PKG_CONFIG_EXECUTABLE "D:/a/_temp/msys64/mingw64/bin/pkg-config")
+    set(PKG_CONFIG_EXECUTABLE "/mingw64/bin/pkg-config")
 
     if (EXISTS ${PKG_CONFIG_EXECUTABLE})
         message(STATUS "Using pkg-config: ${PKG_CONFIG_EXECUTABLE}")
