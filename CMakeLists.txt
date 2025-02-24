@@ -133,11 +133,14 @@ elseif(${CMAKE_SYSTEM_NAME} MATCHES "Linux")  # Ubuntu
     find_package(TBB REQUIRED)
 
 elseif(${CMAKE_SYSTEM_NAME} MATCHES "Windows")  # Windows
-    set(ENV{PKG_CONFIG_EXECUTABLE} "D:\\a\\_temp\\msys64\\mingw64\\bin\\pkg-config.exe")
-    set(ENV{PKG_CONFIG_PATH} "D:/a/_temp/msys64/mingw64/lib/pkgconfig")
+    set(PKG_CONFIG_EXECUTABLE "D:\\a\\_temp\\msys64\\mingw64\\bin\\pkg-config.exe")
+    set(PKG_CONFIG_PATH "D:/a/_temp/msys64/mingw64/lib/pkgconfig")
 
     # TBB を `pkg-config` で検出
     find_package(PkgConfig REQUIRED)
+
+    set(TBB_DIR "D:\a\_temp\msys64\mingw64\lib\cmake\TBB")
+
     pkg_check_modules(TBB REQUIRED tbb)
 
     find_package(TBB REQUIRED)
