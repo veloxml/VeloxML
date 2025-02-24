@@ -9,9 +9,10 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3 -march=native")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -frtti")
 
-if(${CMAKE_SYSTEM_NAME} MATCHES "Windows")  # Windows
-    set(CMAKE_C_COMPILER D:\a\_temp\msys64\mingw64\bin\gcc.exe)
-    set(CMAKE_CXX_COMPILER D:\a\_temp\msys64\mingw64\bin\g++.exe)
+if(WIN32)  # Windows
+    add_custom_command(TARGET VeloxML
+                    POST_BUILD
+                    COMMAND cmd //C "C:/Program Files/Microsoft Visual Studio/2022/Enterprise/VC/Auxiliary/Build/vcvarsall.bat" x86_amd64 )
 endif()
 
 # ------------------------------------------------------------------------------
