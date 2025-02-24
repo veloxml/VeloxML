@@ -83,8 +83,9 @@ repair-wheel-command = """
 """
 
 [tool.cibuildwheel.macos]
-build = "cp312* cp313*"
+build = "cp39* cp310* cp311* cp312* cp313*"
 repair-wheel-command = "delocate-wheel --exclude libgomp.1.dylib --exclude libgcc_s.1.1.dylib -w {dest_dir} {wheel}"
+environment = "CXXFLAGS='-isystem /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include'"
 
 
 [tool.cibuildwheel.windows]

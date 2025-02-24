@@ -157,8 +157,6 @@ if(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")  # macOS
 
 elseif(${CMAKE_SYSTEM_NAME} MATCHES "Linux")  # Ubuntu
     
-    message(STATUS "Python site-packages path: ${SITE_PACKAGES_PATH}")
-
     message(STATUS "TBB_DIR: ${TBB_DIR}")
 
     find_package(TBB REQUIRED)
