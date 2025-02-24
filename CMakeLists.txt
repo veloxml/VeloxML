@@ -169,48 +169,6 @@ if(CMAKE_CXX_COMPILER_ID MATCHES "Clang")
 endif()
 
 # ------------------------------------------------------------------------------
-# Python3 設定
-# ------------------------------------------------------------------------------
-# if (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")  # macOS
-#     find_package(Python3 COMPONENTS Interpreter Development REQUIRED)
-#     if(Python3_FOUND)
-#         message(STATUS "Found Python3: ${Python3_EXECUTABLE}")
-#         message(STATUS "Python Include Dir: ${Python3_INCLUDE_DIRS}")
-#         message(STATUS "Python Library: ${Python3_LIBRARIES}")
-#     else()
-#         message(FATAL_ERROR "Python3 not found! Please install Python3 development headers.")
-#     endif()
-# elseif(${CMAKE_SYSTEM_NAME} MATCHES "Linux")  # Linux
-#     # Python3 を検索
-#     find_package(Python3 COMPONENTS Interpreter Development)
-
-#     if (NOT Python3_FOUND)
-#         # 3. 結果を表示
-#         message(STATUS "Python Include Dir: ${Python3_INCLUDE_DIRS}")
-#         message(STATUS "Python Library: ${Python3_LIBRARIES}")
-
-#         # Python バージョン番号を抽出 (例: "python3.9" → "3.9")
-#         string(REGEX MATCH "python(3\\.[0-9]+)" PYTHON_VERSION_MATCH ${Python3_INCLUDE_DIRS})
-#         set(PYTHON_VERSION ${CMAKE_MATCH_1})  # "3.9" を取得
-#         message(STATUS "Detected Python Version: ${PYTHON_VERSION}")
-    
-#         # /usr/local/lib/libpython{X}.so のパスを作成
-#         set(Python3_LIBRARIES "/usr/local/lib/libpython${PYTHON_VERSION}.so")
-
-#         # 4. 実際に存在するかチェック
-#         if (EXISTS ${Python3_LIBRARIES})
-#             message(STATUS "Python Library found at: ${Python3_LIBRARIES}")
-#             set(Python3_LIBRARIES-NOTFOUND FALSE)
-#         else()
-#             message(WARNING "Python Library not found at: ${Python3_LIBRARIES}. You may need to set it manually.")
-#         endif()
-#     else()
-#         message(STATUS "Python Include Dir: ${Python3_INCLUDE_DIRS}")
-#         message(STATUS "Python Library: ${Python3_LIBRARIES}")
-#     endif()
-# endif()
-
-# ------------------------------------------------------------------------------
 # OpenBLAS + LAPACK 設定 (macOS, Linux, Windows)
 # ------------------------------------------------------------------------------
 

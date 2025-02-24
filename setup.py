@@ -45,6 +45,7 @@ if sys.platform == "darwin":  # macOS
     # 環境変数に値が設定されていなければデフォルト値を利用
     CC = os.environ.get("CMAKE_C_COMPILER", default_cc)
     CXX = os.environ.get("CMAKE_CXX_COMPILER", default_cxx)
+    PKG_CONFIG_EXEC_PATH = ""
     
     # 確認用の出力
     print("TBB_DIR:", TBB_DIR)
@@ -63,17 +64,18 @@ elif sys.platform.startswith("linux"):
     CXX = os.environ.get("CMAKE_CXX_COMPILER", "/opt/rh/gcc-toolset-14/root/usr/bin/g++")
     
     PKG_CONFIG_PATH = ""
+    PKG_CONFIG_EXEC_PATH = ""
     Python3_LIBRARIES = os.popen("python3 -c 'import sysconfig; print(sysconfig.get_config_var(\"LIBDIR\"))'").read().strip()
 elif sys.platform == "win32":
-    site_packages_path = sysconfig.get_paths()["purelib"]
-    TBB_DIR = f"{site_packages_path}/"
+    TBB_DIR = f"/mingw64/usr/lib/tbb"
     
     # WindowsでGCCを確実に使うためのパス設定
     # CC = "C:/msys64/mingw64/bin/gcc.exe"
     # CXX = "C:/mingw64/mingw64/bin/g++.exe"
-    CC = ""
-    CXX = ""
-    PKG_CONFIG_PATH = ""
+    CC = "/mingw64/bin/gcc.exe"
+    CXX = "/mingw64/bin/g++.exe"
+    PKG_CONFIG_PATH = "/mingw64/openblas/lib/pkgconfig"
+    PKG_CONFIG_EXEC_PATH = "/mingw64/bin/pkg-config"
 else:
     raise RuntimeError("Unsupported OS")
 
@@ -96,6 +98,7 @@ setup(
         f"-DTBB_DIR:PATH={TBB_DIR}",
         f"-DCMAKE_PREFIX_PATH:PATH={TBB_DIR}",
         f"-DPKG_CONFIG_PATH:PATH={PKG_CONFIG_PATH}",
+        f"-DPKG_CONFIG_EXECUTABLE:PATH={PKG_CONFIG_EXEC_PATH}"
     ],
     include_package_data=True,  # .so を含める
 )
