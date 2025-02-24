@@ -136,10 +136,10 @@ elseif(${CMAKE_SYSTEM_NAME} MATCHES "Windows")  # Windows
     # Windows: vcpkg でインストールされた TBB を使用
     message(STATUS "TBB_DIR: ${TBB_DIR}")
 
-    set(PKG_CONFIG_EXECUTABLE "D:\a\_temp\msys64\mingw64\bin\pkg-config.exe")
+    set(PKG_CONFIG_EXECUTABLE "D:\\a\\_temp\\msys64\\mingw64\\bin\\pkg-config.exe")
 
     # TBB を `pkg-config` で検出
-    find_package(PkgConfig REQUIRED "D:\a\_temp\msys64\mingw64\lib\pkg-config")
+    find_package(PkgConfig REQUIRED)
     pkg_check_modules(TBB REQUIRED tbb)
 
     find_package(TBB REQUIRED)
@@ -245,10 +245,6 @@ elseif (UNIX AND NOT APPLE)  # Linux
     endif()
 
 elseif (WIN32)  # Windows
-    set(PKG_CONFIG_EXECUTABLE "/mingw64/bin/pkg-config")
-
-    # OpenBLAS を `pkg-config` で検出
-    find_package(PkgConfig REQUIRED)
     pkg_check_modules(OpenBLAS REQUIRED openblas)
 
     if (OpenBLAS_FOUND)
