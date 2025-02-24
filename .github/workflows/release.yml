@@ -114,14 +114,11 @@ jobs:
 
       - name: Build Python Wheels (Windows x86_64)
         if: runner.os == 'Windows'
-        uses: pypa/cibuildwheel@v2.22.0
+        run: python -m cibuildwheel --output-dir wheelhouse
         env:
           CIBW_BUILD: "cp39-win_amd64 cp310-win_amd64 cp311-win_amd64 cp312-win_amd64 cp313-win_amd64"
           CC: "D:/a/_temp/msys64/mingw64/bin/gcc.exe"
           CXX: "D:/a/_temp/msys64/mingw64/bin/g++.exe"
-        with:
-          package-dir: .
-          output-dir: wheelhouse
 
       - name: Build Python Wheels (macOS Apple Silicon)
         if: runner.os == 'macOS' && runner.arch == 'ARM64'
