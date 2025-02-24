@@ -101,20 +101,20 @@ jobs:
       
       - name: Install cibuildwheel (Windows x86_64)
         if: runner.os == 'Windows'
-        shell: cmd
+        shell: msys2 {0}
         run: |
-          pipx install cibuildwheel
+          pipx install cibuildwheel python=3.12
 
       - name: Build Python Wheels (Windows x86_64)
         if: runner.os == 'Windows'
-        shell: cmd
+        shell: msys2 {0}
         run: |
           cibuildwheel.exe --output-dir wheelhouse
         env:
           CIBW_BUILD: "cp39-win_amd64 cp310-win_amd64 cp311-win_amd64 cp312-win_amd64 cp313-win_amd64"
-          CC: "C:/msys64/mingw64/bin/gcc.exe"
-          CXX: "C:/msys64/mingw64/bin/g++.exe"
-          TBB_DIR: "C:/msys64/mingw64/usr/lib/tbb"
+          CC: "/mingw64/bin/gcc.exe"
+          CXX: "/mingw64/bin/g++.exe"
+          TBB_DIR: "/mingw64/usr/lib/tbb"
 
       - name: Build Python Wheels (macOS Apple Silicon)
         if: runner.os == 'macOS' && runner.arch == 'ARM64'
