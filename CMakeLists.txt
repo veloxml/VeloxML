@@ -285,6 +285,14 @@ elseif (WIN32)  # Windows
     find_package(PkgConfig REQUIRED)
     pkg_check_modules(OpenBLAS REQUIRED openblas)
 
+    set(PKG_CONFIG_EXECUTABLE "D:/a/_temp/msys64/mingw64/bin/pkg-config")
+
+    if (EXISTS ${PKG_CONFIG_EXECUTABLE})
+        message(STATUS "Using pkg-config: ${PKG_CONFIG_EXECUTABLE}")
+    else()
+        message(FATAL_ERROR "pkg-config not found! Install it using 'pacman -S mingw-w64-x86_64-pkg-config'")
+    endif()
+
     if (OpenBLAS_FOUND)
         message(STATUS "Using OpenBLAS: ${OpenBLAS_LIBRARIES}")
         message(STATUS "OpenBLAS Include Dir: ${OpenBLAS_INCLUDE_DIRS}")
