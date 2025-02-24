@@ -91,7 +91,7 @@ repair-wheel-command = "delocate-wheel --exclude libgomp.1.dylib --exclude libgc
 build = "cp39* cp310* cp311* cp312* cp313*"
 
 before-build =  """
-    python -m ensurepip --upgrade && pip install scikit-build ninja cmake pybind11 tbb-devel && \
+    python -m ensurepip --upgrade && pip install scikit-build pybind11 && \
     where /r D:\\a\\_temp\\ *openblas* 
 """
 environment = "CC=D:\\a\\_temp\\msys64\\mingw64\\bin\\gcc.exe CXX=D:\\a\\_temp\\msys64\\mingw64\\bin\\g++.exe"
