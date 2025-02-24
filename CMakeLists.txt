@@ -281,19 +281,12 @@ elseif (UNIX AND NOT APPLE)  # Linux
     endif()
 
 elseif (WIN32)  # Windows
-    if (DEFINED ENV{VCPKG_ROOT})
-        set(VCPKG_ROOT "$ENV{VCPKG_ROOT}")
-    else()
-        set(VCPKG_ROOT "C:/vcpkg")
-    endif()
+    find_package(BLAS REQUIRED)
 
-    set(OPENBLAS_INCLUDE_DIR "${VCPKG_ROOT}/installed/x64-windows/include")
-    set(OPENBLAS_LIB "${VCPKG_ROOT}/installed/x64-windows/lib/openblas.lib")
-
-    if (EXISTS ${OPENBLAS_LIB})
+    if (BLAS_FOUND)
         message(STATUS "Using OpenBLAS: ${OPENBLAS_LIB}")
-        set(BLAS_LIBRARIES ${OPENBLAS_LIB})
-        set(BLAS_INCLUDE_DIRS ${OPENBLAS_INCLUDE_DIR})
+        set(OPENBLAS_LIB ${BLAS_LIBRARIES})
+        set(OPENBLAS_INCLUDE_DIR ${BLAS_INCLUDE_DIRS})
     else()
         message(FATAL_ERROR "OpenBLAS not found! Install it using 'vcpkg install openblas' and set VCPKG_ROOT")
     endif()
