@@ -103,7 +103,7 @@ jobs:
         if: runner.os == 'Windows'
         shell: msys2 {0}
         run: |
-          pipx install cibuildwheel python=3.12
+          pipx install cibuildwheel --python python3.12
 
       - name: Build Python Wheels (Windows x86_64)
         if: runner.os == 'Windows'
