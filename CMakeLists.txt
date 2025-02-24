@@ -281,14 +281,14 @@ elseif (UNIX AND NOT APPLE)  # Linux
     endif()
 
 elseif (WIN32)  # Windows
-    find_package(BLAS REQUIRED)
+    find_package(OpenBLAS)
 
-    if (BLAS_FOUND)
+    if (OpenBLAS_FOUND)
         message(STATUS "Using OpenBLAS: ${OPENBLAS_LIB}")
-        set(OPENBLAS_LIB ${BLAS_LIBRARIES})
-        set(OPENBLAS_INCLUDE_DIR ${BLAS_INCLUDE_DIRS})
+        # set(OPENBLAS_LIB ${BLAS_LIBRARIES})
+        # set(OPENBLAS_INCLUDE_DIR ${BLAS_INCLUDE_DIRS})
     else()
-        message(FATAL_ERROR "OpenBLAS not found! Install it using 'vcpkg install openblas' and set VCPKG_ROOT")
+        message(FATAL_ERROR "OpenBLAS not found!!!!!!!!")
     endif()
 
     find_package(LAPACK REQUIRED)
