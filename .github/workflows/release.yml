@@ -94,7 +94,7 @@ jobs:
 
       - name: Build Python Wheels (Windows x86_64)
         if: runner.os == 'Windows'
-        shell: mingw64
+        shell: cmd
         run: |
           cibuildwheel.exe --output-dir wheelhouse
         env:

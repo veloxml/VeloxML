@@ -69,8 +69,8 @@ elif sys.platform == "win32":
     VCPKG_ROOT = os.environ.get("VCPKG_ROOT", "C:/vcpkg")
     TBB_DIR = os.path.join(VCPKG_ROOT, "installed", "x64-windows", "share", "tbb")
     # WindowsでGCCを確実に使うためのパス設定
-    CC = os.environ.get("CMAKE_C_COMPILER", "C:/mingw64/bin/gcc.exe")
-    CXX = os.environ.get("CMAKE_CXX_COMPILER", "C:/mingw64/bin/g++.exe")
+    CC = "C:/msys64/mingw64/bin/gcc.exe"
+    CXX = "C:/mingw64/mingw64/bin/g++.exe"
     PKG_CONFIG_PATH = ""
 else:
     raise RuntimeError("Unsupported OS")
