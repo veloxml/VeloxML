@@ -1,11 +1,6 @@
 [build-system]
-requires = ["scikit-build-core", "pybind11", "cmake", "ninja", "dynamic-metadata"]
-build-backend = "scikit_build_core.build"
-
-[tool.dynamic-metadata.version]
-provider = "dynamic_metadata.plugins.regex"
-input = "src/my_package/__init__.py"
-regex = '(?i)^(__version__|VERSION) *= *([\'"])v?(?P<value>.+?)\2'
+requires = ["setuptools", "scikit-build", "pybind11", "cmake", "ninja"]
+build-backend = "setuptools.build_meta"
 
 [tool.mypy]
 files = "setup.py"
@@ -20,7 +15,7 @@ ignore_missing_imports = true
 
 [project]
 name = "veloxml"  # あなたのプロジェクト名
-dynamic = ["version"]
+version = "0.0.1"  # バージョン
 description = "High-Performance Machine Learning Library for Python (Powered by C++)"
 authors = [
     { name = "Yuji Chinen", email = "veloxml1113@gmail.com" }
@@ -60,9 +55,6 @@ veloxml = ["core/*.so", "**/*.py"]  # .soファイルを含める
 [tool.setuptools.exclude-package-data]
 veloxml = ["core/include/gtest/*", "core/lib/gtest*", "**/*.cpp", "**/*.hpp"]
 
-[tool.cibuildwheel]
-#test-requires = "pytest"
-#test-command = "pytest {package}/tests"
 
 [tool.cibuildwheel.linux]
 build = "cp39-manylinux* cp310-manylinux* cp311-manylinux* cp312-manylinux*"
@@ -91,8 +83,9 @@ repair-wheel-command = """
 """
 
 [tool.cibuildwheel.macos]
-build = "cp39* cp310* cp311* cp312* cp313*"
+build = "cp312* cp313*"
 repair-wheel-command = "delocate-wheel --exclude libgomp.1.dylib --exclude libgcc_s.1.1.dylib -w {dest_dir} {wheel}"
+
 
 [tool.cibuildwheel.windows]
 build = "cp39* cp310* cp311* cp312* cp313*"
@@ -101,5 +94,5 @@ before-build =  """
     python -m ensurepip --upgrade && pip install scikit-build ninja cmake pybind11 tbb-devel && \
     where /r D:\\a\\_temp\\ *openblas* 
 """
-environment = { CC = "D:\\a\\_temp\\msys64\\mingw64\\bin\\gcc.exe", CXX = "D:\\a\\_temp\\msys64\\mingw64\\bin\\g++.exe" }
+environment = "CC=D:\\a\\_temp\\msys64\\mingw64\\bin\\gcc.exe CXX=D:\\a\\_temp\\msys64\\mingw64\\bin\\g++.exe"
 

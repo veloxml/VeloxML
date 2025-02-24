@@ -19,13 +19,6 @@ def list_files_limited_depth(base_dir, max_depth=2, current_depth=0):
             if entry.is_dir():
                 list_files_limited_depth(entry.path, max_depth, current_depth + 1)
 
-# def find_executable(name):
-#     """指定したコマンドのフルパスを取得する"""
-#     try:
-#         return subprocess.check_output(["which", name], text=True).strip()
-#     except subprocess.CalledProcessError:
-#         return None
-
 if sys.platform == "darwin":  # macOS
     TBB_PREFIX = os.popen("brew --prefix tbb").read().strip()
     TBB_DIR = os.path.join(TBB_PREFIX, "lib/cmake/tbb")
@@ -89,8 +82,10 @@ setup(
     package_dir={".": "veloxml"},  
     cmake_install_dir=".",  
     cmake_args=[
-        f"-DCMAKE_C_COMPILER:PATH={CC}",
-        f"-DCMAKE_CXX_COMPILER:PATH={CXX}",
+        f"-DCC={CC}",
+        f"-DCXX={CXX}",
+        f"-DCMAKE_C_COMPILER={CC}",
+        f"-DCMAKE_CXX_COMPILER={CXX}",
         "-DBUILD_TESTS=OFF",
         "-DBUILD_GMOCK=OFF",
         "-DINSTALL_GTEST=OFF",

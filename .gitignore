@@ -5,6 +5,7 @@
 
 html
 wheelhouse
+_skbuild
 
 # ---> Python
 benchmark.py
