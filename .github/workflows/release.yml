@@ -74,6 +74,7 @@ jobs:
 
       - name: Install dependencies (Windows)
         if: runner.os == 'Windows'
+        id: msys2
         uses: msys2/setup-msys2@v2
         with:
           msystem: mingw64
@@ -85,6 +86,11 @@ jobs:
             mingw-w64-x86_64-openblas
             mingw-w64-x86_64-python
             mingw-w64-x86_64-python-pipx
+      - env:
+          MSYS2_LOCATION: ${{ steps.msys2.outputs.msys2-location }}
+        run: |
+          echo "$env:MSYS2_LOCATION"
+          echo "MSYS2_LOCATION=${MSYS2_LOCATION}" >> $GITHUB_ENV
       
       - name: Install cibuildwheel (Windows x86_64)
         if: runner.os == 'Windows'
@@ -100,7 +106,8 @@ jobs:
         env:
           CIBW_BUILD: "cp39-win_amd64 cp310-win_amd64 cp311-win_amd64 cp312-win_amd64 cp313-win_amd64"
           CC: "C:/msys64/mingw64/bin/gcc.exe"
-          CXX: "C:/mingw64/mingw64/bin/g++.exe"
+          CXX: "C:/msys64/mingw64/bin/g++.exe"
+          TBB_DIR: "C:/msys64/mingw64/usr/lib/tbb"
 
       - name: Build Python Wheels (macOS Apple Silicon)
         if: runner.os == 'macOS' && runner.arch == 'ARM64'

@@ -134,8 +134,9 @@ elseif(${CMAKE_SYSTEM_NAME} MATCHES "Linux")  # Ubuntu
 
 elseif(${CMAKE_SYSTEM_NAME} MATCHES "Windows")  # Windows
     # Windows: vcpkg でインストールされた TBB を使用
-    set(TBB_DIR "$ENV{VCPKG_ROOT}/installed/x64-windows/share/tbb")
-    find_package(TBB CONFIG REQUIRED)
+    message(STATUS "TBB_DIR: ${TBB_DIR}")
+
+    find_package(TBB REQUIRED)
 
 else()
     message(FATAL_ERROR "Unsupported OS for TBB!")
