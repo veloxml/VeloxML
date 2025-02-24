@@ -6,8 +6,16 @@ project(VeloxML LANGUAGES CXX)
 # ------------------------------------------------------------------------------
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3 -march=native")
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -frtti")
+
+if (MSVC)
+    add_definitions(-D_CRT_SECURE_NO_WARNINGS)
+    add_definitions(-DWIN32_LEAN_AND_MEAN)
+    add_definitions(-D_CRT_NONSTDC_NO_WARNINGS)
+else()
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3 -march=native")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -frtti")
+endif()
+
 
 # ------------------------------------------------------------------------------
 # テストビルドのON/OFF切替
@@ -156,13 +164,13 @@ elseif(${CMAKE_SYSTEM_NAME} MATCHES "Linux")  # Ubuntu
     find_package(TBB REQUIRED)
 
 elseif(${CMAKE_SYSTEM_NAME} MATCHES "Windows")  # Windows
-    set(PKG_CONFIG_EXECUTABLE "D:\\a\\_temp\\msys64\\mingw64\\bin\\pkg-config.exe")
-    set(PKG_CONFIG_PATH "D:\\a\\_temp\\msys64\\mingw64\\lib\\pkgconfig")
+    set(PKG_CONFIG_EXECUTABLE "D:/a/_temp/msys64/mingw64/bin/pkg-config.exe")
+    set(PKG_CONFIG_PATH "D:/a/_temp/msys64/mingw64/lib/pkgconfig")
 
     # TBB を `pkg-config` で検出
     find_package(PkgConfig REQUIRED)
 
-    set(TBB_DIR "D:\\a\\_temp\\msys64\\mingw64\\lib\\cmake\\TBB")
+    set(TBB_DIR "D:/a/_temp/msys64/mingw64/lib/cmake/TBB")
 
     pkg_check_modules(TBB REQUIRED tbb)
 
@@ -269,9 +277,9 @@ elseif (UNIX AND NOT APPLE)  # Linux
     endif()
 
 elseif (WIN32)  # Windows
-    set(OPENBLAS_LIB "D:\\a\\_temp\\msys64\\mingw64\\lib\\libopenblas.a")
-    set(OPENBLAS_INCLUDE_DIR "D:\\a\\_temp\\msys64/mingw64\\include\\openblas")
-    set(LAPACK_LIBRARIES "D:\\a\\_temp\\msys64/mingw64\\lib\\kapack.a")
+    set(OPENBLAS_LIB "D:/a/_temp/msys64/mingw64/lib/libopenblas.a")
+    set(OPENBLAS_INCLUDE_DIR "D:/a/_temp/msys64/mingw64/include/openblas")
+    set(LAPACK_LIBRARIES "D:/a/_temp/msys64/mingw64/lib/kapack.a")
     set(LAPACK_INCLUDE_DIRS "${OPENBLAS_INCLUDE_DIR}")
 endif()
 
