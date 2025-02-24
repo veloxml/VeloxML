@@ -93,7 +93,10 @@ build = "cp39* cp310* cp311* cp312* cp313*"
 repair-wheel-command = "delocate-wheel --exclude libgomp.1.dylib --exclude libgcc_s.1.1.dylib -w {dest_dir} {wheel}"
 
 [tool.cibuildwheel.windows]
-before-build =  "python -m ensurepip --upgrade && pip install scikit-build ninja cmake pybind11 tbb-devel"
+before-build =  """
+    python -m ensurepip --upgrade && pip install scikit-build ninja cmake pybind11 tbb-devel && \
+    find -type f -name "*tbb*" && find -type f -name "*pkg-conpfig*"
+"""
 environment = """
     CMAKE_C_COMPILER=D:/a/_temp/msys64/mingw64/bin/gcc.exe \
     CMAKE_CXX_COMPILER=D:/a/_temp/msys64/mingw64/bin/g++.exe \
