@@ -12,58 +12,25 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -frtti")
 # ------------------------------------------------------------------------------
 # テストビルドのON/OFF切替
 # ------------------------------------------------------------------------------
-option(BUILD_TESTS "Build unit tests" ON)
+option(BUILD_TESTS "Build unit tests" OFF)
 
 # ------------------------------------------------------------------------------
-# SIMD 命令を有効化（AVX-512, AVX2, ARM NEON, SVE ）
+# SIMD 命令を有効化（Mac では Clang 用のオプションを適用）
 # ------------------------------------------------------------------------------
-include(CheckCXXCompilerFlag)
-
-# ユーザーオプション（デフォルト: OFF）
-option(ENABLE_AVX512 "Enable AVX-512 optimizations" OFF)
-
-if (CMAKE_SYSTEM_PROCESSOR MATCHES "arm64|aarch64" OR CMAKE_OSX_ARCHITECTURES STREQUAL "arm64")
+if (CMAKE_SYSTEM_PROCESSOR MATCHES "arm" OR CMAKE_SYSTEM_PROCESSOR MATCHES "aarch" OR CMAKE_OSX_ARCHITECTURES STREQUAL "arm64")
     message(STATUS "Using ARM NEON (AArch64) settings.")
 
-    # NEON を有効化
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -march=native -ffast-math -ftree-vectorize")
-
-    # SVE をサポートしている場合
-    check_cxx_compiler_flag("-march=armv8-a+sve" HAS_SVE)
-    if (HAS_SVE)
-        message(STATUS "Enabling ARM SVE support.")
-        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -march=armv8-a+sve")
-    endif()
-
-elseif (CMAKE_SYSTEM_PROCESSOR MATCHES "armv7l") # 32-bit ARM (ARMv7)
-    message(STATUS "Using ARMv7 with NEON settings.")
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -march=armv7-a -mfpu=neon -ffast-math -ftree-vectorize")
-
-elseif (CMAKE_SYSTEM_PROCESSOR MATCHES "x86_64")
-    # AVX-512 のサポートをチェック
-    check_cxx_compiler_flag("-mavx512f" HAS_AVX512)
-    
-    if (ENABLE_AVX512 AND HAS_AVX512)
-        message(STATUS "Using AVX-512 settings.")
-        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -march=native -mavx512f -mfma -ffast-math")
-    else()
-        message(STATUS "Using AVX2 settings (AVX-512 disabled or not supported).")
-        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -march=native -mavx2 -mfma -ffast-math")
-    endif()
-
-elseif (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC" AND CMAKE_SYSTEM_PROCESSOR MATCHES "x86_64")
-    # MSVC では /arch:AVX512 をサポートするか確認
-    check_cxx_compiler_flag("/arch:AVX512" HAS_AVX512_MSVC)
-    
-    if (ENABLE_AVX512 AND HAS_AVX512_MSVC)
-        message(STATUS "Using MSVC with AVX-512 settings.")
-        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /arch:AVX512 /fp:fast")
-    else()
-        message(STATUS "Using MSVC with AVX2 settings.")
-        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /arch:AVX2 /fp:fast")
-    endif()
+elseif (CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
+    message(STATUS "Using GCC with AVX2 settings.")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -march=native -mavx2 -mfma -ffast-math")
+elseif (CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
+    message(STATUS "Using Clang with AVX2 settings.")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -march=native -mavx2 -mfma -ffast-math")
+elseif (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
+    message(STATUS "Using MSVC with AVX2 settings.")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /arch:AVX2 /fp:fast")
 endif()
-
 
 # ------------------------------------------------------------------------------
 # OpenMP 設定
@@ -107,11 +74,16 @@ elseif(CMAKE_CXX_COMPILER_ID MATCHES "GNU")
         set(OpenMP_CXX_FLAGS "-fopenmp")
 
         # Linux 環境の場合
-        if(UNIX AND NOT APPLE)
+        if(UNIX AND NOT APPLE AND CMAKE_SYSTEM_PROCESSOR MATCHES "aarch")
             set(OpenMP_CXX_LIB_NAMES "gomp")
-            set(OpenMP_omp_LIBRARY "/usr/lib64/libomp.so")
-            set(OpenMP_INCLUDE_DIR "/usr/local/gcc-14.2.0/lib/gcc/aarch64-unknown-linux-gnu/14.2.0/include/")
-        
+            set(OpenMP_omp_LIBRARY "/opt/rh/gcc-toolset-14/root/usr/lib/gcc/aarch64-redhat-linux/14/libgomp.so")
+            set(OpenMP_INCLUDE_DIR "/opt/rh/gcc-toolset-14/root/usr/lib/gcc/aarch64-redhat-linux/14/include")
+
+        elseif(UNIX AND NOT APPLE)
+            set(OpenMP_CXX_LIB_NAMES "gomp")
+            set(OpenMP_omp_LIBRARY "/opt/rh/gcc-toolset-14/root/usr/lib/gcc/x86_64-redhat-linux/14/libgomp.so")
+            set(OpenMP_INCLUDE_DIR "/opt/rh/gcc-toolset-14/root/usr/lib/gcc/x86_64-redhat-linux/14/include")
+            
         # macOS 環境の場合 (Homebrew の libomp)
         elseif(APPLE)
             set(OpenMP_CXX_LIB_NAMES "omp")
@@ -153,8 +125,11 @@ if(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")  # macOS
     find_package(TBB CONFIG REQUIRED)
 
 elseif(${CMAKE_SYSTEM_NAME} MATCHES "Linux")  # Ubuntu
-    # Ubuntu: APT でインストールされる TBB を検索
+    
+    message(STATUS "Python site-packages path: ${SITE_PACKAGES_PATH}")
+
     message(STATUS "TBB_DIR: ${TBB_DIR}")
+
     find_package(TBB REQUIRED)
 
 elseif(${CMAKE_SYSTEM_NAME} MATCHES "Windows")  # Windows
@@ -195,44 +170,44 @@ endif()
 # ------------------------------------------------------------------------------
 # Python3 設定
 # ------------------------------------------------------------------------------
-if (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")  # macOS
-    find_package(Python3 COMPONENTS Interpreter Development REQUIRED)
-    if(Python3_FOUND)
-        message(STATUS "Found Python3: ${Python3_EXECUTABLE}")
-        message(STATUS "Python Include Dir: ${Python3_INCLUDE_DIRS}")
-        message(STATUS "Python Library: ${Python3_LIBRARIES}")
-    else()
-        message(FATAL_ERROR "Python3 not found! Please install Python3 development headers.")
-    endif()
-elseif(${CMAKE_SYSTEM_NAME} MATCHES "Linux")  # Linux
-    # Python3 を検索
-    find_package(Python3 COMPONENTS Interpreter Development)
+# if (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")  # macOS
+#     find_package(Python3 COMPONENTS Interpreter Development REQUIRED)
+#     if(Python3_FOUND)
+#         message(STATUS "Found Python3: ${Python3_EXECUTABLE}")
+#         message(STATUS "Python Include Dir: ${Python3_INCLUDE_DIRS}")
+#         message(STATUS "Python Library: ${Python3_LIBRARIES}")
+#     else()
+#         message(FATAL_ERROR "Python3 not found! Please install Python3 development headers.")
+#     endif()
+# elseif(${CMAKE_SYSTEM_NAME} MATCHES "Linux")  # Linux
+#     # Python3 を検索
+#     find_package(Python3 COMPONENTS Interpreter Development)
 
-    if (NOT Python3_FOUND)
-        # 3. 結果を表示
-        message(STATUS "Python Include Dir: ${Python3_INCLUDE_DIRS}")
-        message(STATUS "Python Library: ${Python3_LIBRARIES}")
+#     if (NOT Python3_FOUND)
+#         # 3. 結果を表示
+#         message(STATUS "Python Include Dir: ${Python3_INCLUDE_DIRS}")
+#         message(STATUS "Python Library: ${Python3_LIBRARIES}")
 
-        # Python バージョン番号を抽出 (例: "python3.9" → "3.9")
-        string(REGEX MATCH "python(3\\.[0-9]+)" PYTHON_VERSION_MATCH ${Python3_INCLUDE_DIRS})
-        set(PYTHON_VERSION ${CMAKE_MATCH_1})  # "3.9" を取得
-        message(STATUS "Detected Python Version: ${PYTHON_VERSION}")
+#         # Python バージョン番号を抽出 (例: "python3.9" → "3.9")
+#         string(REGEX MATCH "python(3\\.[0-9]+)" PYTHON_VERSION_MATCH ${Python3_INCLUDE_DIRS})
+#         set(PYTHON_VERSION ${CMAKE_MATCH_1})  # "3.9" を取得
+#         message(STATUS "Detected Python Version: ${PYTHON_VERSION}")
     
-        # /usr/local/lib/libpython{X}.so のパスを作成
-        set(Python3_LIBRARIES "/usr/local/lib/libpython${PYTHON_VERSION}.so")
+#         # /usr/local/lib/libpython{X}.so のパスを作成
+#         set(Python3_LIBRARIES "/usr/local/lib/libpython${PYTHON_VERSION}.so")
 
-        # 4. 実際に存在するかチェック
-        if (EXISTS ${Python3_LIBRARIES})
-            message(STATUS "Python Library found at: ${Python3_LIBRARIES}")
-            set(Python3_LIBRARIES-NOTFOUND FALSE)
-        else()
-            message(WARNING "Python Library not found at: ${Python3_LIBRARIES}. You may need to set it manually.")
-        endif()
-    else()
-        message(STATUS "Python Include Dir: ${Python3_INCLUDE_DIRS}")
-        message(STATUS "Python Library: ${Python3_LIBRARIES}")
-    endif()
-endif()
+#         # 4. 実際に存在するかチェック
+#         if (EXISTS ${Python3_LIBRARIES})
+#             message(STATUS "Python Library found at: ${Python3_LIBRARIES}")
+#             set(Python3_LIBRARIES-NOTFOUND FALSE)
+#         else()
+#             message(WARNING "Python Library not found at: ${Python3_LIBRARIES}. You may need to set it manually.")
+#         endif()
+#     else()
+#         message(STATUS "Python Include Dir: ${Python3_INCLUDE_DIRS}")
+#         message(STATUS "Python Library: ${Python3_LIBRARIES}")
+#     endif()
+# endif()
 
 # ------------------------------------------------------------------------------
 # OpenBLAS + LAPACK 設定 (macOS, Linux, Windows)
@@ -351,7 +326,6 @@ file(GLOB BUILD_SOURCES "src/*.cpp" "src/*/*.cpp" "scr/*/binding/*.cpp")
 
 add_library(VeloxML SHARED ${BUILD_SOURCES})
 target_include_directories(VeloxML PUBLIC
-    ${Python3_INCLUDE_DIRS}
     include
     ${OPENBLAS_INCLUDE_DIR}
     tests/testutils
@@ -362,8 +336,6 @@ target_link_libraries(VeloxML PUBLIC
     TBB::tbb
     ${OPENBLAS_LIB}
     pybind11::module
-    pybind11::embed
-    ${Python3_LIBRARIES}
 )
 
 if (APPLE)
@@ -374,7 +346,6 @@ endif()
 # ------------------------------------------------------------------------------
 # Python バインドのビルド設定
 # ------------------------------------------------------------------------------
-set(PYBIND11_FINDPYTHON ON)
 # pybind11 を使って C++ モジュールをビルド
 pybind11_add_module(c_veloxml_core ${BUILD_SOURCES} "${CMAKE_SOURCE_DIR}/src/bindings.cpp")
 

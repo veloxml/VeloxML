@@ -6,6 +6,18 @@ import os, sys
 import os
 import sys
 import platform
+import sysconfig
+
+def list_files_limited_depth(base_dir, max_depth=2, current_depth=0):
+    """ 指定したディレクトリを max_depth まで再帰的に探索 """
+    if current_depth >= max_depth:
+        return
+
+    with os.scandir(base_dir) as entries:
+        for entry in entries:
+            print("  " * current_depth + f"- {entry.name}")
+            if entry.is_dir():
+                list_files_limited_depth(entry.path, max_depth, current_depth + 1)
 
 # def find_executable(name):
 #     """指定したコマンドのフルパスを取得する"""
@@ -34,17 +46,22 @@ if sys.platform == "darwin":  # macOS
     CC = os.environ.get("CMAKE_C_COMPILER", default_cc)
     CXX = os.environ.get("CMAKE_CXX_COMPILER", default_cxx)
     
-    Python3_LIBRARIES = ""
-    
     # 確認用の出力
     print("TBB_DIR:", TBB_DIR)
     print("C Compiler:", CC)
     print("C++ Compiler:", CXX)
 
 elif sys.platform.startswith("linux"):
-    TBB_DIR = os.environ.get("TBB_DIR", "/usr/local/tbb")
-    CC =  os.environ.get("CMAKE_C_COMPILER", "/usr/local/gcc-14.2.0/bin/gcc")
-    CXX = os.environ.get("CMAKE_CXX_COMPILER", "/usr/local/gcc-14.2.0/bin/g++")
+    machine = platform.machine()
+    if machine == "aarch64" or machine == "arm64":
+        print("HOOOOOOOOOOOOOOOO")
+        TBB_DIR = "/usr/local/tbb"
+    else:
+        site_packages_path = sysconfig.get_paths()["purelib"]
+        TBB_DIR = f"{site_packages_path}/"
+    
+    CC =  os.environ.get("CMAKE_C_COMPILER", "/opt/rh/gcc-toolset-14/root/usr/bin/gcc")
+    CXX = os.environ.get("CMAKE_CXX_COMPILER", "/opt/rh/gcc-toolset-14/root/usr/bin/g++")
     
     PKG_CONFIG_PATH = ""
     Python3_LIBRARIES = os.popen("python3 -c 'import sysconfig; print(sysconfig.get_config_var(\"LIBDIR\"))'").read().strip()
@@ -55,7 +72,6 @@ elif sys.platform == "win32":
     CC = os.environ.get("CMAKE_C_COMPILER", "C:/mingw64/bin/gcc.exe")
     CXX = os.environ.get("CMAKE_CXX_COMPILER", "C:/mingw64/bin/g++.exe")
     PKG_CONFIG_PATH = ""
-    Python3_LIBRARIES = ""
 else:
     raise RuntimeError("Unsupported OS")
 

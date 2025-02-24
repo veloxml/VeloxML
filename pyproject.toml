@@ -1,9 +1,20 @@
 [build-system]
-requires = ["setuptools", "wheel", "scikit-build", "cmake", "ninja", "pybind11"]
-build-backend = "setuptools.build_meta"
+requires = ["scikit-build-core", "pybind11", "cmake", "ninja"]
+build-backend = "scikit_build_core.build"
 
 [tool.cmake]
 args = ["-DBUILD_TESTS=OFF", "-DBUILD_GMOCK=OFF", "-DINSTALL_GTEST=OFF"]
+
+[tool.mypy]
+files = "setup.py"
+strict = true
+show_error_codes = true
+enable_error_code = ["ignore-without-code", "redundant-expr", "truthy-bool"]
+warn_unreachable = true
+
+[[tool.mypy.overrides]]
+module = ["ninja"]
+ignore_missing_imports = true
 
 [project]
 name = "veloxml"  # あなたのプロジェクト名
@@ -12,6 +23,7 @@ description = "High-Performance Machine Learning Library for Python (Powered by 
 authors = [
     { name = "Yuji Chinen", email = "veloxml1113@gmail.com" }
 ]
+license = { file = "LICENSE" }
 readme = "README.md"
 dependencies = [
     "numpy",
@@ -21,12 +33,7 @@ keywords = ["veloxml", "machine-learning", "high-performance", "python", "cpp"]
 classifiers = [
     "Development Status :: 3 - Alpha",
     "Intended Audience :: Developers",
-    "License :: OSI Approved :: MIT License",
-    "Programming Language :: Python :: 3.9",
-    "Programming Language :: Python :: 3.10",
-    "Programming Language :: Python :: 3.11",
-    "Programming Language :: Python :: 3.12",
-    "Programming Language :: C++",
+    "License :: OSI Approved :: MIT License"
 ]
 
 [project.optional-dependencies]
@@ -58,19 +65,29 @@ veloxml = ["core/include/gtest/*", "core/lib/gtest*", "**/*.cpp", "**/*.hpp"]
 [tool.cibuildwheel.linux]
 build = "cp39-manylinux* cp310-manylinux* cp311-manylinux* cp312-manylinux*"
 archs = "auto64"
-
 before-build = """
-    python -m ensurepip --upgrade && pip install scikit-build ninja cmake pybind11 && \
-    export CMAKE_PREFIX_PATH=$(python3 -c "import sysconfig; print(sysconfig.get_path('include'))") && \
-    export LD_LIBRARY_PATH=$(python3 -c "import sysconfig; print(sysconfig.get_config_var('LIBDIR'))"):$LD_LIBRARY_PATH
+    if [ \"$(uname -m)\" = \"x86_64\" ]; then
+        python -m ensurepip --upgrade && pip install scikit-build ninja cmake pybind11 tbb-devel
+    else
+        python -m ensurepip --upgrade && pip install scikit-build ninja cmake pybind11 && find /usr/local/tbb/ -type f -name "libtbb.so.12"
+    fi
 """
+
 
 environment = "PATH=$PATH:/usr/local/bin CMAKE_INCLUDE_PATH=/usr/include/openblas:$CMAKE_INCLUDE_PATH"
 
 manylinux-x86_64-image =  "veloxml/for-build-linux-x86_64:latest"
 manylinux-aarch64-image = "veloxml/for-build-linux-aarch64:latest"
 
-repair-wheel-command = ""
+repair-wheel-command = """ 
+    if [ \"$(uname -m)\" = \"x86_64\" ]; then 
+        LD_LIBRARY_PATH=$(find /opt/_internal/ -type f -name "libtbb.so.12" | sort -V | tail -n 1 | xargs -I {} dirname {}) \
+        auditwheel repair --plat manylinux_2_28_$(uname -m) -w {dest_dir} {wheel}
+    else 
+        LD_LIBRARY_PATH=/usr/local/tbb/lib64/ \
+        auditwheel repair --plat manylinux_2_34_$(uname -m) -w {dest_dir} {wheel}
+    fi
+"""
 
 [tool.cibuildwheel.macos]
 build = "cp39* cp310* cp311* cp312* cp313*"
