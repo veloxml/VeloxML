@@ -215,7 +215,7 @@ jobs:
 
       - name: Flatten directory
         run: |
-          mkdir -p dist && mv wheelhouse/*/* dist/
+          mkdir -p dist && mv wheelhouse/* dist/
 
       - name: Publish distribution 📦 to PyPI
         uses: pypa/gh-action-pypi-publish@release/v1
