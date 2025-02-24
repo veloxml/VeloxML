@@ -54,7 +54,6 @@ if sys.platform == "darwin":  # macOS
 elif sys.platform.startswith("linux"):
     machine = platform.machine()
     if machine == "aarch64" or machine == "arm64":
-        print("HOOOOOOOOOOOOOOOO")
         TBB_DIR = "/usr/local/tbb"
     else:
         site_packages_path = sysconfig.get_paths()["purelib"]
@@ -66,8 +65,9 @@ elif sys.platform.startswith("linux"):
     PKG_CONFIG_PATH = ""
     Python3_LIBRARIES = os.popen("python3 -c 'import sysconfig; print(sysconfig.get_config_var(\"LIBDIR\"))'").read().strip()
 elif sys.platform == "win32":
-    VCPKG_ROOT = os.environ.get("VCPKG_ROOT", "C:/vcpkg")
-    TBB_DIR = os.path.join(VCPKG_ROOT, "installed", "x64-windows", "share", "tbb")
+    site_packages_path = sysconfig.get_paths()["purelib"]
+    TBB_DIR = f"{site_packages_path}/"
+    
     # WindowsでGCCを確実に使うためのパス設定
     CC = "C:/msys64/mingw64/bin/gcc.exe"
     CXX = "C:/mingw64/mingw64/bin/g++.exe"

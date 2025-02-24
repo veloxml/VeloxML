@@ -73,7 +73,6 @@ before-build = """
     fi
 """
 
-
 environment = "PATH=$PATH:/usr/local/bin CMAKE_INCLUDE_PATH=/usr/include/openblas:$CMAKE_INCLUDE_PATH"
 
 manylinux-x86_64-image =  "veloxml/for-build-linux-x86_64:latest"
@@ -92,3 +91,7 @@ repair-wheel-command = """
 [tool.cibuildwheel.macos]
 build = "cp39* cp310* cp311* cp312* cp313*"
 repair-wheel-command = "delocate-wheel --exclude libgomp.1.dylib --exclude libgcc_s.1.1.dylib -w {dest_dir} {wheel}"
+
+[tool.cibuildwheel.windows]
+before-build =  "python -m ensurepip --upgrade && pip install scikit-build ninja cmake pybind11 tbb-devel"
+environment = "CMAKE_C_COMPILER=C:/msys64/mingw64/bin/gcc.exe CMAKE_CXX_COMPILER=C:/msys64/mingw64/bin/g++.exe"
