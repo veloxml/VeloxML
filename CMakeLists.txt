@@ -246,23 +246,10 @@ elseif (UNIX AND NOT APPLE)  # Linux
     endif()
 
 elseif (WIN32)  # Windows
-    pkg_check_modules(OpenBLAS REQUIRED openblas)
-
-    if (OpenBLAS_FOUND)
-        message(STATUS "Using OpenBLAS: ${OpenBLAS_LIBRARIES}")
-        message(STATUS "OpenBLAS Include Dir: ${OpenBLAS_INCLUDE_DIRS}")
-    else()
-        message(FATAL_ERROR "OpenBLAS not found! Install it using 'pacman -S mingw-w64-x86_64-openblas'")
-    endif()
-
-    # LAPACK も OpenBLAS 経由で提供される
-    find_package(LAPACK REQUIRED)
-
-    if (LAPACK_FOUND)
-        message(STATUS "Found LAPACK: ${LAPACK_LIBRARIES}")
-    else()
-        message(FATAL_ERROR "LAPACK not found! Install it using your package manager.")
-    endif()
+    set(OPENBLAS_LIB " D:\\a\\_temp\\msys64\\mingw64\\lib\\libopenblas.a")
+    set(OPENBLAS_INCLUDE_DIR "D:\\a\\_temp\\msys64/mingw64\\include\\openblas")
+    set(LAPACK_LIBRARIES "D:\\a\\_temp\\msys64/mingw64\\lib\\kapack.a")
+    set(LAPACK_INCLUDE_DIRS "${OPENBLAS_INCLUDE_DIR}")
 endif()
 
 
