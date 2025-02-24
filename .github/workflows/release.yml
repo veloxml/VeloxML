@@ -111,9 +111,9 @@ jobs:
         uses: pypa/cibuildwheel@v2.22.0
         env:
           CIBW_BUILD: "cp39-win_amd64 cp310-win_amd64 cp311-win_amd64 cp312-win_amd64 cp313-win_amd64"
-          CC: "/mingw64/bin/gcc.exe"
-          CXX: "/mingw64/bin/g++.exe"
-          TBB_DIR: "/mingw64/usr/lib/tbb"
+          CC: "D:/a/_temp/msys64/mingw64/bin/gcc.exe"
+          CXX: "D:/a/_temp/msys64/mingw64/bin/g++.exe"
+          TBB_DIR: "D:/a/_temp/msys64/mingw64/usr/lib/tbb"
         with:
           package-dir: .
           output-dir: wheelhouse
