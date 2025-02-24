@@ -9,6 +9,11 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3 -march=native")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -frtti")
 
+if(${CMAKE_SYSTEM_NAME} MATCHES "Windows")  # Windows
+    set(CMAKE_C_COMPILER D:\a\_temp\msys64\mingw64\bin\gcc.exe)
+    set(CMAKE_CXX_COMPILER D:\a\_temp\msys64\mingw64\bin\g++.exe)
+endif()
+
 # ------------------------------------------------------------------------------
 # テストビルドのON/OFF切替
 # ------------------------------------------------------------------------------
