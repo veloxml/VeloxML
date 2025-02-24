@@ -315,10 +315,10 @@ target_link_libraries(VeloxML PUBLIC
     pybind11::module
 )
 
-if (APPLE)
-    target_link_libraries(VeloxML PUBLIC "-framework CoreFoundation")
-    set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -undefined dynamic_lookup")
-endif()
+# if (APPLE)
+#     # target_link_libraries(VeloxML PUBLIC "-framework CoreFoundation")
+#     set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -undefined dynamic_lookup")
+# endif()
 
 # ------------------------------------------------------------------------------
 # Python バインドのビルド設定
