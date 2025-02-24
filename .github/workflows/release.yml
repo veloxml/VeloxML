@@ -223,7 +223,7 @@ jobs:
         run: |
           gh release create "${{ github.ref_name }}" dist/* \
             --title "Release ${{ github.ref_name }}" \
-            --notes "Alpha release."
+            --notes "Version 0.0.1 (Alpha) release."
 
   publish-pypi:
     name: Publish to PyPI
