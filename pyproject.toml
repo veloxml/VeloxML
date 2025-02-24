@@ -99,5 +99,5 @@ environment = """
     CMAKE_CXX_COMPILER=D:/a/_temp/msys64/mingw64/bin/g++.exe \
     CMAKE_INCLUDE_PATH=D:/a/_temp/msys64/mingw64/include: \
     CMAKE_LIBRARY_PATH=D:/a/_temp/msys64/mingw64/lib: \
-    TBB_DIR = D:/a/_temp/msys64/mingw64/
+    TBB_DIR=D:/a/_temp/msys64/mingw64/
 """
