@@ -279,8 +279,8 @@ elseif (UNIX AND NOT APPLE)  # Linux
 elseif (WIN32)  # Windows
     set(OPENBLAS_LIB "D:/a/_temp/msys64/mingw64/lib/libopenblas.a")
     set(OPENBLAS_INCLUDE_DIR "D:/a/_temp/msys64/mingw64/include/openblas")
-    set(LAPACK_LIBRARIES "D:/a/_temp/msys64/mingw64/lib/lapack.a")
-    set(LAPACK_INCLUDE_DIRS "D:/a/_temp/msys64/mingw64/include/lapack")
+    set(LAPACK_LIBRARIES "D:/a/_temp/msys64/mingw64/lib/liblapack")
+    set(LAPACK_INCLUDE_DIRS "D:/a/_temp/msys64/mingw64/include/openblas")
 endif()
 
 

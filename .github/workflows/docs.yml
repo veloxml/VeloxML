@@ -3,7 +3,9 @@ name: Build & Deploy Docs
 on:
   push:
     branches:
-      - gh-pages  # mainブランチへのpush時に実行
+      - gh-pages
+    # tags:
+    #   - "v*.*.*"
 
 jobs:
   build:
