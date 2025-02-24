@@ -281,10 +281,6 @@ elseif (UNIX AND NOT APPLE)  # Linux
     endif()
 
 elseif (WIN32)  # Windows
-    # OpenBLAS を `pkg-config` で検出
-    find_package(PkgConfig REQUIRED)
-    pkg_check_modules(OpenBLAS REQUIRED openblas)
-
     set(PKG_CONFIG_EXECUTABLE "D:/a/_temp/msys64/mingw64/bin/pkg-config")
 
     if (EXISTS ${PKG_CONFIG_EXECUTABLE})
@@ -292,6 +288,10 @@ elseif (WIN32)  # Windows
     else()
         message(FATAL_ERROR "pkg-config not found! Install it using 'pacman -S mingw-w64-x86_64-pkg-config'")
     endif()
+
+    # OpenBLAS を `pkg-config` で検出
+    find_package(PkgConfig REQUIRED)
+    pkg_check_modules(OpenBLAS REQUIRED openblas)
 
     if (OpenBLAS_FOUND)
         message(STATUS "Using OpenBLAS: ${OpenBLAS_LIBRARIES}")
