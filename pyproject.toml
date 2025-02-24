@@ -96,5 +96,5 @@ before-build =  """
     dir /s /b D:\\a\\_temp\\msys64\\mingw64\\ | findstr /i "lapack"
 """
 # environment = "CC=D:/a/_temp/msys64/mingw64/bin/gcc.exe CXX=D:/a/_temp/msys64/mingw64/bin/g++.exe CMAKE_GENERATOR='Ninja'"
-environment = "CC=cl.exe CXX=cl.exe CMAKE_GENERATOR='Ninja'"
+environment = "CC=cl.exe CXX=cl.exe"
 
