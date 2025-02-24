@@ -95,7 +95,7 @@ repair-wheel-command = "delocate-wheel --exclude libgomp.1.dylib --exclude libgc
 [tool.cibuildwheel.windows]
 before-build =  """
     python -m ensurepip --upgrade && pip install scikit-build ninja cmake pybind11 tbb-devel && \
-    where /r C:\\ *tbb* 
+    where /r D:\\a\\_temp\\ *tbb* 
 """
 environment = """
     CMAKE_C_COMPILER=D:\\a\\_temp\\msys64\\mingw64\\bin\\gcc.exe \
