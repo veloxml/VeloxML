@@ -103,13 +103,13 @@ jobs:
         if: runner.os == 'Windows'
         shell: msys2 {0}
         run: |
-          pipx install cibuildwheel --python python3.12
+          pip install cibuildwheel --break-system-packages 
 
       - name: Build Python Wheels (Windows x86_64)
         if: runner.os == 'Windows'
         shell: msys2 {0}
         run: |
-          cibuildwheel.exe --output-dir wheelhouse
+          python -m cibuildwheeel --output-dir wheelhouse
         env:
           CIBW_BUILD: "cp39-win_amd64 cp310-win_amd64 cp311-win_amd64 cp312-win_amd64 cp313-win_amd64"
           CC: "/mingw64/bin/gcc.exe"
