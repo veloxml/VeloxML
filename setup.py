@@ -65,8 +65,8 @@ elif sys.platform == "win32":
     # WindowsでGCCを確実に使うためのパス設定
     # CC = "C:/msys64/mingw64/bin/gcc.exe"
     # CXX = "C:/mingw64/mingw64/bin/g++.exe"
-    CC = "D:/a/_temp/msys64/mingw64/bin/gcc.exe"
-    CXX = "D:/a/_temp/msys64/mingw64/bin/g++.exe"
+    CC = "cl.exe"
+    CXX = "cl.exe"
     PKG_CONFIG_PATH = "  D:/a/_temp/msys64/mingw64/bin/pkg-config.exe"
     PKG_CONFIG_EXEC_PATH = "D:/a/_temp/msys64/mingw64/bin/pkg-config.exe"
 else:
