@@ -63,10 +63,10 @@ elif sys.platform == "win32":
     TBB_DIR = f"D:/a/_temp/msys64/mingw64/usr/lib/tbb"
     
     # WindowsでGCCを確実に使うためのパス設定
-    # CC = "cl.exe"
-    # CXX = "cl.exe"
-    CC = "D:/a/_temp/msys64/mingw64/bin/gcc.exe"
-    CXX = "D:/a/_temp/msys64/mingw64/bin/g++.exe"
+    CC = "cl.exe"
+    CXX = "cl.exe"
+    # CC = "D:/a/_temp/msys64/mingw64/bin/gcc.exe"
+    # CXX = "D:/a/_temp/msys64/mingw64/bin/g++.exe"
     PKG_CONFIG_PATH = "  D:/a/_temp/msys64/mingw64/bin/pkg-config.exe"
     PKG_CONFIG_EXEC_PATH = "D:/a/_temp/msys64/mingw64/bin/pkg-config.exe"
 else:
