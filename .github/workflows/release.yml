@@ -103,6 +103,12 @@ jobs:
           export PATH="/mingw64/bin:$PATH"
           which pkg-config 
 
+      - name: call bat (Windows)
+        shell: cmd
+        run: |
+          C:/Program Files/Microsoft Visual Studio/2022/Enterprise/VC/Auxiliary/Build/vcvarsall.bat
+
+
       - name: Build Python Wheels (Windows x86_64)
         if: runner.os == 'Windows'
         uses: pypa/cibuildwheel@v2.22.0
