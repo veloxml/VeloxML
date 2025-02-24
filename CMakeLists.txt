@@ -269,7 +269,7 @@ elseif (UNIX AND NOT APPLE)  # Linux
     endif()
 
 elseif (WIN32)  # Windows
-    set(OPENBLAS_LIB " D:\\a\\_temp\\msys64\\mingw64\\lib\\libopenblas.a")
+    set(OPENBLAS_LIB "D:\\a\\_temp\\msys64\\mingw64\\lib\\libopenblas.a")
     set(OPENBLAS_INCLUDE_DIR "D:\\a\\_temp\\msys64/mingw64\\include\\openblas")
     set(LAPACK_LIBRARIES "D:\\a\\_temp\\msys64/mingw64\\lib\\kapack.a")
     set(LAPACK_INCLUDE_DIRS "${OPENBLAS_INCLUDE_DIR}")
