@@ -98,12 +98,14 @@ jobs:
           echo "MSYS2_LOCATION=${MSYS2_LOCATION}" >> $GITHUB_ENV
 
       - name: Add mingw64 to PATH
+        if: runner.os == 'Windows'
         shell: msys2 {0}
         run: |
           export PATH="/mingw64/bin:$PATH"
           which pkg-config
 
       - name: call bat (Windows)
+        if: runner.os == 'Windows'
         shell: cmd
         run: |
           "C:/Program Files/Microsoft Visual Studio/2022/Enterprise/VC/Auxiliary/Build/vcvarsall.bat" x86_amd64
@@ -115,14 +117,17 @@ jobs:
           D:/a/_temp/msys64/mingw64/bin/gcc.exe --version
 
       - name: Set CMake Compiler
+        if: runner.os == 'Windows'
         run: |
           echo "CMAKE_C_COMPILER=D:/a/_temp/msys64/mingw64/bin/gcc.exe" >> $GITHUB_ENV
           echo "CMAKE_CXX_COMPILER=D:/a/_temp/msys64/mingw64/bin/g++.exe" >> $GITHUB_ENV
 
       - name: Verify GCC Path
+        if: runner.os == 'Windows'
         run: which gcc && gcc --version
 
       - name: Set MinGW Path
+        if: runner.os == 'Windows'
         run: echo "D:/a/_temp/msys64/mingw64/bin" >> $GITHUB_PATH
 
       - name: Build Python Wheels (Windows x86_64)
