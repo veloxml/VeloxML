@@ -6,8 +6,8 @@ on:
       - "v*.*.*"
 
 permissions:
-  contents: write  # ← リリースを作成・更新するための権限を追加
-  id-token: write  # ← OIDC を使用する場合に必要
+  contents: write # ← リリースを作成・更新するための権限を追加
+  id-token: write # ← OIDC を使用する場合に必要
 
 jobs:
   build:
@@ -17,7 +17,7 @@ jobs:
     strategy:
       matrix:
         # os: [ ubuntu-latest, ubuntu-latest-arm, macos-13, macos-14, windows-latest ]
-        os: [ windows-latest ]
+        os: [windows-latest]
         build_type: ["Release"]
         c_compiler: ["gcc"]
         cxx_compiler: ["g++"]
@@ -29,7 +29,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.12'
+          python-version: "3.12"
 
       - name: Install dependencies (Linux)
         if: runner.os == 'Linux'
@@ -78,7 +78,9 @@ jobs:
         uses: msys2/setup-msys2@v2
         with:
           msystem: mingw64
-          install: > 
+          install: >
+            mingw-w64-x86_64-toolchain
+            mingw-w64-x86_64-binutils
             mingw-w64-x86_64-gcc 
             mingw-w64-x86_64-ninja 
             mingw-w64-x86_64-cmake
@@ -99,7 +101,7 @@ jobs:
         shell: msys2 {0}
         run: |
           export PATH="/mingw64/bin:$PATH"
-          which pkg-config 
+          which pkg-config
 
       - name: call bat (Windows)
         shell: cmd
@@ -112,19 +114,27 @@ jobs:
         run: |
           D:/a/_temp/msys64/mingw64/bin/gcc.exe --version
 
-      - name: Install cibuildwheel (Windows)
-        if: runner.os == 'Windows'
-        shell: msys2 {0}
-        run: pip install -U cibuildwheel --break-system-packages
+      - name: Set CMake Compiler
+        run: |
+          echo "CMAKE_C_COMPILER=D:/a/_temp/msys64/mingw64/bin/gcc.exe" >> $GITHUB_ENV
+          echo "CMAKE_CXX_COMPILER=D:/a/_temp/msys64/mingw64/bin/g++.exe" >> $GITHUB_ENV
+
+      - name: Verify GCC Path
+        run: which gcc && gcc --version
+
+      - name: Set MinGW Path
+        run: echo "D:/a/_temp/msys64/mingw64/bin" >> $GITHUB_PATH
 
       - name: Build Python Wheels (Windows x86_64)
         if: runner.os == 'Windows'
-        shell: msys2 {0}
-        run: python -m cibuildwheel --output-dir wheelhouse
+        uses: pypa/cibuildwheel@v2.22.0
         env:
           CIBW_BUILD: "cp39-win_amd64 cp310-win_amd64 cp311-win_amd64 cp312-win_amd64 cp313-win_amd64"
           CC: "D:/a/_temp/msys64/mingw64/bin/gcc.exe"
           CXX: "D:/a/_temp/msys64/mingw64/bin/g++.exe"
+        with:
+          package-dir: .
+          output-dir: wheelhouse/
 
       - name: Build Python Wheels (macOS Apple Silicon)
         if: runner.os == 'macOS' && runner.arch == 'ARM64'
@@ -170,7 +180,7 @@ jobs:
           path: wheelhouse/
           retention-days: 1
           compression-level: 9
-      
+
   artifact-merge:
     name: Upload Artifacts
     needs: build
