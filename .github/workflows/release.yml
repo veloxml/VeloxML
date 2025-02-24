@@ -84,6 +84,7 @@ jobs:
             mingw-w64-x86_64-cmake
             mingw-w64-x86_64-tbb
             mingw-w64-x86_64-openblas
+            mingw-w64-x86_64-lapack
             mingw-w64-x86_64-pkg-config
             mingw-w64-x86_64-python
             mingw-w64-x86_64-python-pipx
