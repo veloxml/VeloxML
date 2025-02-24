@@ -89,8 +89,8 @@ setup(
     package_dir={".": "veloxml"},  
     cmake_install_dir=".",  
     cmake_args=[
-        f"-DCMAKE_C_COMPILER={CC}",
-        f"-DCMAKE_CXX_COMPILER={CXX}",
+        f"-DCMAKE_C_COMPILER:PATH={CC}",
+        f"-DCMAKE_CXX_COMPILER:PATH={CXX}",
         "-DBUILD_TESTS=OFF",
         "-DBUILD_GMOCK=OFF",
         "-DINSTALL_GTEST=OFF",

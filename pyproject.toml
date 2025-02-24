@@ -18,7 +18,7 @@ ignore_missing_imports = true
 
 [project]
 name = "veloxml"  # あなたのプロジェクト名
-version = "0.0.1"
+dynamic = ["version"]
 description = "High-Performance Machine Learning Library for Python (Powered by C++)"
 authors = [
     { name = "Yuji Chinen", email = "veloxml1113@gmail.com" }
@@ -99,5 +99,5 @@ before-build =  """
     python -m ensurepip --upgrade && pip install scikit-build ninja cmake pybind11 tbb-devel && \
     where /r D:\\a\\_temp\\ *openblas* 
 """
-environment = { CC = "/mingw64/bin/gcc", CXX = "/mingw64/bin/g++" }
+environment = { CC = "D:\\a\\_temp\\msys64\\mingw64\\bin\\gcc.exe", CXX = "D:\\a\\_temp\\msys64\\mingw64\\bin\\g++.exe" }
 

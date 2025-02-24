@@ -7,3 +7,4 @@ from . import svm
 from . import tree
 
 __all__ = ["base", "core", "kmeans", "linear", "pca", "svm", "tree"]
+__version__ = "0.0.1"
