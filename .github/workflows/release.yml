@@ -84,6 +84,7 @@ jobs:
             mingw-w64-x86_64-cmake
             mingw-w64-x86_64-tbb
             mingw-w64-x86_64-openblas
+            mingw-w64-x86_64-pkg-config
             mingw-w64-x86_64-python
             mingw-w64-x86_64-python-pipx
       - env:
@@ -91,6 +92,12 @@ jobs:
         run: |
           echo "$env:MSYS2_LOCATION"
           echo "MSYS2_LOCATION=${MSYS2_LOCATION}" >> $GITHUB_ENV
+
+      - name: Add mingw64 to PATH
+        shell: msys2 {0}
+        run: |
+          export PATH="/mingw64/bin:$PATH"
+          which pkg-config 
       
       - name: Install cibuildwheel (Windows x86_64)
         if: runner.os == 'Windows'
