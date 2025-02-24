@@ -138,13 +138,7 @@ elseif(${CMAKE_SYSTEM_NAME} MATCHES "Windows")  # Windows
 
     set(PKG_CONFIG_EXECUTABLE "/mingw64/bin/pkg-config")
 
-    if (EXISTS ${PKG_CONFIG_EXECUTABLE})
-        message(STATUS "Using pkg-config: ${PKG_CONFIG_EXECUTABLE}")
-    else()
-        message(FATAL_ERROR "pkg-config not found! Install it using 'pacman -S mingw-w64-x86_64-pkg-config'")
-    endif()
-
-    # OpenBLAS を `pkg-config` で検出
+    # TBB を `pkg-config` で検出
     find_package(PkgConfig REQUIRED HINTS "/mingw64/bin/pkg-config")
     pkg_check_modules(TBB REQUIRED tbb)
 
@@ -252,12 +246,6 @@ elseif (UNIX AND NOT APPLE)  # Linux
 
 elseif (WIN32)  # Windows
     set(PKG_CONFIG_EXECUTABLE "/mingw64/bin/pkg-config")
-
-    if (EXISTS ${PKG_CONFIG_EXECUTABLE})
-        message(STATUS "Using pkg-config: ${PKG_CONFIG_EXECUTABLE}")
-    else()
-        message(FATAL_ERROR "pkg-config not found! Install it using 'pacman -S mingw-w64-x86_64-pkg-config'")
-    endif()
 
     # OpenBLAS を `pkg-config` で検出
     find_package(PkgConfig REQUIRED)
