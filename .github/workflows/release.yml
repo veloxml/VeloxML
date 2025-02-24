@@ -104,6 +104,10 @@ jobs:
         shell: cmd
         run: |
           "C:/Program Files/Microsoft Visual Studio/2022/Enterprise/VC/Auxiliary/Build/vcvarsall.bat" x86_amd64
+      - name: Check GCC version
+        shell: msys2 {0}
+        run: |
+          D:/a/_temp/msys64/mingw64/bin/gcc.exe --version
 
       - name: Build Python Wheels (Windows x86_64)
         if: runner.os == 'Windows'

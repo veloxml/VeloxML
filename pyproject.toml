@@ -94,5 +94,5 @@ before-build =  """
     python -m ensurepip --upgrade && pip install scikit-build pybind11 && \
     cmd /c "C:/Program Files/Microsoft Visual Studio/2022/Enterprise/VC/Auxiliary/Build/vcvarsall.bat" x86_amd64
 """
-environment = "CC=D:/a/_temp/msys64/mingw64/bin/gcc.exe CXX=D:/a/_temp/msys64/mingw64/bin/g++.exe"
+environment = "CC=D:/a/_temp/msys64/mingw64/bin/gcc.exe CXX=D:/a/_temp/msys64/mingw64/bin/g++.exe CMAKE_GENERATOR=MinGW Makefiles"
 
