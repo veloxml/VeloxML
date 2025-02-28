@@ -2,10 +2,11 @@
 .vscode
 
 .DS_Store
-
+test.py
 html
 wheelhouse
 _skbuild
+kernel
 
 # ---> Python
 benchmark.py

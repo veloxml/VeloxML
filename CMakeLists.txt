@@ -49,10 +49,10 @@ if(CMAKE_CXX_COMPILER_ID MATCHES "AppleClang")
     find_package(OpenMP)
     if(NOT OpenMP_CXX_FOUND)
         message(STATUS "OpenMP が自動検出できませんでした。AppleClang 用に手動設定を適用します。")
-        set(OpenMP_CXX_FLAGS "-Xpreprocessor -fopenmp")
+        set(OpenMP_CXX_FLAGS "-Xpreprocessor;-fopenmp")
         set(OpenMP_CXX_LIB_NAMES "omp")
-        set(OpenMP_omp_LIBRARY "/opt/homebrew/Cellar/libomp/19.1.7/lib/libomp.dylib")
-        set(OpenMP_INCLUDE_DIR "/opt/homebrew/Cellar/libomp/19.1.7/include")
+        set(OpenMP_omp_LIBRARY "/opt/homebrew/opt/libomp/lib/libomp.dylib")
+        set(OpenMP_INCLUDE_DIR "/opt/homebrew/opt/libomp/include")
         set(OpenMP_CXX_FOUND TRUE)
     endif()
 
@@ -68,6 +68,8 @@ if(CMAKE_CXX_COMPILER_ID MATCHES "AppleClang")
     message(STATUS "Using OpenMP compile options: ${OpenMP_CXX_FLAGS}")
     message(STATUS "Using OpenMP library: ${OpenMP_omp_LIBRARY}")
     message(STATUS "Using OpenMP include dir: ${OpenMP_INCLUDE_DIR}")
+
+    include_directories(${OpenMP_INCLUDE_DIR})
 
 elseif(CMAKE_CXX_COMPILER_ID MATCHES "GNU")
     message(STATUS "Using GNU GCC")
@@ -195,14 +197,14 @@ elseif(${CMAKE_SYSTEM_NAME} MATCHES "Windows")
 endif()
 
 
-# ------------------------------------------------------------------------------
-# AddressSanitizer 設定（Clang, GCC 両方に対応）
-# ------------------------------------------------------------------------------
-if(CMAKE_CXX_COMPILER_ID MATCHES "Clang")
-    message(STATUS "Enabling AddressSanitizer")
-    add_compile_options(-fsanitize=address -fno-omit-frame-pointer)
-    add_link_options(-fsanitize=address)
-endif()
+# # ------------------------------------------------------------------------------
+# # AddressSanitizer 設定（Clang, GCC 両方に対応）
+# # ------------------------------------------------------------------------------
+# if(CMAKE_CXX_COMPILER_ID MATCHES "Clang")
+#     message(STATUS "Enabling AddressSanitizer")
+#     add_compile_options(-fsanitize=address -fno-omit-frame-pointer)
+#     add_link_options(-fsanitize=address)
+# endif()
 
 # ------------------------------------------------------------------------------
 # OpenBLAS + LAPACK 設定 (macOS, Linux, Windows)
@@ -218,6 +220,8 @@ if (APPLE)
         message(STATUS "Using OpenBLAS: ${OPENBLAS_LIB}")
         set(BLAS_LIBRARIES ${OPENBLAS_LIB})
         set(BLAS_INCLUDE_DIRS ${OPENBLAS_INCLUDE_DIR})
+        # OpenBLAS には LAPACK 機能も含まれるため、LAPACK_LIBRARIES にも同じパスを設定
+        set(LAPACK_LIBRARIES ${OPENBLAS_LIB})
     else()
         message(FATAL_ERROR "OpenBLAS not found! Install it using 'brew install openblas'")
     endif()
@@ -281,6 +285,55 @@ elseif (WIN32)  # Windows
     set(LAPACK_INCLUDE_DIRS "D:/a/_temp/msys64/mingw64/include/openblas")
 endif()
 
+# ------------------------------------------------------------------------------
+# Apple Silicon (ARM64) の場合のみMetalを有効化
+# ------------------------------------------------------------------------------
+if(APPLE AND CMAKE_SYSTEM_PROCESSOR MATCHES "arm64|aarch64")
+    message(STATUS "Building with Metal support on Apple Silicon (ARM64)")
+
+    find_library(METAL_LIB Metal)
+    find_library(METALKIT_LIB MetalKit)
+    find_library(FOUNDATION_LIB Foundation)
+
+    # Metal シェーダーのソースファイル
+    file(GLOB KERNEL_FILES metal_kernel/*/*.metal)
+
+    # AIR ファイルと METALLIB の出力先
+    set(SHADER_AIR_FILES "")
+    set(SHADER_LIB "${CMAKE_BINARY_DIR}/kernel/shaders.metallib")
+
+    # Metal シェーダーをコンパイルするカスタムコマンド
+    foreach(METAL_FILE ${KERNEL_FILES})
+        get_filename_component(KERNEL_NAME ${METAL_FILE} NAME_WE)
+        set(SHADER_AIR "${CMAKE_BINARY_DIR}/${KERNEL_NAME}.air")
+        list(APPEND SHADER_AIR_FILES ${SHADER_AIR})
+
+        add_custom_command(
+            OUTPUT ${SHADER_AIR}
+            COMMAND xcrun -sdk macosx metal -c ${METAL_FILE} -o ${SHADER_AIR}
+            DEPENDS ${METAL_FILE}
+            COMMENT "Compiling Metal shader: ${KERNEL_NAME}.metal"
+        )
+    endforeach()
+
+    # すべての .air ファイルを 1 つの .metallib に統合
+    add_custom_command(
+        OUTPUT ${SHADER_LIB}
+        COMMAND xcrun -sdk macosx metallib ${SHADER_AIR_FILES} -o ${SHADER_LIB}
+        DEPENDS ${SHADER_AIR_FILES}
+        COMMENT "Linking Metal shaders into ${SHADER_LIB}"
+    )
+    set(METAL_LIBRARIES ${METAL_LIB} ${METALKIT_LIB} ${FOUNDATION_LIB})
+
+    # シェーダーのビルドターゲット
+    add_custom_target(
+        compile_shaders ALL
+        DEPENDS ${SHADER_LIB}
+    )
+else()
+    message(STATUS "Metal is only supported on Apple Silicon (ARM64). Skipping Metal build.")
+endif()
+
 
 # ------------------------------------------------------------------------------
 # 外部コンテンツ: pybind11 の取得
@@ -297,7 +350,19 @@ FetchContent_MakeAvailable(pybind11)
 # ソースファイルの収集
 # ------------------------------------------------------------------------------
 
+# ソースファイルの指定
 file(GLOB BUILD_SOURCES "src/*.cpp" "src/*/*.cpp" "scr/*/binding/*.cpp")
+
+if(APPLE AND CMAKE_SYSTEM_PROCESSOR MATCHES "arm64|aarch64")
+    file(GLOB CXX_SRC_FILES src/*/*.cpp)
+    file(GLOB OBJCXX_SRC_FILES src/metal/*/*.mm)
+    file(GLOB CXX_HEADERS include/*/*.hpp)
+    file(GLOB OBJCXX_HEADERS include/metal/*/*.h)
+    # .mm ファイルを Objective-C++ でコンパイル
+    set_source_files_properties(${OBJCXX_SRC_FILES} ${OBJCXX_HEADERS} PROPERTIES COMPILE_FLAGS "-x objective-c++")
+    set_source_files_properties(${OBJCXX_FILES} PROPERTIES COMPILE_FLAGS "-fobjc-arc")
+    set(BUILD_SOURCES ${CXX_SRC_FILES} ${OBJCXX_SRC_FILES} ${CXX_HEADERS} ${OBJCXX_HEADERS})
+endif()
 
 add_library(VeloxML SHARED ${BUILD_SOURCES})
 target_include_directories(VeloxML PUBLIC
@@ -310,13 +375,14 @@ target_link_libraries(VeloxML PUBLIC
     OpenMP::OpenMP_CXX
     TBB::tbb
     ${OPENBLAS_LIB}
+    ${LAPACK_LIBRARIES}
     pybind11::module
 )
 
-# if (APPLE)
-#     # target_link_libraries(VeloxML PUBLIC "-framework CoreFoundation")
-#     set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -undefined dynamic_lookup")
-# endif()
+if(APPLE AND CMAKE_SYSTEM_PROCESSOR MATCHES "arm64|aarch64")
+    target_link_libraries(VeloxML PRIVATE ${METAL_LIBRARIES})
+    add_dependencies(VeloxML compile_shaders)
+endif()
 
 # ------------------------------------------------------------------------------
 # Python バインドのビルド設定
@@ -334,6 +400,11 @@ target_include_directories(c_veloxml_core PRIVATE include ${OPENBLAS_INCLUDE_DIR
 target_link_libraries(c_veloxml_core PRIVATE ${OPENBLAS_LIB} TBB::tbb)
 target_link_libraries(c_veloxml_core PRIVATE ${LAPACK_LIBRARIES})
 
+if(APPLE AND CMAKE_SYSTEM_PROCESSOR MATCHES "arm64|aarch64")
+    target_link_libraries(c_veloxml_core PRIVATE ${METAL_LIBRARIES})
+    add_dependencies(c_veloxml_core compile_shaders)
+endif()
+
 # Google Test を明示的にインストールしないようにする
 if(TARGET gtest OR TARGET gtest_main)
     message(STATUS "Excluding Google Test from installation")
@@ -342,6 +413,9 @@ if(TARGET gtest OR TARGET gtest_main)
 endif()
 
 install(TARGETS c_veloxml_core LIBRARY DESTINATION "${CMAKE_INSTALL_PREFIX}/veloxml/core")
+
+# add_executable(VeloxMLMain src/main.cpp)
+# target_link_libraries(VeloxMLMain VeloxML)
 
 # テスト
 if(BUILD_TESTS)

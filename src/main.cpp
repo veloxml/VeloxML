@@ -1,98 +1,60 @@
-#include "svm/svm_classification.hpp"
-#include "utils/utilities.hpp"
-#include "utils/function.hpp"
+// #include <iostream>
+// #include <vector>
+// #include <chrono>
+// #include <cmath>
+// #include "linear/linear_regression.hpp" // CPU版
+// #include "metal/linear/cxx_linear_regression_metal.h" // Metal版
 
-std::pair<std::vector<std::vector<double>>, std::vector<std::vector<double>>>
-generate_dummy_data_for_classification(int M, int N)
-{
-    // 固定シードで再現性を確保
-    std::mt19937 gen(42);
-    // 特徴量は [-1, 1] の一様分布
-    std::uniform_real_distribution<double> uniform_dist(-1, 1);
-    // ノイズは小さめの標準偏差 (0.1)
-    std::normal_distribution<double> normal_dist(0.0, 0.1);
+// // MSE計算
+// double mean_squared_error(const std::vector<double>& y_true, const std::vector<double>& y_pred) {
+//     double mse = 0.0;
+//     int n = static_cast<int>(y_true.size());
+//     for (int i = 0; i < n; i++) {
+//         double diff = y_true[i] - y_pred[i];
+//         mse += diff * diff;
+//     }
+//     return mse / n;
+// }
 
-    std::vector<std::vector<double>> X(M, std::vector<double>(N));
-    std::vector<std::vector<double>> Y(M, std::vector<double>(1));
+// int main() {
+//     int rows = 1000; // サンプル数
+//     int cols = 1; // 特徴量の数（1次元）
 
-    for (int i = 0; i < M; ++i)
-    {
-        double linear_sum = 0.0;
-        for (int j = 0; j < N; ++j)
-        {
-            X[i][j] = uniform_dist(gen);
-            linear_sum += (j + 1) * X[i][j]; // 真の回帰係数は j+1
-        }
+//     // データセット作成 (y = 3x + 2)
+//     std::vector<double> X(rows);
+//     std::vector<double> y(rows);
+//     for (int i = 0; i < rows; i++) {
+//         X[i] = static_cast<double>(i) / 10.0; // 0.0, 0.1, ..., 99.9
+//         y[i] = 3.0 * X[i] + 2.0;
+//     }
 
-        double prob = sigmoid(linear_sum + normal_dist(gen)); // ノイズ追加
-        Y[i][0] = (prob >= 0.5) ? 1 : 0;                      // しきい値で分類
-    }
-    return {X, Y};
-}
+//     // CPU版で学習
+//     LinearRegression cpu_model;
+//     auto start_cpu = std::chrono::high_resolution_clock::now();
+//     cpu_model.fit(X, y, rows, cols);
+//     auto end_cpu = std::chrono::high_resolution_clock::now();
+//     auto duration_cpu = std::chrono::duration_cast<std::chrono::milliseconds>(end_cpu - start_cpu);
+//     std::cout << "CPU Training Time: " << duration_cpu.count() << " ms" << std::endl;
 
-void standardize(std::vector<std::vector<double>> &X)
-{
-    int M = X.size(), N = X[0].size();
-    std::vector<double> mean(N, 0.0), stddev(N, 0.0);
+//     // Metal版で学習
+//     LinearRegressionMetal metal_model;
+//     auto start_metal = std::chrono::high_resolution_clock::now();
+//     metal_model.fit(X, y, rows, cols);
+//     auto end_metal = std::chrono::high_resolution_clock::now();
+//     auto duration_metal = std::chrono::duration_cast<std::chrono::milliseconds>(end_metal - start_metal);
+//     std::cout << "Metal Training Time: " << duration_metal.count() << " ms" << std::endl;
 
-    // 平均値計算
-    for (int j = 0; j < N; ++j)
-    {
-        for (int i = 0; i < M; ++i)
-        {
-            mean[j] += X[i][j];
-        }
-        mean[j] /= M;
-    }
+//     // 予測結果の取得
+//     std::vector<double> cpu_pred = cpu_model.predict(X, rows, cols);
 
-    // 標準偏差計算
-    for (int j = 0; j < N; ++j)
-    {
-        for (int i = 0; i < M; ++i)
-        {
-            stddev[j] += (X[i][j] - mean[j]) * (X[i][j] - mean[j]);
-        }
-        stddev[j] = std::sqrt(stddev[j] / M);
-        if (stddev[j] == 0.0)
-            stddev[j] = 1.0; // ゼロ割防止
-    }
+//     std::vector<double> metal_pred = metal_model.predict(X, rows, cols);
 
-    // 標準化
-    for (int i = 0; i < M; ++i)
-    {
-        for (int j = 0; j < N; ++j)
-        {
-            X[i][j] = (X[i][j] - mean[j]) / stddev[j];
-        }
-    }
-}
+//     // MSE計算
+//     double mse_cpu = mean_squared_error(y, cpu_pred);
+//     double mse_metal = mean_squared_error(y, metal_pred);
 
-int main()
-{
-    int M = 1000;
-    int N = 5;
-    auto [X, Y] = generate_dummy_data_for_classification(M, N);
-    standardize(X);
+//     std::cout << "CPU MSE: " << mse_cpu << std::endl;
+//     std::cout << "Metal MSE: " << mse_metal << std::endl;
 
-    // ColMajorな1次元配列に変換
-    std::vector<double> X_flat = flattenMatrix(X);
-    std::vector<double> Y_flat = flattenMatrix(Y); // Yは (M x 1) の行列と仮定
-
-    // SVMClassificationではラベルを +1 / -1 として扱うため、
-    // もしY_flatが {0, 1} であれば 0→ -1 に変換する
-    for (auto &label : Y_flat)
-    {
-        if (label == 0)
-            label = -1;
-    }
-
-    // モデル作成
-    // コンストラクタ引数: (C, tol, max_passes, kernel, gamma, coef0, degree, approx_kernel)
-    // ※ polyカーネルの場合、coef0やdegreeを設定します。ここではgamma=0.1, coef0=1.0, degree=3とします。
-    SVMClassification svm(1.0, 1e-3, 100, "poly", true, 0.1, 1.0, 3, true);
-
-    // 学習の実行
-    svm.fit(X_flat, Y_flat, static_cast<std::size_t>(M), static_cast<std::size_t>(N));
-
-    return 0;
-}
+//     return 0;
+// }

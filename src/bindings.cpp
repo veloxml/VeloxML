@@ -13,6 +13,8 @@
 #include "pca/bindings/pca.hpp"
 #include "svm/bindings/svm_classification.hpp"
 
+#include "metal/linear/bindings/linear_regression_metal.hpp"
+
 namespace py = pybind11;
 
 PYBIND11_MODULE(c_veloxml_core, m)
@@ -37,4 +39,7 @@ PYBIND11_MODULE(c_veloxml_core, m)
 
   bind_pca(m);
   bind_kmeans(m);
+
+  // Metal Version
+  bind_linear_regression_metal(m);
 }
