@@ -5,6 +5,99 @@ using namespace metal;
 
 #define BLOCK_SIZE 16
 
+#define THREADGROUP_SIZE 32
+
+// LU分解（部分ピボット付き、エラーチェック・並列化あり）
+// A: 行優先で格納された行列（サイズ: rows x cols）
+// rows, cols: 行数・列数（通常、min(rows, cols) 回の反復を行う）
+// error_flag: エラー発生時に1が書き込まれる（事前に0で初期化しておく）
+kernel void lu_decomposition_optim2(device float*       A           [[ buffer(0) ]],
+                             constant uint &     rows        [[ buffer(1) ]],
+                             constant uint &     cols        [[ buffer(2) ]],
+                             device uint*        error_flag  [[ buffer(3) ]],
+                             uint                tid         [[ thread_position_in_threadgroup ]]) {
+
+    // 有効な反復回数は、行数と列数の小さい方
+    uint min_dim = (rows < cols) ? rows : cols;
+
+    // 各ピボット反復ごとに処理
+    for (uint i = 0; i < min_dim; i++) {
+
+        // --- 部分ピボット選択 ---
+        // i列の i行以降の中で、絶対値が最大の要素を持つ行を選ぶ
+        // 各スレッドが候補を探索し、threadgroup内でリダクションする
+        threadgroup float local_max[THREADGROUP_SIZE];
+        threadgroup uint  local_index[THREADGROUP_SIZE];
+
+        // 初期化：候補が存在しないスレッドは値0とする
+        float best = 0.0;
+        uint best_row = i;  // デフォルトは現在の行
+        // 各スレッドは i 行以降のうち、tid 番目から THREADGROUP_SIZE 刻みで担当
+        for (uint r = i + tid; r < rows; r += THREADGROUP_SIZE) {
+            float val = fabs(A[r * cols + i]);
+            if(val > best) {
+                best = val;
+                best_row = r;
+            }
+        }
+        local_max[tid] = best;
+        local_index[tid] = best_row;
+        threadgroup_barrier(mem_flags::mem_threadgroup);
+
+        // リダクション：threadgroup内で最大値と対応する行番号を求める
+        uint stride = THREADGROUP_SIZE / 2;
+        while (stride > 0) {
+            if (tid < stride) {
+                if (local_max[tid] < local_max[tid + stride]) {
+                    local_max[tid] = local_max[tid + stride];
+                    local_index[tid] = local_index[tid + stride];
+                }
+            }
+            threadgroup_barrier(mem_flags::mem_threadgroup);
+            stride /= 2;
+        }
+
+        // thread 0が決定したピボット行情報を持つ
+        uint pivotRow = local_index[0];
+        float pivotVal = A[pivotRow * cols + i];
+
+        // --- エラーチェック ---
+        // ピボット値が小さすぎる場合、特異行列としてエラー扱い
+        if (fabs(pivotVal) < 1e-6) {
+            if (tid == 0) {
+                *error_flag = 1;
+            }
+            return;
+        }
+
+        // --- 行スワップ ---
+        // 部分ピボットの場合、pivotRow と i行目が異なれば行全体をスワップする
+        if (tid == 0 && pivotRow != i) {
+            for (uint c = i; c < cols; c++) {
+                float temp = A[i * cols + c];
+                A[i * cols + c] = A[pivotRow * cols + c];
+                A[pivotRow * cols + c] = temp;
+            }
+        }
+        threadgroup_barrier(mem_flags::mem_threadgroup);
+
+        // --- 消去処理（LU分解の下三角部分の更新およびU部分の更新） ---
+        // 各スレッドで i+1 行目以降を担当
+        float pivot = A[i * cols + i]; // 更新後のピボット（スワップ済み）
+        for (uint j = i + 1 + tid; j < rows; j += THREADGROUP_SIZE) {
+            // L要素の更新
+            A[j * cols + i] /= pivot;
+            float multiplier = A[j * cols + i];
+            // U部分の更新：i+1列以降
+            for (uint k = i + 1; k < cols; k++) {
+                A[j * cols + k] -= multiplier * A[i * cols + k];
+            }
+        }
+        threadgroup_barrier(mem_flags::mem_threadgroup);
+    }
+}
+
+
 kernel void lu_decomposition_optim(
     device float* A,     // 入力行列（サイズ: N×N，行優先）
     device float* L,     // 出力 L 行列（サイズ: N×N; 単位下三角）

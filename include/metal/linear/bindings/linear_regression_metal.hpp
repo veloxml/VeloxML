@@ -6,13 +6,7 @@
 namespace py = pybind11;
 
 void bind_linear_regression_metal(py::module_ &m) {
-  // py::enum_<LinearDecompositionMode>(m, "LinearDecompositionMode")
-  //       .value("LU", LinearDecompositionMode::LU)
-  //       .value("QR", LinearDecompositionMode::QR)
-  //       .value("SVD", LinearDecompositionMode::SVD)
-  //       .export_values();
-
-  py::class_<LinearRegressionMetal, std::shared_ptr<LinearRegressionMetal>>(
+  py::class_<LinearRegressionMetal, RegressionBase, std::shared_ptr<LinearRegressionMetal>>(
       m, "LinearRegressionMetal")
       .def(py::init<>())
       .def("fit", &LinearRegressionMetal::fit_py)

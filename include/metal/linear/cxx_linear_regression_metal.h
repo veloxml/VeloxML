@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <iostream>
+#include "base/regression_base.hpp"
 
 #include <pybind11/pybind11.h>
 #include <pybind11/numpy.h>
@@ -29,45 +30,45 @@ class LinearRegressionMetalOBJCXX;
   #define OBJC_STRONG
 #endif
 
-class LinearRegressionMetal {
+class LinearRegressionMetal : public RegressionBase{
 public:
     LinearRegressionMetal();
     ~LinearRegressionMetal();
 
-    void fit(const std::vector<double>& X, const std::vector<double>& y, std::size_t rows, std::size_t cols);
-    std::vector<double> predict(const std::vector<double>& X, std::size_t rows, std::size_t cols);
+    void fit(const std::vector<double>& X, const std::vector<double>& y, std::size_t rows, std::size_t cols) override;
+    std::vector<double> predict(const std::vector<double>& X, std::size_t rows, std::size_t cols) override;
 
-    void fit_py(const py::array_t<double> &X, const py::array_t<double> &Y)
-  {
-    auto bufX = X.request();
-    auto bufY = Y.request();
+  //   void fit_py(const py::array_t<double> &X, const py::array_t<double> &Y)
+  // {
+  //   auto bufX = X.request();
+  //   auto bufY = Y.request();
 
-    if (bufX.ndim != 2)
-      throw std::runtime_error("fit: X must be a 2-dimensional array");
+  //   if (bufX.ndim != 2)
+  //     throw std::runtime_error("fit: X must be a 2-dimensional array");
 
-    std::size_t n = bufX.shape[0];
-    std::size_t m = bufX.shape[1];
+  //   std::size_t n = bufX.shape[0];
+  //   std::size_t m = bufX.shape[1];
 
-    std::vector<double> vecX(static_cast<double *>(bufX.ptr), static_cast<double *>(bufX.ptr) + n * m);
-    std::vector<double> vecY(static_cast<double *>(bufY.ptr), static_cast<double *>(bufY.ptr) + n);
+  //   std::vector<double> vecX(static_cast<double *>(bufX.ptr), static_cast<double *>(bufX.ptr) + n * m);
+  //   std::vector<double> vecY(static_cast<double *>(bufY.ptr), static_cast<double *>(bufY.ptr) + n);
 
-    fit(vecX, vecY, n, m);
-  }
+  //   fit(vecX, vecY, n, m);
+  // }
 
-  py::array_t<double> predict_py(const py::array_t<double> &X)
-  {
-    auto bufX = X.request();
-    if (bufX.ndim != 2)
-      throw std::runtime_error("predict: X must be a 2-dimensional array");
+  // py::array_t<double> predict_py(const py::array_t<double> &X)
+  // {
+  //   auto bufX = X.request();
+  //   if (bufX.ndim != 2)
+  //     throw std::runtime_error("predict: X must be a 2-dimensional array");
 
-    std::size_t l = bufX.shape[0];
-    std::size_t m = bufX.shape[1];
+  //   std::size_t l = bufX.shape[0];
+  //   std::size_t m = bufX.shape[1];
 
-    std::vector<double> vecX(static_cast<double *>(bufX.ptr), static_cast<double *>(bufX.ptr) + l * m);
-    std::vector<double> result = predict(vecX, l, m);
+  //   std::vector<double> vecX(static_cast<double *>(bufX.ptr), static_cast<double *>(bufX.ptr) + l * m);
+  //   std::vector<double> result = predict(vecX, l, m);
 
-    return py::array_t<double>(result.size(), result.data());
-  }
+  //   return py::array_t<double>(result.size(), result.data());
+  // }
 
 private:
     OBJC_STRONG LinearRegressionMetalOBJCXX* pImpl;

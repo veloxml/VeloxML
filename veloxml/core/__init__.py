@@ -19,6 +19,7 @@ from .c_veloxml_core import KMeansAlgorithm
 
 # Metal Version
 from .c_veloxml_core import LinearRegressionMetal as CLinearRegressionMetal
+from .c_veloxml_core import RidgeRegressionMetal as CRidgeRegressionMetal
 
 
 
