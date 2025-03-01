@@ -249,47 +249,6 @@ std::vector<double> LassoRegression::predict(const std::vector<double>& X, std::
     return y_pred;
 }
 
-// ── Python API: fit ──────────────────────────────────────────
-// void LassoRegression::fit(pybind11::array_t<double> X_array, int n, int m,
-//                           pybind11::array_t<double> Y_array, int n_y, int m_y) {
-//     auto X_req = X_array.request();
-//     auto Y_req = Y_array.request();
-//     if (X_req.size != static_cast<size_t>(n * m))
-//         throw std::runtime_error("X size does not match provided dimensions");
-//     if (Y_req.size != static_cast<size_t>(n_y * m_y))
-//         throw std::runtime_error("Y size does not match provided dimensions");
-//     if (n_y != n || m_y != 1)
-//         throw std::runtime_error("Y must be of shape (n×1)");
-//     double* X_ptr = static_cast<double*>(X_req.ptr);
-//     double* Y_ptr = static_cast<double*>(Y_req.ptr);
-//     if (solver_mode_ == LassoSolverMode::FISTA)
-//         solveFISTA(X_ptr, n, m, Y_ptr);
-//     else if (solver_mode_ == LassoSolverMode::ADMM)
-//         solveADMM(X_ptr, n, m, Y_ptr);
-//     else
-//         throw std::runtime_error("Unsupported solver mode");
-// }
-
-// ── Python API: predict ──────────────────────────────────────
-// pybind11::array_t<double> LassoRegression::predict(pybind11::array_t<double> X_array, int n, int m) {
-//     auto X_req = X_array.request();
-//     if (X_req.size != static_cast<size_t>(n * m))
-//         throw std::runtime_error("X size does not match provided dimensions");
-//     if (m != static_cast<int>(weights_.size()))
-//         throw std::runtime_error("Feature dimension does not match the trained model");
-//     std::vector<double> X_vec(static_cast<double*>(X_req.ptr),
-//                               static_cast<double*>(X_req.ptr) + n * m);
-//     std::vector<double> y_pred = predict(X_vec, n, m);
-//     pybind11::array_t<double> result({n, 1});
-//     auto res_req = result.request();
-//     double* res_ptr = static_cast<double*>(res_req.ptr);
-//     #pragma omp parallel for
-//     for (int i = 0; i < n; i++) {
-//         res_ptr[i] = y_pred[i];
-//     }
-//     return result;
-// }
-
 std::vector<double> LassoRegression::get_weights() const {
     return weights_;
 }

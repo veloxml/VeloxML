@@ -13,8 +13,11 @@
 #include "pca/bindings/pca.hpp"
 #include "svm/bindings/svm_classification.hpp"
 
+// Metal Version
 #include "metal/linear/bindings/linear_regression_metal.hpp"
 #include "metal/linear/bindings/ridge_regression_metal.hpp"
+#include "metal/linear/bindings/lasso_regression_metal.hpp"
+#include "metal/linear/bindings/lasso_sgd_regression_metal.hpp"
 
 namespace py = pybind11;
 
@@ -44,4 +47,6 @@ PYBIND11_MODULE(c_veloxml_core, m)
   // Metal Version
   bind_linear_regression_metal(m);
   bind_ridge_regression_metal(m);
+  bind_lasso_regression_metal(m);
+  bind_lasso_sgd_regression_metal(m);
 }
