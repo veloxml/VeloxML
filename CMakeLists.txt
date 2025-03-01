@@ -20,7 +20,9 @@ endif()
 # ------------------------------------------------------------------------------
 # テストビルドのON/OFF切替
 # ------------------------------------------------------------------------------
-option(BUILD_TESTS "Build unit tests" OFF)
+if(NOT BUILD_TESTS)
+    option(BUILD_TESTS "Build unit tests" OFF)
+endif()
 
 # ------------------------------------------------------------------------------
 # SIMD 命令を有効化（Mac では Clang 用のオプションを適用）
@@ -378,6 +380,14 @@ target_link_libraries(VeloxML PUBLIC
     ${LAPACK_LIBRARIES}
     pybind11::module
 )
+
+if(BUILD_TESTS)
+    if(APPLE)
+        target_link_options(VeloxML PRIVATE -undefined dynamic_lookup)
+    endif()
+    find_package(Python COMPONENTS Interpreter Development REQUIRED)
+    target_link_libraries(VeloxML PUBLIC Python::Python)
+endif()
 
 if(APPLE AND CMAKE_SYSTEM_PROCESSOR MATCHES "arm64|aarch64")
     target_link_libraries(VeloxML PRIVATE ${METAL_LIBRARIES})

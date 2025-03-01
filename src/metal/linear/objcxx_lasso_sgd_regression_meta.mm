@@ -129,7 +129,7 @@
       [commandBuffer commit];
       [commandBuffer waitUntilCompleted];
     }
-    std::cout << "Epoch: " << epoch << " is done." << std::endl;
+    // std::cout << "Epoch: " << epoch << " is done." << std::endl;
   }
 
   // GPU上の重み更新結果を取得

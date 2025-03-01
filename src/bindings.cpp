@@ -12,6 +12,7 @@
 #include "kmeans/bindings/kmeans.hpp"
 #include "pca/bindings/pca.hpp"
 #include "svm/bindings/svm_classification.hpp"
+#include "svm/bindings/svm_regression.hpp"
 
 // Metal Version
 #include "metal/linear/bindings/linear_regression_metal.hpp"
@@ -40,6 +41,7 @@ PYBIND11_MODULE(c_veloxml_core, m)
   bind_random_forest_classification(m);
 
   bind_svm_classification(m);
+  bind_svm_regression(m);
 
   bind_pca(m);
   bind_kmeans(m);

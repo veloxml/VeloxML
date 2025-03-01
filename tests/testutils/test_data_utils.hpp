@@ -8,10 +8,12 @@ void generate_data_for_trees(int num_samples, int num_features, std::vector<doub
 
 // 回帰用ダミーデータ生成関数
 std::pair<std::vector<double>, std::vector<double>> generate_data(int M, int N);
+std::pair<std::vector<double>, std::vector<double>> generate_data_simple(int M, int N);
+
 // 分類用ダミーデータ生成関数
 std::pair<std::vector<std::vector<double>>, std::vector<std::vector<double>>> generate_dummy_data_for_classification(int M, int N);
 
-void standardize(std::vector<std::vector<double>> &X);
+void standardize(std::vector<double> &X, int M, int N);
 
 std::tuple<std::vector<std::vector<double>>, std::vector<std::vector<double>>> generate_cluster_data(int M, int N, int K);
 

@@ -34,12 +34,13 @@ TEST_P(LogisticRegressionTest, FitPredictTest)
     // ダミーデータ生成 (X: 2次元, Y: 1次元)
     auto [X, Y] = generate_dummy_data_for_classification(M, N);
     // 標準化 (行ごとに各特徴量のスケールを合わせる)
-    standardize(X);
 
     // 内部処理用に、XをCol-Majorの1次元配列に変換
     std::vector<double> X_flat = flattenMatrix(X);
     std::vector<double> Y_flat = flattenMatrix(Y);  // Y は (n x 1) の行列と仮定
     // Yはすでに1次元配列であると仮定
+    standardize(X_flat, M, N);
+
 
     // モデル作成
     // コンストラクタ引数: (solver, lambda, tol, maxIter, ls_alpha_init, ls_rho, ls_c)
